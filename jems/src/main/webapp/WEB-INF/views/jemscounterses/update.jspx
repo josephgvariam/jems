@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_dubaidrums_jems_domain_JemsCounters" modelAttribute="jemsCounters" path="/jemscounterses" versionField="Version" z="eETv31lEp+T95pBubWXIZfKOYsI=">
+        <field:input field="qCount" id="c_com_dubaidrums_jems_domain_JemsCounters_qCount" min="0" required="true" validationMessageCode="field_invalid_integer" z="bJ+8gNZ0wgGcuVGp/PPckztB6VE="/>
+        <field:input field="iCount" id="c_com_dubaidrums_jems_domain_JemsCounters_iCount" min="0" required="true" validationMessageCode="field_invalid_integer" z="e7UnXylqh6OhK5hZfeWgVWcz5bA="/>
+        <field:select field="organization" id="c_com_dubaidrums_jems_domain_JemsCounters_organization" itemValue="id" items="${jemsorganizations}" path="/jemsorganizations" z="NWHyZ5Wzx/5PhzT/DUpfXqdsGwQ="/>
+    </form:update>
+</div>

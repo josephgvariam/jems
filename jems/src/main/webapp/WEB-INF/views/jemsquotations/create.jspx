@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_dubaidrums_jems_domain_JemsQuotation" modelAttribute="jemsQuotation" path="/jemsquotations" render="${empty dependencies}" z="ubaNM96Z4PBizQ3LZR0rBbWP+Kc=">
+        <field:input field="qNumber" id="c_com_dubaidrums_jems_domain_JemsQuotation_qNumber" min="0" required="true" validationMessageCode="field_invalid_integer" z="6ZeeTKhkmOk1vaDHoDeCzDS+gbE="/>
+        <field:datetime dateTimePattern="${jemsQuotation_qdate_date_format}" field="qDate" id="c_com_dubaidrums_jems_domain_JemsQuotation_qDate" z="P2vWG4Qz/pumkGX814IblNDEV3g="/>
+        <field:textarea field="billTo" id="c_com_dubaidrums_jems_domain_JemsQuotation_billTo" z="MoeY6Jg18NCafS/v7Ss/jL+hkKU="/>
+        <field:textarea field="eventDetails" id="c_com_dubaidrums_jems_domain_JemsQuotation_eventDetails" z="ac9DdsdhqPvQaHWru0b997GGJj4="/>
+        <field:textarea field="paymentTerms" id="c_com_dubaidrums_jems_domain_JemsQuotation_paymentTerms" z="ro3qLC8VMQV4BP0V0lTJY0yNN9c="/>
+        <field:textarea field="description1" id="c_com_dubaidrums_jems_domain_JemsQuotation_description1" z="scYsAHvLOdOlRfxneFpawQkvzV4="/>
+        <field:input field="amount1" id="c_com_dubaidrums_jems_domain_JemsQuotation_amount1" validationMessageCode="field_invalid_number" z="YeqAXSKePV/t8IaA5BU/deK6DO8="/>
+        <field:textarea field="description2" id="c_com_dubaidrums_jems_domain_JemsQuotation_description2" z="MQmumce7bX0t65YeayOWZ+5jakk="/>
+        <field:input field="amount2" id="c_com_dubaidrums_jems_domain_JemsQuotation_amount2" validationMessageCode="field_invalid_number" z="U47oQGOILC1Zc/aHOUkcWKR4St4="/>
+        <field:textarea field="description3" id="c_com_dubaidrums_jems_domain_JemsQuotation_description3" z="aiZyOjFPZFP5PcG8d0yOTfvAaSk="/>
+        <field:input field="amount3" id="c_com_dubaidrums_jems_domain_JemsQuotation_amount3" validationMessageCode="field_invalid_number" z="fHAzJ7IHZpanfF1dyPNab3YAbUQ="/>
+        <field:textarea field="description4" id="c_com_dubaidrums_jems_domain_JemsQuotation_description4" z="plvS74y8wvcWcqnK/oWGdRh7mEk="/>
+        <field:input field="amount4" id="c_com_dubaidrums_jems_domain_JemsQuotation_amount4" validationMessageCode="field_invalid_number" z="oyIT5kyfjvBrLIPtDD8VplVuvm4="/>
+        <field:textarea field="description5" id="c_com_dubaidrums_jems_domain_JemsQuotation_description5" z="VO6d/kqqUEvzhFBbTNTd2m+Eo88="/>
+        <field:input field="amount5" id="c_com_dubaidrums_jems_domain_JemsQuotation_amount5" validationMessageCode="field_invalid_number" z="9DJ/7rsrYtbXyWUooeZNXFwY9mI="/>
+        <field:simple field="taxes" id="c_com_dubaidrums_jems_domain_JemsQuotation_taxes" messageCode="entity_reference_not_managed" messageCodeAttribute="Jems Tax" z="OlF0PPkIZqdnIawUsHz8fwW3TLI="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_dubaidrums_jems_domain_JemsQuotation" render="${not empty dependencies}" z="OpervhxwMgoclWc82sMGSi+1ql8="/>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsCostingItem" items="${jemscostingitems}" z="9/Y+4yg+4k2TGOiWlbeQHHRXtQQ=">
+        <table:table data="${jemscostingitems}" id="l_com_dubaidrums_jems_domain_JemsCostingItem" path="/jemscostingitems" z="yWqJ3KmufYdRGTKsmxcCj1R802E=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingItem_category" property="category" z="K28GxCPFKGvfrhoZkF3Al9O7jHM="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingItem_subCategory" property="subCategory" z="sp7JsQY5Rg9PRIel+I5ECQS5ncw="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingItem_rate" property="rate" z="SeCzJWMtq3UZnscc7BAvY08XYfo="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingItem_quantity" property="quantity" z="J9yjI50VD88ySBm0qi1/MNiUuU4="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingItem_organization" property="organization" z="4cJgE/m+Is7pkNUw47veFvM92Do="/>
+        </table:table>
+    </page:list>
+</div>

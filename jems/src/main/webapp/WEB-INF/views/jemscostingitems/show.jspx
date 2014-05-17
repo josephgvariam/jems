@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsCostingItem" object="${jemscostingitem}" path="/jemscostingitems" z="oc4f0p1iCcmnSxvKlUrj1e7k/v4=">
+        <field:display field="category" id="s_com_dubaidrums_jems_domain_JemsCostingItem_category" object="${jemscostingitem}" z="TNI6caGuBJFWOo5Fbf++YXUGQbU="/>
+        <field:display field="subCategory" id="s_com_dubaidrums_jems_domain_JemsCostingItem_subCategory" object="${jemscostingitem}" z="DlEOdEFhYFgOJeYErfDTd1U4w4U="/>
+        <field:display field="rate" id="s_com_dubaidrums_jems_domain_JemsCostingItem_rate" object="${jemscostingitem}" z="jc0v+AebM3LHG+Ppt23+UxFpZWs="/>
+        <field:display field="quantity" id="s_com_dubaidrums_jems_domain_JemsCostingItem_quantity" object="${jemscostingitem}" z="A+aYwr2hnyxK8LPmkU45aQ6va/Q="/>
+        <field:display field="organization" id="s_com_dubaidrums_jems_domain_JemsCostingItem_organization" object="${jemscostingitem}" z="OHDUA4fot1a2w2gzHfQnD+oTc7U="/>
+    </page:show>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsOrganization" items="${jemsorganizations}" z="+dsa3QNc4I0j4YFObdz3SaV4GaA=">
+        <table:table data="${jemsorganizations}" id="l_com_dubaidrums_jems_domain_JemsOrganization" path="/jemsorganizations" z="Dkcns/GqbPK8V3ePDsVeKhT281g=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_name" property="name" z="q7t1fkA74xwEAEL8iA7x1Tjxpr8="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_country" property="country" z="0qOhEs6uR8PuyFdUva1CQFG6GEQ="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_region" property="region" z="ZnBPOrDNrpVwa+yNLxPi/cvCAUs="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_currency" property="currency" z="ZKHT/Q8kRGDmD/bolSNRWWSqu14="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_adminEmail" property="adminEmail" z="BcvoiwuS0zcmLpXwzs/v2NwBbXs="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsOrganization_active" property="active" z="N8sLCbb9PGFGQcHL1IPQGCkcFBU="/>
+        </table:table>
+    </page:list>
+</div>

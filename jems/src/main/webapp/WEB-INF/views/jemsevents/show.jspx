@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsEvent" object="${jemsevent}" path="/jemsevents" z="hpv63fHxv1qxc2DrQxGzLLjc9VE=">
+        <field:display field="title" id="s_com_dubaidrums_jems_domain_JemsEvent_title" object="${jemsevent}" z="/fyho5MVKn6eJikpoTMpEJ9gog0="/>
+        <field:display field="description" id="s_com_dubaidrums_jems_domain_JemsEvent_description" object="${jemsevent}" z="WXaI3w9FA91ot/H4vc0rdJGYT4c="/>
+        <field:display field="type" id="s_com_dubaidrums_jems_domain_JemsEvent_type" object="${jemsevent}" z="MBR5qRS+nxVkN2U+4u2vNpeAeww="/>
+        <field:display field="status" id="s_com_dubaidrums_jems_domain_JemsEvent_status" object="${jemsevent}" z="lDJjy2QYB2d/EtoGnf7XQDFjA9U="/>
+        <field:display date="true" dateTimePattern="${jemsEvent_startdatetime_date_format}" field="startDateTime" id="s_com_dubaidrums_jems_domain_JemsEvent_startDateTime" object="${jemsevent}" z="KBEtqrRT6BjBGJqpS50YNJQBIB8="/>
+        <field:display date="true" dateTimePattern="${jemsEvent_enddatetime_date_format}" field="endDateTime" id="s_com_dubaidrums_jems_domain_JemsEvent_endDateTime" object="${jemsevent}" z="M0BB5GStOcFkVrQTowYykuOyfKA="/>
+        <field:display field="location" id="s_com_dubaidrums_jems_domain_JemsEvent_location" object="${jemsevent}" z="HcvxVJZU3JSJj51IUogwWnTjezA="/>
+        <field:display field="country" id="s_com_dubaidrums_jems_domain_JemsEvent_country" object="${jemsevent}" z="+G3rNR6DXM82t8jZ7lhLpIybXvU="/>
+        <field:display field="region" id="s_com_dubaidrums_jems_domain_JemsEvent_region" object="${jemsevent}" z="CYNJSOzJonXvXo3D59v+qvbahgM="/>
+        <field:display field="locationLatLong" id="s_com_dubaidrums_jems_domain_JemsEvent_locationLatLong" object="${jemsevent}" z="5aMHNyfuqV4/pFIjIAiaW//Jow0="/>
+        <field:display field="numberDrums" id="s_com_dubaidrums_jems_domain_JemsEvent_numberDrums" object="${jemsevent}" z="QEn/3xZJ60MdvF7Gd1oANkpi8Yg="/>
+        <field:display field="numberPeople" id="s_com_dubaidrums_jems_domain_JemsEvent_numberPeople" object="${jemsevent}" z="4+elUJkdjY70RyXUwxH4iJU7FYg="/>
+        <field:display field="numberDrummers" id="s_com_dubaidrums_jems_domain_JemsEvent_numberDrummers" object="${jemsevent}" z="jNWKvflLyWpgofnyqsmQIRixB/Y="/>
+        <field:display field="numberSessions" id="s_com_dubaidrums_jems_domain_JemsEvent_numberSessions" object="${jemsevent}" z="zNrdsT/TZTwR3JzuRTwB8R83R8U="/>
+        <field:display field="sessionTime" id="s_com_dubaidrums_jems_domain_JemsEvent_sessionTime" object="${jemsevent}" z="zZXMiX7QIP1YxKnGgrIImrbikqw="/>
+        <field:display field="chairsRequired" id="s_com_dubaidrums_jems_domain_JemsEvent_chairsRequired" object="${jemsevent}" z="UBei0E6y+6FlZ9fLz0CMAKa4I9g="/>
+        <field:display field="staffAssigned" id="s_com_dubaidrums_jems_domain_JemsEvent_staffAssigned" object="${jemsevent}" z="M/7pG+zgzsmj1y8cRkEoIFD90FU="/>
+        <field:display field="useInDocs" id="s_com_dubaidrums_jems_domain_JemsEvent_useInDocs" object="${jemsevent}" z="MjExUnlWZJhuCVDu8Kdk52pvbJ0="/>
+        <field:display field="hiringAgentCompany" id="s_com_dubaidrums_jems_domain_JemsEvent_hiringAgentCompany" object="${jemsevent}" z="tophkIpxhqWSYjxHKbjX3pQF14k="/>
+        <field:display field="hiringAgentContactPerson" id="s_com_dubaidrums_jems_domain_JemsEvent_hiringAgentContactPerson" object="${jemsevent}" z="27mSnc6NlyeDu3ixDjr123dTMLA="/>
+        <field:display field="hiringAgentPhone" id="s_com_dubaidrums_jems_domain_JemsEvent_hiringAgentPhone" object="${jemsevent}" z="ZNKoLyY5Ti4CDRnLmWvKModdWGk="/>
+        <field:display field="hiringAgentEmail" id="s_com_dubaidrums_jems_domain_JemsEvent_hiringAgentEmail" object="${jemsevent}" z="T0PFArXFiPAAJ10h5aRqaltpxFA="/>
+        <field:display field="hiringAgentAddress" id="s_com_dubaidrums_jems_domain_JemsEvent_hiringAgentAddress" object="${jemsevent}" z="6TnH31qRC38RZ70L3ZJEj5EhTSw="/>
+        <field:display field="clientCompany" id="s_com_dubaidrums_jems_domain_JemsEvent_clientCompany" object="${jemsevent}" z="KzXEnneqgFoZ9cYAr85naV5D1lg="/>
+        <field:display field="clientContactPerson" id="s_com_dubaidrums_jems_domain_JemsEvent_clientContactPerson" object="${jemsevent}" z="+JyF63xJb5eOkUMSuspkGPUXGjw="/>
+        <field:display field="clientPhone" id="s_com_dubaidrums_jems_domain_JemsEvent_clientPhone" object="${jemsevent}" z="Vb24CYzMX6Zz7AgDPLebqVWGD10="/>
+        <field:display field="clientEmail" id="s_com_dubaidrums_jems_domain_JemsEvent_clientEmail" object="${jemsevent}" z="GcTrkjJSKNPcn2/5Bm3Y6YyyhjM="/>
+        <field:display field="clientAddress" id="s_com_dubaidrums_jems_domain_JemsEvent_clientAddress" object="${jemsevent}" z="4rjxO0rc2IGYGW9+DVjajhZr+98="/>
+        <field:display field="notes" id="s_com_dubaidrums_jems_domain_JemsEvent_notes" object="${jemsevent}" z="LipI3xMXDm7kr9vBcFLvxz/88ec="/>
+        <field:display field="notes_" id="s_com_dubaidrums_jems_domain_JemsEvent_notes_" object="${jemsevent}" z="DqmvhQSjPFGo97JmPKLpTub46cg="/>
+        <field:display field="amountPayable" id="s_com_dubaidrums_jems_domain_JemsEvent_amountPayable" object="${jemsevent}" z="VmYEqNbedlmjR02NltarjDlFQdI="/>
+        <field:display field="paid" id="s_com_dubaidrums_jems_domain_JemsEvent_paid" object="${jemsevent}" z="V/2WwXCKvSQWvFV90kHPRc5/nCk="/>
+        <field:display field="paidAmount" id="s_com_dubaidrums_jems_domain_JemsEvent_paidAmount" object="${jemsevent}" z="wFmHGhKC6mns8cgUY5GbA2pE/qc="/>
+        <field:display date="true" dateTimePattern="${jemsEvent_paiddate_date_format}" field="paidDate" id="s_com_dubaidrums_jems_domain_JemsEvent_paidDate" object="${jemsevent}" z="xup3Y2bi1D4pjkJajIkX9RsTPgM="/>
+        <field:display field="paymentMethod" id="s_com_dubaidrums_jems_domain_JemsEvent_paymentMethod" object="${jemsevent}" z="Pr5r+tRNeF1Trkswy79+bdyCXrg="/>
+        <field:display field="paymentNotes" id="s_com_dubaidrums_jems_domain_JemsEvent_paymentNotes" object="${jemsevent}" z="RLKvmM8/XaNgWEgCuaVSWQf/pLE="/>
+        <field:display field="receiptVoucherNumber" id="s_com_dubaidrums_jems_domain_JemsEvent_receiptVoucherNumber" object="${jemsevent}" z="G/kQeWyVgt8PO72pbu4wvx+i6vY="/>
+        <field:display field="attachments" id="s_com_dubaidrums_jems_domain_JemsEvent_attachments" object="${jemsevent}" z="lWnVtiwR3WFcS9PScfJ6wuU1Tv0="/>
+        <field:display date="true" dateTimePattern="${jemsEvent_modifieddatetime_date_format}" field="modifiedDateTime" id="s_com_dubaidrums_jems_domain_JemsEvent_modifiedDateTime" object="${jemsevent}" z="qOJJuTuDSzffJRwZ+XKX31/uBT4="/>
+        <field:display field="modifiedUser" id="s_com_dubaidrums_jems_domain_JemsEvent_modifiedUser" object="${jemsevent}" z="lxIhrqQXX053+TbHE7aIGu9vrTc="/>
+        <field:display field="organization" id="s_com_dubaidrums_jems_domain_JemsEvent_organization" object="${jemsevent}" z="ATm9mlcxvBatLWP/lZYRucmkw7E="/>
+        <field:display field="currency" id="s_com_dubaidrums_jems_domain_JemsEvent_currency" object="${jemsevent}" z="oGMd77knCyAo4CsIloMBSv5k6FI="/>
+        <field:display field="active" id="s_com_dubaidrums_jems_domain_JemsEvent_active" object="${jemsevent}" z="MdMRJBdN4A57QN4IsdIcCSh10R0="/>
+        <field:display field="jemsQuotation" id="s_com_dubaidrums_jems_domain_JemsEvent_jemsQuotation" object="${jemsevent}" z="Czgzt9wM5IunMfDgB68s5H4vA5c="/>
+        <field:display field="jemsInvoice" id="s_com_dubaidrums_jems_domain_JemsEvent_jemsInvoice" object="${jemsevent}" z="J3yZKbELw3EozN8uQjW22W3ZVZI="/>
+    </page:show>
+</div>

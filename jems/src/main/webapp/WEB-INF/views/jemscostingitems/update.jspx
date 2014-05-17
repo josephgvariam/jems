@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_dubaidrums_jems_domain_JemsCostingItem" modelAttribute="jemsCostingItem" path="/jemscostingitems" versionField="Version" z="+fiZUDu3tMh6qR3F34gvCjQYdGA=">
+        <field:textarea field="category" id="c_com_dubaidrums_jems_domain_JemsCostingItem_category" required="true" z="AbV1HvGtp8Y/eZ5HbW9buH6S+qg="/>
+        <field:textarea field="subCategory" id="c_com_dubaidrums_jems_domain_JemsCostingItem_subCategory" required="true" z="ASDdHgDmJzbLys+ZmccWnzXq1Ak="/>
+        <field:input field="rate" id="c_com_dubaidrums_jems_domain_JemsCostingItem_rate" validationMessageCode="field_invalid_number" z="/A4YZHlb9wbV20NsgcXBXS6Cyp8="/>
+        <field:input field="quantity" id="c_com_dubaidrums_jems_domain_JemsCostingItem_quantity" validationMessageCode="field_invalid_number" z="31mhh2JZyalenej3mkMRnamxTQY="/>
+        <field:select field="organization" id="c_com_dubaidrums_jems_domain_JemsCostingItem_organization" itemValue="id" items="${jemsorganizations}" path="/jemsorganizations" z="D/i73oPviHReCfZmqtjbOiCMeo0="/>
+    </form:update>
+</div>

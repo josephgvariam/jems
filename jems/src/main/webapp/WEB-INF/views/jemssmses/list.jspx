@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsSms" items="${jemssmses}" z="9II9Z+aCjBhO9gR2vINHO3UF/qw=">
+        <table:table data="${jemssmses}" id="l_com_dubaidrums_jems_domain_JemsSms" path="/jemssmses" z="KYApmLaCMAww5tk2yLG5hmtHMB0=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsSms_sendTo" property="sendTo" z="y8Af9mhympdbo2Z5tWi/Jj0WnyA="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsSms_message" property="message" z="Jjyr8WPAFKxJvbPzQWrGOPjGlVA="/>
+            <table:column date="true" dateTimePattern="${jemsSms_senttime_date_format}" id="c_com_dubaidrums_jems_domain_JemsSms_sentTime" property="sentTime" z="3u3N8aOmH11DBTrkHTsZfmXRzYE="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsSms_sentBy" property="sentBy" z="Be34uDceB8C8YKITFpUBUFg0yN8="/>
+        </table:table>
+    </page:list>
+</div>

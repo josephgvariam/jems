@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsRegion" object="${jemsregion}" path="/jemsregions" z="IS6v57TBQWi7IZpo66t7TZpudvQ=">
+        <field:display field="name" id="s_com_dubaidrums_jems_domain_JemsRegion_name" object="${jemsregion}" z="J5W1Fl2EFRJhl8DNB1dkpxL5EBM="/>
+        <field:display field="country" id="s_com_dubaidrums_jems_domain_JemsRegion_country" object="${jemsregion}" z="tM56u5616Q5NPlIlMUU5aLITzRo="/>
+        <field:display field="active" id="s_com_dubaidrums_jems_domain_JemsRegion_active" object="${jemsregion}" z="9r0n8UbfoYcHdQksE/SAJNirxWM="/>
+    </page:show>
+</div>

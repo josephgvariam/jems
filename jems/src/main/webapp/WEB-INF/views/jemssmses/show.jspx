@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsSms" object="${jemssms}" path="/jemssmses" z="xnjQoghKYYMDCwisNhSDlGjNCUw=">
+        <field:display field="sendTo" id="s_com_dubaidrums_jems_domain_JemsSms_sendTo" object="${jemssms}" z="zJb0W3J0RMM/KX6QahAsGiuSH2E="/>
+        <field:display field="message" id="s_com_dubaidrums_jems_domain_JemsSms_message" object="${jemssms}" z="jBigITfCyBaycSazJ64mK+3nHGw="/>
+        <field:display date="true" dateTimePattern="${jemsSms_senttime_date_format}" field="sentTime" id="s_com_dubaidrums_jems_domain_JemsSms_sentTime" object="${jemssms}" z="eGJKBsr/7hzZLJqo8iewIP+MJWk="/>
+        <field:display field="sentBy" id="s_com_dubaidrums_jems_domain_JemsSms_sentBy" object="${jemssms}" z="CLTrWzx85ICLUeGzxz5/bpTWlC0="/>
+    </page:show>
+</div>

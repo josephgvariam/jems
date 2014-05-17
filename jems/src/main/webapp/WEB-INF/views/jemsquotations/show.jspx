@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsQuotation" object="${jemsquotation}" path="/jemsquotations" z="9PkBmXMbNiR+8X0qCX39xE2GEew=">
+        <field:display field="QNumber" id="s_com_dubaidrums_jems_domain_JemsQuotation_qNumber" object="${jemsquotation}" z="lpVqP6SEendzxAY4+4E2CY1SFgk="/>
+        <field:display date="true" dateTimePattern="${jemsQuotation_qdate_date_format}" field="QDate" id="s_com_dubaidrums_jems_domain_JemsQuotation_qDate" object="${jemsquotation}" z="0x567dPLGbPqA1jyKsmuSz//yxA="/>
+        <field:display field="billTo" id="s_com_dubaidrums_jems_domain_JemsQuotation_billTo" object="${jemsquotation}" z="aVU8kSyn/rUiTuYoGSNdshCWzac="/>
+        <field:display field="eventDetails" id="s_com_dubaidrums_jems_domain_JemsQuotation_eventDetails" object="${jemsquotation}" z="f1ceXta4kbAcqLycsHA969UKAno="/>
+        <field:display field="paymentTerms" id="s_com_dubaidrums_jems_domain_JemsQuotation_paymentTerms" object="${jemsquotation}" z="8LuiOUj0cDKNJPoT7CkNadEypQs="/>
+        <field:display field="description1" id="s_com_dubaidrums_jems_domain_JemsQuotation_description1" object="${jemsquotation}" z="NRh4+RYaFVbjsRa03soeObUZrQ4="/>
+        <field:display field="amount1" id="s_com_dubaidrums_jems_domain_JemsQuotation_amount1" object="${jemsquotation}" z="mWH6L+nxTLqaPUgkTvg2lBLcfW0="/>
+        <field:display field="description2" id="s_com_dubaidrums_jems_domain_JemsQuotation_description2" object="${jemsquotation}" z="4BRMrDB1lW+CXWkZ/c8GLJvKfGk="/>
+        <field:display field="amount2" id="s_com_dubaidrums_jems_domain_JemsQuotation_amount2" object="${jemsquotation}" z="/9rbR8eysTJk/dZQdPikW2zZe/U="/>
+        <field:display field="description3" id="s_com_dubaidrums_jems_domain_JemsQuotation_description3" object="${jemsquotation}" z="PS57YPTJiobMVFXzzN51l1k4EkQ="/>
+        <field:display field="amount3" id="s_com_dubaidrums_jems_domain_JemsQuotation_amount3" object="${jemsquotation}" z="TE1qOHjaxwz3knwv43nhvmRHssQ="/>
+        <field:display field="description4" id="s_com_dubaidrums_jems_domain_JemsQuotation_description4" object="${jemsquotation}" z="a3uWWEmrat5YSQBfN1Jhwt61qV4="/>
+        <field:display field="amount4" id="s_com_dubaidrums_jems_domain_JemsQuotation_amount4" object="${jemsquotation}" z="ooVCnD2AoboFvbH9wdVtJUB0xxA="/>
+        <field:display field="description5" id="s_com_dubaidrums_jems_domain_JemsQuotation_description5" object="${jemsquotation}" z="kDISg5idQ7qyQ03BNYcWxxSb6to="/>
+        <field:display field="amount5" id="s_com_dubaidrums_jems_domain_JemsQuotation_amount5" object="${jemsquotation}" z="rYZ6czIbjaBko1UNuIjDqTLaZmU="/>
+    </page:show>
+</div>

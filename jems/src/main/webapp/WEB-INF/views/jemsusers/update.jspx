@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_dubaidrums_jems_domain_JemsUser" modelAttribute="jemsUser" path="/jemsusers" versionField="Version" z="OLj3WuTHqciw6YWF9gpDHCFZlo0=">
+        <field:textarea field="username" id="c_com_dubaidrums_jems_domain_JemsUser_username" required="true" z="IHMnmHALdpmxlsq7kQgsA3IgKDw="/>
+        <field:textarea field="password" id="c_com_dubaidrums_jems_domain_JemsUser_password" required="true" z="vhAwpTOpB4URUWfn+WxkQdFyvbA="/>
+        <field:checkbox field="enabled" id="c_com_dubaidrums_jems_domain_JemsUser_enabled" z="/UONfQRH5I6N/XfsCTgUJ7Zc4w8="/>
+        <field:textarea field="email" id="c_com_dubaidrums_jems_domain_JemsUser_email" required="true" validationMessageCode="field_invalid_email" z="ZJwq3VxsbiiLzOODy/X3RUN7uKs="/>
+        <field:textarea field="mobile" id="c_com_dubaidrums_jems_domain_JemsUser_mobile" required="true" z="WO7+hULT25JpEoslpalKvF2HfmI="/>
+        <field:textarea field="fullName" id="c_com_dubaidrums_jems_domain_JemsUser_fullName" required="true" z="exnGejYmVueknuer6Tf2XR9Ka1U="/>
+        <field:select field="roles" id="c_com_dubaidrums_jems_domain_JemsUser_roles" itemValue="id" items="${jemsroles}" multiple="true" path="/jemsroles" z="dK7fl+hFhR1g5WImCMj+YAF9TvE="/>
+        <field:select field="organizations" id="c_com_dubaidrums_jems_domain_JemsUser_organizations" itemValue="id" items="${jemsorganizations}" multiple="true" path="/jemsorganizations" z="ppIzpKIgwW5m42L6llTcufZ4RNI="/>
+    </form:update>
+</div>

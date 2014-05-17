@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsInvoice" items="${jemsinvoices}" z="RtCArqo3UhbDR7ZlrFoReDCXX1w=">
+        <table:table data="${jemsinvoices}" id="l_com_dubaidrums_jems_domain_JemsInvoice" path="/jemsinvoices" z="K3yV1L9U2YW2OclIgl9p/rMSrkA=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsInvoice_iNumber" property="INumber" z="0EdokRknYEAo9EynkB9aUvOPbDE="/>
+            <table:column date="true" dateTimePattern="${jemsInvoice_idate_date_format}" id="c_com_dubaidrums_jems_domain_JemsInvoice_iDate" property="IDate" z="Ewr1YYvnciVckJphTjHezgWrZJo="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsInvoice_billTo" property="billTo" z="Vh3+YVxjcSyYQn127epav+6xEdI="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsInvoice_eventDetails" property="eventDetails" z="D/6em1NvXU+arBxhgt+u1zVQXJU="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsInvoice_paymentTerms" property="paymentTerms" z="64Rq9gkHUQ95n0xPzThBIgFphGE="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsInvoice_clientRef" property="clientRef" z="TyDmdz/80W+SDzXpxvPMAjWnxeU="/>
+        </table:table>
+    </page:list>
+</div>

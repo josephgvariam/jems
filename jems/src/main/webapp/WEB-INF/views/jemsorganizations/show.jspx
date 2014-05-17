@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsOrganization" object="${jemsorganization}" path="/jemsorganizations" z="QCpQiXWtT8wUCCSEvnTe/iFl83Y=">
+        <field:display field="name" id="s_com_dubaidrums_jems_domain_JemsOrganization_name" object="${jemsorganization}" z="eFSn2uKv8yJClvKlja/yfCXaZjM="/>
+        <field:display field="country" id="s_com_dubaidrums_jems_domain_JemsOrganization_country" object="${jemsorganization}" z="BYaQigsML39PIORVJ0KZfzKzEvA="/>
+        <field:display field="region" id="s_com_dubaidrums_jems_domain_JemsOrganization_region" object="${jemsorganization}" z="tTOo55oORpk9qI1VvtAuSlo+A5I="/>
+        <field:display field="currency" id="s_com_dubaidrums_jems_domain_JemsOrganization_currency" object="${jemsorganization}" z="pWZXcarqix1BZTm9U81AoR1rnc8="/>
+        <field:display field="adminEmail" id="s_com_dubaidrums_jems_domain_JemsOrganization_adminEmail" object="${jemsorganization}" z="ALGYj1MWSh5rq2nXjP8kn3qDAjw="/>
+        <field:display field="active" id="s_com_dubaidrums_jems_domain_JemsOrganization_active" object="${jemsorganization}" z="OiAYPlxXKP5V3vHpO8j6Y7TcMYg="/>
+        <field:display field="defaultGps" id="s_com_dubaidrums_jems_domain_JemsOrganization_defaultGps" object="${jemsorganization}" z="XJSA+eVxhS/1gP/lARE1Ot/3xFc="/>
+    </page:show>
+</div>

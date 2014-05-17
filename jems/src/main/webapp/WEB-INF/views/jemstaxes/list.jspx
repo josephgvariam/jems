@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsTax" items="${jemstaxes}" z="ssfgcoC16arL4Ad89DXLH6fl9N0=">
+        <table:table data="${jemstaxes}" id="l_com_dubaidrums_jems_domain_JemsTax" path="/jemstaxes" z="Gw0Ed+mAZIyNS3QQU72GfeVbBZ4=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsTax_name" property="name" z="euTT5bJhuE2IpNWqt2CyeC+3b2s="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsTax_ratePercent" property="ratePercent" z="Co4VFqPLm0CyasZ4a8byW7m/g18="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsTax_uuid" property="uuid" z="lFMifDvi+jXO4eYlZUwCEo8j6og="/>
+        </table:table>
+    </page:list>
+</div>

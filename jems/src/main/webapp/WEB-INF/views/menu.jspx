@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_jemsevent" z="xcDKBtjT7q4RDb1WndtccYTkhOE=">
+            <menu:item id="i_jemsevent_new" messageCode="global_menu_new" url="/jemsevents?form" z="KV+wqzhfv3qjUFAW9v0Iy3Wd+Z8="/>
+            <menu:item id="i_jemsevent_list" messageCode="global_menu_list" url="/jemsevents?page=1&amp;size=${empty param.size ? 10 : param.size}" z="P3uwie6h8QJqgf5aV+ASO62ixgQ="/>
+        </menu:category>
+        <menu:category id="c_jemsregion" z="PovdWz65+fX1lzyIKoIiQEzMRxo=">
+            <menu:item id="i_jemsregion_new" messageCode="global_menu_new" url="/jemsregions?form" z="PiYxSdrtLm5+1UiqtEewbIPZeTE="/>
+            <menu:item id="i_jemsregion_list" messageCode="global_menu_list" url="/jemsregions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="28rrFIs0KfYrVosfLiYpdb5C8xA="/>
+        </menu:category>
+        <menu:category id="c_jemstax" z="X88UchSinppchepU4pla8u6SehE=">
+            <menu:item id="i_jemstax_new" messageCode="global_menu_new" url="/jemstaxes?form" z="wRCBxt8WgNal0wPF4OVt/zRwRxE="/>
+            <menu:item id="i_jemstax_list" messageCode="global_menu_list" url="/jemstaxes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="+eve4KeBDqfv7mpLxRFQ5FPUlgM="/>
+        </menu:category>
+        <menu:category id="c_jemscostingsubcategory" z="6y0YyYXJ65tPhi4HwFEK46POgSE=">
+            <menu:item id="i_jemscostingsubcategory_new" messageCode="global_menu_new" url="/jemscostingsubcategorys?form" z="03LLKP1bm8lpdvUeCVetON5e+l4="/>
+            <menu:item id="i_jemscostingsubcategory_list" messageCode="global_menu_list" url="/jemscostingsubcategorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="j2fPa1EdDSf0LTeD9V+SLhnxrhk="/>
+        </menu:category>
+        <menu:category id="c_jemsuser" z="ZDVRprxUVQPvwNZUYvvtb2hIOJk=">
+            <menu:item id="i_jemsuser_new" messageCode="global_menu_new" url="/jemsusers?form" z="OuHNHAsKO/AV/EODyBh5qFJNykM="/>
+            <menu:item id="i_jemsuser_list" messageCode="global_menu_list" url="/jemsusers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="5D3qLeHRN5ajs3BOlMXnmpyW4uE="/>
+        </menu:category>
+        <menu:category id="c_jemscountry" z="ZRFsl8qcWZYhvYizzJaxnTmv3KA=">
+            <menu:item id="i_jemscountry_new" messageCode="global_menu_new" url="/jemscountrys?form" z="alhlLQyvJMLgmFzUNw3IZnI+DPA="/>
+            <menu:item id="i_jemscountry_list" messageCode="global_menu_list" url="/jemscountrys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="2WGIjVvdIp6VAHUlOXmlxA80Hto="/>
+        </menu:category>
+        <menu:category id="c_jemscounters" z="BJvyRoGCVQTyaFfoEUl+zCK+KDY=">
+            <menu:item id="i_jemscounters_new" messageCode="global_menu_new" url="/jemscounterses?form" z="YrEiHyacwOanmzSSUUJv6/Zur2U="/>
+            <menu:item id="i_jemscounters_list" messageCode="global_menu_list" url="/jemscounterses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="wCn/tpCEhNKA/8PfZ/ULpE+shvM="/>
+        </menu:category>
+        <menu:category id="c_jemsquotation" z="TyGSmNHnepdCf6sjM5clrW/09Cw=">
+            <menu:item id="i_jemsquotation_new" messageCode="global_menu_new" url="/jemsquotations?form" z="RZHrNHdKvNFePLzFdTYRFWRJLgc="/>
+            <menu:item id="i_jemsquotation_list" messageCode="global_menu_list" url="/jemsquotations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JoI48U9rO8ZVrkZ23w0+MAS98wE="/>
+        </menu:category>
+        <menu:category id="c_jemsrole" z="S5Z32uxOei54cM2dA1n+2Hicfss=">
+            <menu:item id="i_jemsrole_new" messageCode="global_menu_new" url="/jemsroles?form" z="0YeRLYkRfVB9Te5/nMDm4jQHEn4="/>
+            <menu:item id="i_jemsrole_list" messageCode="global_menu_list" url="/jemsroles?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SGj4GpgSc2JchLO22DkmTJAKTjY="/>
+        </menu:category>
+        <menu:category id="c_jemssms" z="u/z+tHCkj465lcxW46Cv1QSjJYM=">
+            <menu:item id="i_jemssms_new" messageCode="global_menu_new" url="/jemssmses?form" z="PnY2zRzCUnCYZSZEWViOS4FY92Y="/>
+            <menu:item id="i_jemssms_list" messageCode="global_menu_list" url="/jemssmses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="gpJTJa7FjekX5aZ6xkSRUTpw/Pc="/>
+        </menu:category>
+        <menu:category id="c_jemscurrency" z="F/OTxjyhX7n+eY8raHOV1J14Hak=">
+            <menu:item id="i_jemscurrency_new" messageCode="global_menu_new" url="/jemscurrencys?form" z="zOjTX6YSEg0C0b9OrgkK+Lz2pCQ="/>
+            <menu:item id="i_jemscurrency_list" messageCode="global_menu_list" url="/jemscurrencys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="AO3nxhFmwzeEMJ1Ac6I05CWqtL8="/>
+        </menu:category>
+        <menu:category id="c_jemscostingcategory" z="c7H9E6ZGXmnxgcguFfVS9/O6PTI=">
+            <menu:item id="i_jemscostingcategory_new" messageCode="global_menu_new" url="/jemscostingcategorys?form" z="51UgRuPPJekt+naeSF1Qdi0kcy8="/>
+            <menu:item id="i_jemscostingcategory_list" messageCode="global_menu_list" url="/jemscostingcategorys?page=1&amp;size=${empty param.size ? 10 : param.size}" z="V1bD6i78C+a+IovAyB/w9r6owjQ="/>
+        </menu:category>
+        <menu:category id="c_jemscostingitem" z="pNBIOjam8+5maQPyRzdvmtgvO8E=">
+            <menu:item id="i_jemscostingitem_new" messageCode="global_menu_new" url="/jemscostingitems?form" z="xF9b7waPmLKJ6/k4Ami9j99DD34="/>
+            <menu:item id="i_jemscostingitem_list" messageCode="global_menu_list" url="/jemscostingitems?page=1&amp;size=${empty param.size ? 10 : param.size}" z="aZ/lboQSuGRjDZZRPrlSg1WYsO8="/>
+        </menu:category>
+        <menu:category id="c_jemsorganization" z="sT+hgkuT0WdZWq+o2nOA2as/2l0=">
+            <menu:item id="i_jemsorganization_new" messageCode="global_menu_new" url="/jemsorganizations?form" z="+TmNfCARJUZvrhn6qUlTQ8eypbY="/>
+            <menu:item id="i_jemsorganization_list" messageCode="global_menu_list" url="/jemsorganizations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="QxNikc5BaByLriBUMPKjDcRyVPo="/>
+        </menu:category>
+        <menu:category id="c_jemsinvoice" z="APkhlr8DcA4MiopFYH1CR2myfXU=">
+            <menu:item id="i_jemsinvoice_new" messageCode="global_menu_new" url="/jemsinvoices?form" z="Yrbi0UtIAMw7nqsdQJsaHFK819g="/>
+            <menu:item id="i_jemsinvoice_list" messageCode="global_menu_list" url="/jemsinvoices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="AQkE6lnR/lM2J9cqM6SbjrAJEWs="/>
+        </menu:category>
+    </menu:menu>
+</div>

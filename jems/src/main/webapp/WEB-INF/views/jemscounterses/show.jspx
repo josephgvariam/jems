@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsCounters" object="${jemscounters}" path="/jemscounterses" z="FnIkGQiHjAs3IALbjIMAeTcrdD4=">
+        <field:display field="QCount" id="s_com_dubaidrums_jems_domain_JemsCounters_qCount" object="${jemscounters}" z="zNws/RIvThd2ra3c6xvOkQI9UAI="/>
+        <field:display field="ICount" id="s_com_dubaidrums_jems_domain_JemsCounters_iCount" object="${jemscounters}" z="cEASUrjUx3PrjR0e+2GCEGrMgQQ="/>
+        <field:display field="organization" id="s_com_dubaidrums_jems_domain_JemsCounters_organization" object="${jemscounters}" z="fg/k4MITYlBfknh0NiO95JGHDXE="/>
+    </page:show>
+</div>

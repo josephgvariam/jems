@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_dubaidrums_jems_domain_JemsOrganization" modelAttribute="jemsOrganization" path="/jemsorganizations" render="${empty dependencies}" z="dD8eVhSSK0G0I88wfE82hUFWYc8=">
+        <field:textarea field="name" id="c_com_dubaidrums_jems_domain_JemsOrganization_name" required="true" z="F5zFbp3GY/8PLgxWDj4L7wCH0Oc="/>
+        <field:select field="country" id="c_com_dubaidrums_jems_domain_JemsOrganization_country" itemValue="id" items="${jemscountrys}" path="/jemscountrys" z="ZPBjxhp4R0i0syEUVwqo/JpsrRc="/>
+        <field:select field="region" id="c_com_dubaidrums_jems_domain_JemsOrganization_region" itemValue="id" items="${jemsregions}" path="/jemsregions" z="ympTOk9LETp3zbL0NM/4pvPZnC0="/>
+        <field:select field="currency" id="c_com_dubaidrums_jems_domain_JemsOrganization_currency" itemValue="id" items="${jemscurrencys}" path="/jemscurrencys" z="imyLD47c0i15cKvwXIs4NiZUJOg="/>
+        <field:textarea field="adminEmail" id="c_com_dubaidrums_jems_domain_JemsOrganization_adminEmail" required="true" z="XpKSe/kFAaXvawP1ubHWPFW4LCs="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsOrganization_active" z="IQPgHt8S9W/eoGZDx7AH1It5eYo="/>
+        <field:textarea field="defaultGps" id="c_com_dubaidrums_jems_domain_JemsOrganization_defaultGps" z="RE7uF+DnQxgaDONI/6kIO6lqyXU="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_dubaidrums_jems_domain_JemsOrganization" render="${not empty dependencies}" z="GyKv1KX0/tyqOyk4QmCwChqFQJ4="/>
+</div>

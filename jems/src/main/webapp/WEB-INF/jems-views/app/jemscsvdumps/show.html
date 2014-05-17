@@ -1,0 +1,320 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://jems.dubaidrums.com/tags" prefix="jems" %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>CSV Dumps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- build:css styles/app.css -->
+    <link href="styles/bootstrap.min.css" rel="stylesheet">  
+    <link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <style>
+      body { padding-top: 60px;}
+    </style>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+<script>
+
+function selectchk(chkstate){
+	$("input[type=checkbox]").each(function () {		
+        $(this).prop("checked", chkstate);
+    });
+	return false;
+
+}
+</script>    
+  </head>
+
+  <body>
+
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">JEMS</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+              <li><a href="/dashboard"><i class="icon-bar-chart icon-white icon-large"></i> Dashboard</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/calendar"><i class="icon-calendar icon-white icon-large"></i> Calendar</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+              <li><a href="/jemsevents?form"><i class="icon-file icon-white icon-large"></i> New Event</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/jemsevents"><i class="icon-list icon-white icon-large"></i> List Events</a></li>
+            <li class="divider-vertical"></li>
+
+            <li><a href="/search"><i class="icon-search icon-white icon-large"></i> Search</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <li class="active"><a href="/settings"><i class="icon-cogs icon-white icon-large "></i> Settings</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+          </ul>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user icon-large"></i> <sec:authentication property="principal.username" /> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/resources/j_spring_security_logout"><i class="icon-share icon-large"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+<div id="legend" class="">
+  <legend class="">CSV Dumps</legend>
+</div>
+
+
+
+<div class="well">
+<form action="/jemscsvdumps/quotations" method="POST" class="form-horizontal">  
+
+<div class="control-group">
+  <label class="control-label" for="radios">Search by</label>
+  <div class="controls">
+    <label class="radio" for="radios-0">
+      <input type="radio" name="searchdate" id="radios-0" value="true" checked="checked">
+      Event Date
+    </label>
+    <label class="radio" for="radios-1">
+      <input type="radio" name="searchdate" id="radios-1" value="false">
+      Quotation Date
+    </label>
+  </div>
+</div>
+
+  
+    <div class="control-group">
+      <label class="control-label" for="startdatetimepicker">Start Date</label>
+      <div class="controls">
+        <div id="startdatetimepicker" class="input-append date">
+          <input id="startDate" name="startDate" class="input-xlarge" type="text"/>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="enddatetimepicker">End Date</label>
+      <div class="controls">
+        <div id="enddatetimepicker" class="input-append date">
+          <input id="endDate" name="endDate" class="input-xlarge" type="text"/>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+      </div>
+    </div>    
+
+
+   
+<div class="control-group">
+    <div class="controls span3">
+        <label class="checkbox">
+            <input type="checkbox" name="edate" checked> Event Date
+        </label>
+		<label class="checkbox">
+            <input type="checkbox" name="enumber" checked> Event Number
+        </label>        
+        <label class="checkbox">
+            <input type="checkbox" name="org" checked> Organization
+        </label>        
+        <label class="checkbox">
+            <input type="checkbox" name="type" checked> Event Type
+        </label>                
+        <label class="checkbox">
+            <input type="checkbox" name="status" checked> Event Status
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="title" checked> Event Title
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="description" > Event Description
+        </label>                                
+        <label class="checkbox">
+            <input type="checkbox" name="numfacilitators" checked> Number of Facilitators
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="numPeople" checked> Number of People
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="companyname" checked> Company Name
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="contactperson" checked> Company Contact Person
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="contactnumber" checked> Company Contact Number
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="email" checked> Company Email
+        </label>  
+        
+        <label class="checkbox">
+            <input type="checkbox" name="currency" > Currency
+        </label>                
+        <label class="checkbox">
+            <input type="checkbox" name="location" > Location
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="gps" > GPS Coordinates
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="country" > Country
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="region" > Region
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="numDrums" > Number of Drums
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="numSessions" > Number of Sessions
+        </label>          
+        <label class="checkbox">
+            <input type="checkbox" name="chairs" > Chairs Required
+        </label>         
+        <label class="checkbox">
+            <input type="checkbox" name="staff" > Staff Assigned
+        </label>           
+        <label class="checkbox">
+            <input type="checkbox" name="receipt" > Receipt Voucher
+        </label>          
+    </div>
+    <div class="controls span3">
+
+        <label class="checkbox">
+            <input type="checkbox" name="qdate" checked> Quotation Date
+        </label>        
+        <label class="checkbox">
+            <input type="checkbox" name="qnum" checked> Quotation Number
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="idate" checked> Invoice Date
+        </label>            
+        <label class="checkbox">
+            <input type="checkbox" name="inum" checked> Invoice Number
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="qamount" checked> Quoted Amount
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="iamount" checked> Invoiced Amount
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="paidstatus" checked> Paid Status
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="paidamount" checked> Paid Amount
+        </label>  
+        <label class="checkbox">
+            <input type="checkbox" name="paiddate" checked> Paid Date
+        </label>                                                         
+
+        <label class="checkbox">
+            <input type="checkbox" name="elink" > Event Link
+        </label>        
+        <label class="checkbox">
+            <input type="checkbox" name="qlink" > Quotation Link
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" name="ilink"  > Invoice Link
+        </label>            
+    </div>    
+</div>
+
+<div class="controls">
+<button class="btn btn-mini" onclick="return selectchk(true);">Select All</button>
+<button class="btn btn-mini" onclick="return selectchk(false);">Deselect All</button>
+</div>
+
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Dump CSV</button>
+</div>   
+
+
+</form> 
+</div>
+
+
+
+   
+    </div>
+
+<!-- build:js scripts/app.js -->
+<script src="scripts/vendor/jquery.min.js"></script>
+<script src="scripts/vendor/bootstrap.min.js"></script>
+<script src="scripts/vendor/bootstrap-datetimepicker.min.js"></script>
+<script src="scripts/vendor/bootstrap-multiselect.js"></script>
+<!-- endbuild -->  
+
+<script>
+$('#startdatetimepicker').datetimepicker({
+    format: 'dd/MM/yyyy',
+    pickDate: true,
+    pickTime: false,
+    pick12HourFormat: true,
+    pickSeconds: false,
+    maskInput: true,
+    autoclose: true
+  });
+
+  $('#enddatetimepicker').datetimepicker({
+    format: 'dd/MM/yyyy',
+    pickDate: true,
+    pickTime: false,
+    pick12HourFormat: true,
+    pickSeconds: false,
+    maskInput: true,
+    autoclose: true
+  });
+  
+  var nowDate = new Date();
+  var prevDate = new Date();
+  prevDate.setDate(1);
+  prevDate.setMonth(prevDate.getMonth() - 1);
+  $("#startdatetimepicker").datetimepicker("setDate", prevDate);
+  $('#enddatetimepicker').datetimepicker("setDate", nowDate);
+</script> 
+
+  </body>
+</html>

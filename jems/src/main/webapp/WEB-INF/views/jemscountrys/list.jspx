@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsCountry" items="${jemscountrys}" z="TpfOpJw6ILo3uGm2oDiyjtlmr9g=">
+        <table:table data="${jemscountrys}" id="l_com_dubaidrums_jems_domain_JemsCountry" path="/jemscountrys" z="tvnPpez/2Y9Jxme4IrcBfi59fVU=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCountry_isoCode" property="isoCode" z="uInsQJSQ3F1dqz1sno7KWohh4lM="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCountry_name" property="name" z="KXYZYGLH9Nr0T4OTCX20k01JSto="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCountry_currency" property="currency" z="tgW7EWq5muswYkmZoUTzDMVMhUs="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCountry_active" property="active" z="oWSEsrWn4bH7C9Anw6CunvmH5/8="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,130 @@
+<project name="JEMS" default="deploy" basedir="."> 
+    <property name="viewdir" location="src/main/webapp/WEB-INF/jems-views" />
+    <property name="app" location="${viewdir}/app"/>
+    <property name="dist" location="${viewdir}/dist"/>
+    <property name="temp" location="${viewdir}/temp"/>
+
+    <target name="dev" depends="build-run">
+    </target>
+
+    <target name="deploy" depends="clean,build-package">
+        <exec executable="bees">
+            <arg value="app:deploy"/>
+            <arg value="--appid"/>
+            <arg value="dubaidrums/jems"/>
+            <arg value="-P"/>
+            <arg value="buildenv=production"/>
+            <arg value="target/ROOT.war"/>            
+        </exec>
+    </target>
+	
+	<target name="deploy-dev" depends="clean,build-package">
+	        <exec executable="bees">
+	            <arg value="app:deploy"/>
+	            <arg value="--appid"/>
+	            <arg value="dubaidrums/jems-dev"/>
+	            <arg value="-P"/>
+	            <arg value="buildenv=production"/>
+	            <arg value="target/ROOT.war"/>            
+	        </exec>
+	    </target>	
+
+    <target name="bees-run" depends="clean,build-package">       
+        <exec executable="bees">
+            <arg value="app:run"/>
+            <arg value="--appid"/>
+            <arg value="dubaidrums/jems"/>
+            <arg value="--environment"/>
+            <arg value="dev"/>
+            <arg value="target/ROOT.war"/> 
+        </exec>
+    </target>    
+
+	<target name="build-package" depends="yeoman">
+        <buildnumber file="src/main/webapp/WEB-INF/build.properties"/>
+        <propertyfile file="src/main/webapp/WEB-INF/build.properties">
+            <entry  key="build.time" type="date" value="now" pattern="dd-MM-yyyy HH:mm:ss"/>
+        </propertyfile>   
+
+		<exec executable="mvn">
+            <arg value="-Dmaven.test.skip=true"/>
+            <arg value="-Dmaven.javadoc.skip=true"/>
+            <arg value="package"/>
+        </exec>
+    </target>
+
+    <target name="build-run" depends="yeoman-dev">
+        <exec executable="mvn">
+            <arg value="-Dbuildenv=development"/>
+            <arg value="-DSENDGRID_SMTP_HOST=127.0.0.1"/>
+            <arg value="-DSENDGRID_USERNAME=test"/>
+            <arg value="-DSENDGRID_PASSWORD=test"/>
+            <arg value="tomcat:run"/>
+        </exec>
+    </target>
+
+    <target name="yeoman">        
+        <exec executable="yeoman" dir="${viewdir}">
+            <arg value="build:minify"/>
+            <arg value="--force"/>
+        </exec>
+        <antcall target="post-yeoman"/>
+    </target>
+
+    <target name="yeoman-dev">                 
+        <exec executable="/usr/local/bin/grunt" spawn="true"/>            
+    </target>    
+
+    <target name="post-yeoman">
+        <!--
+        <copy todir="${dist}/images">
+            <fileset dir="${dist}/images"/>
+            <globmapper from="*.song.png" to="song.png"/>
+        </copy>        
+        <copy todir="${dist}/images">
+            <fileset dir="${dist}/images"/>
+            <globmapper from="*.glyphicons-halflings.png" to="glyphicons-halflings.png"/>
+        </copy>
+        <copy todir="${dist}/images">
+            <fileset dir="${dist}/images"/>
+            <globmapper from="*.glyphicons-halflings-white.png" to="glyphicons-halflings-white.png"/>
+        </copy>
+        -->
+        <move todir="${dist}" includeemptydirs="false">
+            <fileset dir="${dist}"/>
+            <mapper type="glob" from="*.html" to="*.jsp"/>
+        </move>
+        <antcall target="fixpaths"/>        
+    </target>
+
+    <target name="fixpaths">
+        <replace dir="${dist}" value='href="/styles'>
+            <include name="**/*.jsp"/>
+            <replacetoken>href="styles</replacetoken>
+        </replace>
+        <replace dir="${dist}" value='src="/scripts'>
+            <include name="**/*.jsp"/>
+            <replacetoken>src="scripts</replacetoken>
+        </replace>  
+        <replace dir="${dist}" value='/'>
+            <include name="**/*.jsp"/>
+            <replacetoken>/./</replacetoken>
+        </replace>                 
+    </target>
+
+    <target name="tail">
+        <exec executable="bees">
+            <arg value="app:tail"/>
+            <arg value="--appid"/>
+            <arg value="dubaidrums/jems"/>          
+        </exec>
+    </target>
+
+    <target name="clean">
+    	<delete dir="${dist}"/>
+        <delete dir="${temp}"/>
+        <delete dir="target"/>
+    </target>
+	
+</project>
+

@@ -1,0 +1,97 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Error Occured :(</title>
+        <style>
+            ::-moz-selection {
+                background: #b3d4fc;
+                text-shadow: none;
+            }
+
+            ::selection {
+                background: #b3d4fc;
+                text-shadow: none;
+            }
+
+            html {
+                padding: 30px 10px;
+                font-size: 20px;
+                line-height: 1.4;
+                color: #737373;
+                background: #f0f0f0;
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            html,
+            input {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            body {
+                padding: 30px 20px 50px;
+                border: 1px solid #b3b3b3;
+                border-radius: 4px;
+                margin: 0 auto;
+                box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+                background: #fcfcfc;
+            }
+
+            h1 {
+                margin: 0 10px;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            h1 span {
+                color: #bbb;
+            }
+
+            h3 {
+                margin: 1.5em 0 0.5em;
+            }
+
+            p {
+                margin: 1em 0;
+            }
+
+            ul {
+                padding: 0 0 0 40px;
+                margin: 1em 0;
+            }
+
+            .container {
+                margin: 0 auto;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Error Occured</h1>
+
+    <c:if test="${not empty exception}">
+    <p><a href="https://jems.ctf.cloudforge.com/sf/tracker/do/listTrackers/projects.jemsjemsv3/tracker" target="_blank"><i class="icon-flag icon-white icon-large"></i> Report Bug</a></p>
+      <p>
+        <strong>Message:</strong>
+        <c:out value="${exception.message}" />
+        <br/><br/>
+        <strong>Trace:</strong><br/>
+        <c:forEach items="${exception.stackTrace}" var="trace">
+            <c:out value="${trace}" />
+            <br />
+        </c:forEach>
+      </p>
+    </c:if>            
+        </div>           
+        
+    </body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsUser" object="${jemsuser}" path="/jemsusers" z="jF4V8cTMmw7LY2bQaMlKPh1oFoo=">
+        <field:display field="username" id="s_com_dubaidrums_jems_domain_JemsUser_username" object="${jemsuser}" z="BPSb/sjP8DygIHGhPjnUpm0kFOA="/>
+        <field:display field="password" id="s_com_dubaidrums_jems_domain_JemsUser_password" object="${jemsuser}" z="LZ3NgD/2e83WviIVS4igOPjL9tg="/>
+        <field:display field="enabled" id="s_com_dubaidrums_jems_domain_JemsUser_enabled" object="${jemsuser}" z="jLsNHn//16Y5FBpY5i6iBEBGICA="/>
+        <field:display field="email" id="s_com_dubaidrums_jems_domain_JemsUser_email" object="${jemsuser}" z="Bse6IjL7oYmmlOm87SnDlvlov/E="/>
+        <field:display field="mobile" id="s_com_dubaidrums_jems_domain_JemsUser_mobile" object="${jemsuser}" z="PJg+UcbDtxPxxbloyBeK4vCh0E8="/>
+        <field:display field="fullName" id="s_com_dubaidrums_jems_domain_JemsUser_fullName" object="${jemsuser}" z="ph37eBv05aX5Zx+vro1v8OCQiCM="/>
+        <field:display field="roles" id="s_com_dubaidrums_jems_domain_JemsUser_roles" object="${jemsuser}" z="Ex3N6eP0ugr6wMyrWcYLE7fnONE="/>
+        <field:display field="organizations" id="s_com_dubaidrums_jems_domain_JemsUser_organizations" object="${jemsuser}" z="PO+3d5PzKr86aTdbwx2lgYUjayg="/>
+    </page:show>
+</div>

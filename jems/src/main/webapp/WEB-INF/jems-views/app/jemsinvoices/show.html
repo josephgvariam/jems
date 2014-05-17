@@ -1,0 +1,244 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>View Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- build:css styles/app.css -->
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">  
+    <link href="/styles/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <style>
+      body { padding-top: 60px;}
+    </style>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <body>
+
+
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">JEMS</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+              <li><a href="/dashboard"><i class="icon-bar-chart icon-white icon-large"></i> Dashboard</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/calendar"><i class="icon-calendar icon-white icon-large"></i> Calendar</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+              <li><a href="/jemsevents?form"><i class="icon-file icon-white icon-large"></i> New Event</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/jemsevents"><i class="icon-list icon-white icon-large"></i> List Events</a></li>
+            <li class="divider-vertical"></li>
+
+            <li><a href="/search"><i class="icon-search icon-white icon-large"></i> Search</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <li><a href="/settings"><i class="icon-cogs icon-white icon-large "></i> Settings</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+          </ul>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user icon-large"></i> <sec:authentication property="principal.username" /> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/resources/j_spring_security_logout"><i class="icon-share icon-large"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <div class="container">
+
+<c:if test="${not empty msg}">
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    ${msg}
+  </div>
+</c:if>
+
+
+
+<a href="/jemsevents/${jemsinvoice.jemsEvent.id}#invoices">Back to Event</a>
+<legend>Invoice
+
+<c:choose>
+<c:when test="${jemsinvoice.active}">
+<div class="btn-group">
+  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-white"></i> Action <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/jemsinvoices/${jemsinvoice.id}?form"><i class="icon-pencil"></i> Edit</a></li>
+    <li><a href="/jemsinvoices/${jemsinvoice.id}/pdf"><i class="icon-download-alt"></i> Generate PDF</a></li> 
+  </ul>
+</div>
+</c:when>
+</c:choose>
+
+</legend>
+
+<table class="table table-striped table-bordered">
+  <tbody>
+    <tr>
+      <td class="span3">Invoice Number</td>
+      <td><spring:eval expression="jemsinvoice.INumber" /></td>
+    </tr>
+    <tr>
+      <td>Revision</td>
+      <td><spring:eval expression="jemsinvoice.revisionNumber" /></td>
+    </tr>
+    <tr>
+      <td>Active</td>
+      <td><spring:eval expression="jemsinvoice.active" /></td>
+    </tr>  
+    <tr>
+      <td>Quotation Number</td>
+      <c:choose>
+      	<c:when test="${empty jemsinvoice.jemsQuotation}">
+      		<td></td>
+      	</c:when>
+      	<c:otherwise>
+      		<td><spring:eval expression="jemsinvoice.jemsQuotation.QNumber" /></td>
+      	</c:otherwise>
+      </c:choose>      
+    </tr>         
+    <tr>
+      <td>Invoice Date</td>
+      <td><spring:eval expression="jemsinvoice.IDate" /></td>
+    </tr>
+    <tr>
+      <td>Bill To</td>
+      <td><spring:eval expression="jemsinvoice.billTo" /></td>
+    </tr>
+    <tr>
+      <td>Event Details</td>
+      <td><spring:eval expression="jemsinvoice.eventDetails" /></td>
+    </tr>
+    <tr>
+      <td>Payment Terms</td>
+      <td><spring:eval expression="jemsinvoice.paymentTerms" /></td>
+    </tr>
+    <tr>
+      <td>Client Ref</td>
+      <td><spring:eval expression="jemsinvoice.clientRef" /></td>
+    </tr>    
+    <tr>
+      <td>Modified Date</td>
+      <td><spring:eval expression="jemsinvoice.modifiedDate" /></td>
+    </tr>    
+    <tr>
+      <td>Modified User</td>
+      <td><spring:eval expression="jemsinvoice.modifiedUser" /></td>
+    </tr>      
+  </tbody>
+</table>
+
+<legend>Invoice Items</legend>
+<table class="table table-striped table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th class="span1">#</th>
+      <th class="span8">Description</th>
+      <th class="span3">Amount</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><spring:eval expression="jemsinvoice.description1" /></td>
+      <td><spring:eval expression="jemsinvoice.amount1" /></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><spring:eval expression="jemsinvoice.description2" /></td>
+      <td><spring:eval expression="jemsinvoice.amount2" /></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><spring:eval expression="jemsinvoice.description3" /></td>
+      <td><spring:eval expression="jemsinvoice.amount3" /></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><spring:eval expression="jemsinvoice.description4" /></td>
+      <td><spring:eval expression="jemsinvoice.amount4" /></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><spring:eval expression="jemsinvoice.description5" /></td>
+      <td><spring:eval expression="jemsinvoice.amount5" /></td>
+    </tr>            
+  </tbody>
+</table>
+   
+<c:choose>   
+<c:when test="${not empty previousJemsInvoices}">   
+<legend>Previous Invoices</legend>
+<table class="table table-striped table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th class="span1">Invoice #</th>
+      <th class="span8">Date</th>
+    </tr>
+  </thead>  
+  <tbody>
+  <c:forEach items="${previousJemsInvoices}" var="ji">
+    <tr>
+      <td><a href="/jemsinvoicess/${ji.id}?jemsEventId=${ji.jemsEvent.id}"><spring:eval expression="ji.INumber" /></a></td>
+      <td><spring:eval expression="ji.IDate" /></td>
+    </tr>
+   </c:forEach>
+  </tbody>
+</table>   
+</c:when>
+</c:choose>
+   
+    </div>
+
+   
+<!-- build:js scripts/app.js -->
+<script src="/scripts/vendor/jquery.min.js"></script>
+<script src="/scripts/vendor/bootstrap.min.js"></script>
+<script src="scripts/vendor/bootstrap-datetimepicker.min.js"></script>
+<script src="scripts/vendor/bootstrap-multiselect.js"></script>
+<!-- endbuild --> 
+
+  </body>
+</html>

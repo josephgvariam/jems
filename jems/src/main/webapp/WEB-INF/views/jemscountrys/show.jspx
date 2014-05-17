@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsCountry" object="${jemscountry}" path="/jemscountrys" z="GDt6HCyJyuoom5PTQGaBRwdvG+4=">
+        <field:display field="isoCode" id="s_com_dubaidrums_jems_domain_JemsCountry_isoCode" object="${jemscountry}" z="Yd+sQa3CEkZYGH4GnihIPFx1USk="/>
+        <field:display field="name" id="s_com_dubaidrums_jems_domain_JemsCountry_name" object="${jemscountry}" z="cqo/zM+KnMfwbTsgCd5i1DtsmGM="/>
+        <field:display field="currency" id="s_com_dubaidrums_jems_domain_JemsCountry_currency" object="${jemscountry}" z="bl99pxM8EEXi5U4bAuzTXcuTBVs="/>
+        <field:display field="active" id="s_com_dubaidrums_jems_domain_JemsCountry_active" object="${jemscountry}" z="F09B9N7tvF2tR28DppQpduMeYVI="/>
+    </page:show>
+</div>

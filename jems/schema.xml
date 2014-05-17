@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="Sunspot 1.2.x" version="1.0">
+  <types>
+    <fieldType name="string" class="solr.StrField" omitNorms="true"/>
+    <fieldType name="tdouble" class="solr.TrieDoubleField" omitNorms="true"/>
+    <fieldType name="rand" class="solr.RandomSortField" omitNorms="true"/>
+    <fieldType name="text" class="solr.TextField" omitNorms="false">
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StandardFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="boolean" class="solr.BoolField" omitNorms="true"/>
+    <fieldType name="date" class="solr.DateField" omitNorms="true"/>
+    <fieldType name="sdouble" class="solr.SortableDoubleField" omitNorms="true"/>
+    <fieldType name="sfloat" class="solr.SortableFloatField" omitNorms="true"/>
+    <fieldType name="sint" class="solr.SortableIntField" omitNorms="true"/>
+    <fieldType name="slong" class="solr.SortableLongField" omitNorms="true"/>
+    <fieldType name="tint" class="solr.TrieIntField" omitNorms="true"/>
+    <fieldType name="tfloat" class="solr.TrieFloatField" omitNorms="true"/>
+    <fieldType name="tdate" class="solr.TrieDateField" omitNorms="true"/>
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+  </types>
+  <fields>
+    <field name="id" stored="true" type="string" multiValued="false" indexed="true"/>
+    <field name="title" stored="true" type="text" multiValued="false" indexed="true"/>
+    <field name="description" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="type" stored="true" type="string" multiValued="false" indexed="true"/>
+    <field name="status" stored="true" type="string" multiValued="false" indexed="true"/>
+    <field name="startDateTime" stored="false" type="tdate" multiValued="false" indexed="true"/>
+    <field name="endDateTime" stored="false" type="tdate" multiValued="false" indexed="true"/>
+    <field name="startDateTime_text" stored="true" type="string" multiValued="false" indexed="false"/>
+    <field name="endDateTime_text" stored="true" type="string" multiValued="false" indexed="false"/>
+    <field name="location" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="locationLatLong" stored="false" type="text" multiValued="false" indexed="true"/>
+    <field name="country" stored="false" type="string" multiValued="false" indexed="true"/>
+    <field name="region" stored="false" type="string" multiValued="false" indexed="true"/>
+    <field name="hiringAgentCompany" stored="false" type="text" multiValued="false" indexed="true"/>
+    <field name="hiringAgentContactPerson" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="hiringAgentPhone" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="hiringAgentEmail" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="hiringAgentAddress" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="clientCompany" stored="false" type="text" multiValued="false" indexed="true"/>
+    <field name="clientContactPerson" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="clientPhone" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="clientEmail" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="clientAddress" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="notes" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="notes_" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="paid" stored="false" type="boolean" multiValued="false" indexed="true"/>
+    <field name="receiptVoucherNumber" stored="false" type="string" multiValued="false" indexed="false"/>    
+    <field name="organization" stored="false" type="int" multiValued="false" indexed="true" />
+    <field name="qNumber" stored="true" type="string" multiValued="false" indexed="true"/>
+    <field name="qDate" stored="false" type="tdate" multiValued="false" indexed="true"/>
+    <field name="qDescription1" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qDescription2" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qDescription3" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qDescription4" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qDescription5" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qBillTo" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="qEventDetails" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iNumber" stored="true" type="string" multiValued="false" indexed="true"/>
+    <field name="iDate" stored="false" type="tdate" multiValued="false" indexed="true"/>
+    <field name="iDescription1" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iDescription2" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iDescription3" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iDescription4" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iDescription5" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iBillTo" stored="false" type="text" multiValued="false" indexed="false"/>
+    <field name="iEventDetails" stored="false" type="text" multiValued="false" indexed="false"/>
+
+    <field name="text" type="text" indexed="true" stored="false" multiValued="true"/>
+  </fields>
+  <uniqueKey>id</uniqueKey>
+
+  <copyField source="title" dest="text"/>
+  <copyField source="description" dest="text"/>
+  <copyField source="type" dest="text"/>
+  <copyField source="status" dest="text"/>
+  <copyField source="location" dest="text"/>
+  <copyField source="hiringAgentCompany" dest="text"/>
+  <copyField source="hiringAgentContactPerson" dest="text"/>
+  <copyField source="hiringAgentPhone" dest="text"/>
+  <copyField source="hiringAgentEmail" dest="text"/>
+  <copyField source="hiringAgentAddress" dest="text"/>
+  <copyField source="clientCompany" dest="text"/>
+  <copyField source="clientContactPerson" dest="text"/>
+  <copyField source="clientPhone" dest="text"/>
+  <copyField source="clientEmail" dest="text"/>
+  <copyField source="clientAddress" dest="text"/>
+  <copyField source="notes" dest="text"/>
+  <copyField source="notes_" dest="text"/>
+  <copyField source="receiptVoucherNumber" dest="text"/>
+  <copyField source="qNumber" dest="text"/>
+  <copyField source="qDescription1" dest="text"/>
+  <copyField source="qDescription2" dest="text"/>
+  <copyField source="qDescription3" dest="text"/>
+  <copyField source="qDescription4" dest="text"/>
+  <copyField source="qDescription5" dest="text"/>
+  <copyField source="qBillTo" dest="text"/>
+  <copyField source="qEventDetails" dest="text"/>
+  <copyField source="iNumber" dest="text"/>
+  <copyField source="iDescription1" dest="text"/>
+  <copyField source="iDescription2" dest="text"/>
+  <copyField source="iDescription3" dest="text"/>
+  <copyField source="iDescription4" dest="text"/>
+  <copyField source="iDescription5" dest="text"/>
+  <copyField source="iBillTo" dest="text"/>
+  <copyField source="iEventDetails" dest="text"/>
+
+  <defaultSearchField>text</defaultSearchField>
+  <solrQueryParser defaultOperator="AND"/>
+</schema>

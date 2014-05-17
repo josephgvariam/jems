@@ -1,0 +1,308 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://jems.dubaidrums.com/tags" prefix="jems" %>
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>New Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- build:css styles/app.css -->
+    <link href="styles/bootstrap.min.css" rel="stylesheet">  
+    <link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <style>
+      body { padding-top: 60px; }
+      .row { padding-bottom: 10px; }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body>
+
+
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">JEMS</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+              <li><a href="/dashboard"><i class="icon-bar-chart icon-white icon-large"></i> Dashboard</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/calendar"><i class="icon-calendar icon-white icon-large"></i> Calendar</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+              <li><a href="/jemsevents?form"><i class="icon-file icon-white icon-large"></i> New Event</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/jemsevents"><i class="icon-list icon-white icon-large"></i> List Events</a></li>
+            <li class="divider-vertical"></li>
+
+            <li><a href="/search"><i class="icon-search icon-white icon-large"></i> Search</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <li><a href="/settings"><i class="icon-cogs icon-white icon-large "></i> Settings</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+          </ul>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user icon-large"></i> <sec:authentication property="principal.username" /> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/resources/j_spring_security_logout"><i class="icon-share icon-large"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container">
+
+<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.jemsInvoice'].allErrors}">
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+  </div>
+</c:if>
+
+<form:form action="/jemsinvoices" method="POST" modelAttribute="jemsInvoice" cssClass="form-horizontal">  
+
+<fieldset>
+
+<div id="legend" class="">
+  <legend class="">New Invoice
+    <div class="form-actions pull-right">
+      <button id="saveinvoicebutton" type="submit" class="btn btn-primary">Save Invoice</button>
+      <button type="button" class="btn" onclick="window.location.href='/jemsevents/${jemsEventId}';">Cancel</button>
+    </div>    
+  </legend>
+</div>
+
+<form:hidden path="iNumber" />
+<form:hidden path="jemsEvent" />
+<form:hidden path="jemsQuotation" />
+
+<jems:controlgroup path="iDate">
+  <label class="control-label">Invoice Date</label>
+  <div class="controls">
+    <div id="invoicedatepicker" class="input-append date">
+      <form:input path="iDate" type="text" class="input-xlarge"/>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </div>
+    <span class='help-inline'><form:errors path="iDate"/></span>
+  </div>
+</jems:controlgroup>
+
+<jems:controlgroup path="billTo">
+  <label class="control-label">Bill To</label>
+  <div class="controls">
+    <div class="textarea">
+        <form:textarea path="billTo" maxlength="500" class="input-block-level" rows="5"/>
+        <span class='help-inline'><form:errors path="billTo"/></span>
+    </div>
+  </div>
+</jems:controlgroup>
+
+<jems:controlgroup path="eventDetails">
+  <label class="control-label">Event Details</label>
+  <div class="controls">
+    <div class="textarea">
+        <form:textarea path="eventDetails" maxlength="1000" class="input-block-level" rows="5"/>
+        <span class='help-inline'><form:errors path="eventDetails"/></span>
+    </div>
+  </div>
+</jems:controlgroup>
+
+<jems:controlgroup path="paymentTerms">
+  <label class="control-label">Payment Terms</label>
+  <div class="controls">
+    <div class="textarea">
+        <form:textarea path="paymentTerms" maxlength="500" class="input-block-level" rows="5"/>
+        <span class='help-inline'><form:errors path="paymentTerms"/></span>
+    </div>
+  </div>
+</jems:controlgroup>
+
+<jems:controlgroup path="clientRef">
+  <label class="control-label">Client Ref</label>
+  <div class="controls">
+    <form:input path="clientRef" type="text" class="input-xlarge" maxlength="500"/>
+    <span class='help-inline'><form:errors path="clientRef"/></span>
+  </div>
+</jems:controlgroup>
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">S. No.</span>
+  </div>
+  <div class="span7">
+    Description
+  </div>
+  <div class="span4">
+    Amount
+  </div>
+</div>
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">1</span>
+  </div>
+  <div class="span7">
+    <div class="textarea">
+        <form:textarea path="description1" maxlength="500" class="input-block-level"/>
+    </div>
+  </div>
+  <div class="span4 control-group" id="amount1ControlGroup">
+    <form:input path="amount1" type="text" class="input-mini"/>
+    <span class='help-inline' id="amount1HelpBlock"></span>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">2</span>
+  </div>
+  <div class="span7">
+    <div class="textarea">
+        <form:textarea path="description2" maxlength="500" class="input-block-level"/>
+    </div>
+  </div>
+  <div class="span4 control-group" id="amount2ControlGroup">
+    <form:input path="amount2" type="text" class="input-mini"/>
+    <span class='help-inline' id="amount2HelpBlock"></span>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">3</span>
+  </div>
+  <div class="span7">
+    <div class="textarea">
+        <form:textarea path="description3" maxlength="500" class="input-block-level"/>
+    </div>
+  </div>
+  <div class="span4 control-group" id="amount3ControlGroup">
+    <form:input path="amount3" type="text" class="input-mini"/>
+    <span class='help-inline' id="amount3HelpBlock"></span>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">4</span>
+  </div>
+  <div class="span7">
+    <div class="textarea">
+        <form:textarea path="description4" maxlength="500" class="input-block-level"/>
+    </div>
+  </div>
+  <div class="span4 control-group" id="amount4ControlGroup">
+    <form:input path="amount4" type="text" class="input-mini"/>
+    <span class='help-inline' id="amount4HelpBlock"></span>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="span1">
+    <span class="pull-right">5</span>
+  </div>
+  <div class="span7">
+    <div class="textarea">
+        <form:textarea path="description5" maxlength="500" class="input-block-level"/>
+    </div>
+  </div>
+  <div class="span4 control-group" id="amount4ControlGroup">
+    <form:input path="amount5" type="text" class="input-mini"/>
+    <span class='help-inline' id="amount4HelpBlock"></span>
+  </div>
+</div>  
+
+<div class="form-actions">
+  <button id="saveinvoicebutton" type="submit" class="btn btn-primary">Save Invoice</button>
+  <button type="button" class="btn" onclick="window.location.href='/jemsevents/${jemsEventId}';">Cancel</button>
+</div>   
+
+</fieldset>
+</form:form> 
+   
+    </div>
+
+<!-- build:js scripts/app.js -->
+<script src="scripts/vendor/jquery.min.js"></script>
+<script src="scripts/vendor/bootstrap.min.js"></script>
+<script src="scripts/vendor/bootstrap-datetimepicker.min.js"></script>
+<script src="scripts/vendor/bootstrap-multiselect.js"></script>
+<!-- endbuild -->  
+
+<script>
+$(function () {
+  $('#invoicedatepicker').datetimepicker({
+    format: 'dd/MM/yyyy HH:mm PP',
+    pickDate: true,
+    pickTime: false,
+    pick12HourFormat: true,
+    pickSeconds: false,
+    maskInput: true
+  });
+
+  $('#saveinvoicebutton').click(function() {
+    var result1 = checkAmount('#amount1');
+    var result2 = checkAmount('#amount2');
+    var result3 = checkAmount('#amount3');
+    var result4 = checkAmount('#amount4');
+    var result5 = checkAmount('#amount5');
+    
+    return result1 && result2 && result3 && result4 && result5;
+  });    
+
+  function checkAmount(id){
+    //console.log('checking: '+id);
+    var amt = $(id).val();
+    if(amt && isNaN(amt)){
+      $(id+'ControlGroup').addClass('error');
+      $(id+'HelpBlock').text('Invalid Amount');
+      return false;
+    }else{
+      $(id+'ControlGroup').removeClass('error');
+      $(id+'HelpBlock').text('');
+      return true;
+    }
+  }
+
+});
+</script>
+
+  </body>
+</html>

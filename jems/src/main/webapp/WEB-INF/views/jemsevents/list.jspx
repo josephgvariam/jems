@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsEvent" items="${jemsevents}" z="j8rg6zxS98DJl3XAzz3+djEE3Zo=">
+        <table:table data="${jemsevents}" id="l_com_dubaidrums_jems_domain_JemsEvent" path="/jemsevents" z="YWlqtPRb+qyanrQJpiH5aHqzUsk=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsEvent_title" property="title" z="kMf7WSVLnJX6bDzxCoBItp/1tDo="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsEvent_description" property="description" z="CRAvnCe8glXruIT0FOib4lnUJAA="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsEvent_type" property="type" z="ftmOm/u9M9jNL6YMVRHAIl0yqsI="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsEvent_status" property="status" z="CmRrUTaNnsnRrpoIiuPs+5h2twc="/>
+            <table:column date="true" dateTimePattern="${jemsEvent_startdatetime_date_format}" id="c_com_dubaidrums_jems_domain_JemsEvent_startDateTime" property="startDateTime" z="9RHhYcHR4u1BohqULnMAOaQd16s="/>
+            <table:column date="true" dateTimePattern="${jemsEvent_enddatetime_date_format}" id="c_com_dubaidrums_jems_domain_JemsEvent_endDateTime" property="endDateTime" z="3FqtOVro8YyZICjF8R/uyAPPMrQ="/>
+        </table:table>
+    </page:list>
+</div>

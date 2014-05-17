@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsInvoice" object="${jemsinvoice}" path="/jemsinvoices" z="X0d8jlHCw1ohyM1vRFFyFrO7FQo=">
+        <field:display field="INumber" id="s_com_dubaidrums_jems_domain_JemsInvoice_iNumber" object="${jemsinvoice}" z="A/+t0byMuf8HPCEsXmn61GKI0f4="/>
+        <field:display date="true" dateTimePattern="${jemsInvoice_idate_date_format}" field="IDate" id="s_com_dubaidrums_jems_domain_JemsInvoice_iDate" object="${jemsinvoice}" z="3S7o2WhX/XY+uM7vJ2YX4mAfnjU="/>
+        <field:display field="billTo" id="s_com_dubaidrums_jems_domain_JemsInvoice_billTo" object="${jemsinvoice}" z="kpLGKUaop6QTwd1o+kpiq7hl/Pc="/>
+        <field:display field="eventDetails" id="s_com_dubaidrums_jems_domain_JemsInvoice_eventDetails" object="${jemsinvoice}" z="LW+1M7ldAO5vE/zaBhjTfT8wSxs="/>
+        <field:display field="paymentTerms" id="s_com_dubaidrums_jems_domain_JemsInvoice_paymentTerms" object="${jemsinvoice}" z="sVOca15ulB4kcJ1gDSIRPANoTYQ="/>
+        <field:display field="clientRef" id="s_com_dubaidrums_jems_domain_JemsInvoice_clientRef" object="${jemsinvoice}" z="EtPPAcdBnmvHeIAUKpn/4rsZfJ8="/>
+        <field:display field="description1" id="s_com_dubaidrums_jems_domain_JemsInvoice_description1" object="${jemsinvoice}" z="q5omT0ew99f1toM2eQGDzsAC1Vw="/>
+        <field:display field="amount1" id="s_com_dubaidrums_jems_domain_JemsInvoice_amount1" object="${jemsinvoice}" z="oAtBgPBTl0gkI6IphWKNh+UIn54="/>
+        <field:display field="description2" id="s_com_dubaidrums_jems_domain_JemsInvoice_description2" object="${jemsinvoice}" z="JXdohAUG2UNa8C/uqcme4IB2Gs8="/>
+        <field:display field="amount2" id="s_com_dubaidrums_jems_domain_JemsInvoice_amount2" object="${jemsinvoice}" z="vIYe5X0rRWuRwFwLsK+/K+S5wiQ="/>
+        <field:display field="description3" id="s_com_dubaidrums_jems_domain_JemsInvoice_description3" object="${jemsinvoice}" z="eJDl6nM2X37J1U0UaVJwGys9p1g="/>
+        <field:display field="amount3" id="s_com_dubaidrums_jems_domain_JemsInvoice_amount3" object="${jemsinvoice}" z="9N8fDA4BHI41orWnKoOzVCp2l6s="/>
+        <field:display field="description4" id="s_com_dubaidrums_jems_domain_JemsInvoice_description4" object="${jemsinvoice}" z="n1MUHgTHdQXwFVkVCzGE3vvt7Qw="/>
+        <field:display field="amount4" id="s_com_dubaidrums_jems_domain_JemsInvoice_amount4" object="${jemsinvoice}" z="IPDazMCDsU1nPih6Tvgk+RiOftc="/>
+        <field:display field="description5" id="s_com_dubaidrums_jems_domain_JemsInvoice_description5" object="${jemsinvoice}" z="JT8RoIwMk2zB5nA8UeCXY5SK2vM="/>
+        <field:display field="amount5" id="s_com_dubaidrums_jems_domain_JemsInvoice_amount5" object="${jemsinvoice}" z="ZeYvOws25TUthXBr6iow4YzxVXs="/>
+    </page:show>
+</div>

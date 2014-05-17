@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_dubaidrums_jems_domain_JemsRegion" modelAttribute="jemsRegion" path="/jemsregions" render="${empty dependencies}" z="SguPbUM3ZglPGQuE4QTmd++7X5E=">
+        <field:textarea field="name" id="c_com_dubaidrums_jems_domain_JemsRegion_name" required="true" z="Y2TyuEK6UgyrFtZmTUzo7ko1nH8="/>
+        <field:select field="country" id="c_com_dubaidrums_jems_domain_JemsRegion_country" itemValue="id" items="${jemscountrys}" path="/jemscountrys" z="UmFTLafJmP3Fv7kD45Y2kDD/KLg="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsRegion_active" z="MixLwaHzssxELjwyPlKAkeMPRao="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_dubaidrums_jems_domain_JemsRegion" render="${not empty dependencies}" z="4MWZrghIdH0EKGJjk8odJipCFCE="/>
+</div>

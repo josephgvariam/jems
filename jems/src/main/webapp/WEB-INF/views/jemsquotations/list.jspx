@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsQuotation" items="${jemsquotations}" z="wTCDB9lehb410mzPSUsX3jjJt9k=">
+        <table:table data="${jemsquotations}" id="l_com_dubaidrums_jems_domain_JemsQuotation" path="/jemsquotations" z="8H+xyai9WlmGeHbjiqrh3zfWX44=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsQuotation_qNumber" property="QNumber" z="CYLHRj7ov4E5LT+ZQ2kUYiAWJdM="/>
+            <table:column date="true" dateTimePattern="${jemsQuotation_qdate_date_format}" id="c_com_dubaidrums_jems_domain_JemsQuotation_qDate" property="QDate" z="7BqguWI5dNgagw1fNCHhfHQHWRk="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsQuotation_billTo" property="billTo" z="XnZsvho2TZzrShOg5UI2/iCd9U8="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsQuotation_eventDetails" property="eventDetails" z="cLkcu5GJHKez1Yhiu4JbwsHQzqE="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsQuotation_paymentTerms" property="paymentTerms" z="PlpRBDAuTC1MnoSjyMYUgDugpS4="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsQuotation_description1" property="description1" z="m+UsCvK04AHOHaAeuk4XRP33n0o="/>
+        </table:table>
+    </page:list>
+</div>

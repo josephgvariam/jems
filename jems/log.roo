@@ -1,0 +1,262 @@
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-03-12 08:57:20
+project --topLevelPackage com.dubaidrums.jems --projectName jems
+jpa setup --provider HIBERNATE --database MYSQL --jndiDataSource jdbc/jemsdb
+enum type --class ~.domain.JemsEventType
+enum constant --name Not_Specified                                                                                       
+enum constant --name Interactive_Team_Building   
+enum constant --name Community_Drum_Circle                                                                        
+enum constant --name Drums_Of_The_World                                                                                  
+enum constant --name Charity_Event                                                                                       
+enum constant --name Desert_Drumming                                                                           
+enum constant --name School_Event                                                                                        
+enum constant --name Drum_Lesson                                                                                        
+enum constant --name African_Performance
+enum constant --name Workshop                                                                                         
+enum constant --name Birthday_Party                                                                                      
+enum constant --name Drum_For_Fun
+enum constant --name Wedding
+enum constant --name Walkathon
+enum constant --name Party
+enum constant --name Parade
+enum constant --name Other                                                                                       
+enum constant --name Interactive_Team_Building_And_DOTW
+enum type --class ~.domain.JemsEventStatus
+enum constant --name Tentative
+enum constant --name Confirmed
+enum constant --name Cancelled
+enum constant --name Declined
+enum type --class ~.domain.JemsPaymentMethod
+enum constant --name Cash
+enum constant --name Cheque
+enum constant --name Bank_Transfer
+entity jpa --class ~.domain.JemsCurrency --activeRecord false
+field string --fieldName isoCode --notNull --sizeMin 2 --sizeMax 10
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field boolean --fieldName active --notnull  --value true
+repository jpa --interface ~.repository.JemsCurrencyRepository --entity ~.domain.JemsCurrency
+service --interface ~.service.JemsCurrencyService --entity ~.domain.JemsCurrency --class ~.service.impl.JemsCurrencyServiceImpl
+entity jpa --class ~.domain.JemsCountry --activeRecord false
+field string --fieldName isoCode --notNull --sizeMin 2 --sizeMax 10
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field reference --fieldName currency --type ~.domain.JemsCurrency
+field boolean --fieldName active --notnull  --value true
+repository jpa --interface ~.repository.JemsCountryRepository --entity ~.domain.JemsCountry
+service --interface ~.service.JemsCountryService --entity ~.domain.JemsCountry --class ~.service.impl.JemsCountryServiceImpl
+entity jpa --class ~.domain.JemsRegion --activeRecord false
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field reference --fieldName country --type ~.domain.JemsCountry
+field boolean --fieldName active --notnull  --value true
+repository jpa --interface ~.repository.JemsRegionRepository --entity ~.domain.JemsRegion
+service --interface ~.service.JemsRegionService --entity ~.domain.JemsRegion --class ~.service.impl.JemsRegionServiceImpl
+entity jpa --class ~.domain.JemsOrganization --activeRecord false
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field reference --fieldName country --type ~.domain.JemsCountry
+field reference --fieldName region --type ~.domain.JemsRegion
+field reference --fieldName currency --type ~.domain.JemsCurrency
+field string --fieldName adminEmail --sizeMax 500 --notNull
+field boolean --fieldName active --notnull  --value true
+field string --fieldName defaultGps --sizeMax 500
+repository jpa --interface ~.repository.JemsOrganizationRepository --entity ~.domain.JemsOrganization
+service --interface ~.service.JemsOrganizationService --entity ~.domain.JemsOrganization --class ~.service.impl.JemsOrganizationServiceImpl
+entity jpa --class ~.domain.JemsRole --activeRecord false
+field string --fieldName rolename --class ~.domain.JemsRole --notNull --sizeMin 3 --sizeMax 500
+repository jpa --interface ~.repository.JemsRoleRepository --entity ~.domain.JemsRole
+service --interface ~.service.JemsRoleService --entity ~.domain.JemsRole --class ~.service.impl.JemsRoleServiceImpl
+entity jpa --class ~.domain.JemsUser --activeRecord false
+field string --fieldName username --class ~.domain.JemsUser --notNull --sizeMin 3 --sizeMax 500
+field string --fieldName password --class ~.domain.JemsUser  --notNull --sizeMin 3 --sizeMax 500
+field boolean --fieldName enabled --class ~.domain.JemsUser --notNull true
+field string --fieldName email --class ~.domain.JemsUser --notNull --sizeMin 3 --sizeMax 500
+field string --fieldName mobile --class ~.domain.JemsUser --notNull --sizeMin 3 --sizeMax 500
+field string --fieldName fullName --class ~.domain.JemsUser --notNull --sizeMin 3 --sizeMax 500
+field set --fieldName roles --type ~.domain.JemsRole --class ~.domain.JemsUser
+field set --fieldName organizations --type ~.domain.JemsOrganization --class ~.domain.JemsUser --cardinality MANY_TO_MANY
+repository jpa --interface ~.repository.JemsUserRepository --entity ~.domain.JemsUser
+service --interface ~.service.JemsUserService --entity ~.domain.JemsUser --class ~.service.impl.JemsUserServiceImpl
+entity jpa --class ~.domain.JemsCostingCategory --activeRecord false
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field reference --fieldName organization --type ~.domain.JemsOrganization
+repository jpa --interface ~.repository.JemsCostingCategoryRepository --entity ~.domain.JemsCostingCategory
+service --interface ~.service.JemsCostingCategoryService --entity ~.domain.JemsCostingCategory --class ~.service.impl.JemsCostingCategoryServiceImpl
+entity jpa --class ~.domain.JemsCostingSubCategory --activeRecord false
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field number --fieldName rate --type java.lang.Double
+field reference --fieldName category --type ~.domain.JemsCostingCategory
+repository jpa --interface ~.repository.JemsCostingSubCategoryRepository --entity ~.domain.JemsCostingSubCategory
+service --interface ~.service.JemsCostingSubCategoryService --entity ~.domain.JemsCostingSubCategory --class ~.service.impl.JemsCostingSubCategoryServiceImpl
+field set --fieldName subcategories --type ~.domain.JemsCostingSubCategory --class ~.domain.JemsCostingCategory --cardinality ONE_TO_MANY --mappedBy category
+entity jpa --class ~.domain.JemsCostingItem --activeRecord false
+field string --fieldName category --notNull --sizeMin 3 --sizeMax 500
+field string --fieldName subCategory --notNull --sizeMin 3 --sizeMax 500
+field number --type java.lang.Double --fieldName rate
+field number --type java.lang.Double --fieldName quantity
+field reference --fieldName organization --type ~.domain.JemsOrganization
+repository jpa --interface ~.repository.JemsCostingItemRepository --entity ~.domain.JemsCostingItem
+service --interface ~.service.JemsCostingItemService --entity ~.domain.JemsCostingItem --class ~.service.impl.JemsCostingItemServiceImpl
+entity jpa --class ~.domain.JemsTax  --activeRecord false
+field string --fieldName name --notNull --sizeMin 3 --sizeMax 500
+field number --type java.lang.Double --fieldName ratePercent
+field string --fieldName uuid --sizeMin 3 --sizeMax 500
+field boolean --fieldName checked --transient --value false
+repository jpa --interface ~.repository.JemsTaxRepository --entity ~.domain.JemsTax
+service --interface ~.service.JemsTaxService --entity ~.domain.JemsUser --class ~.service.impl.JemsTaxServiceImpl
+entity jpa --class ~.domain.JemsEvent --activeRecord false
+field string --fieldName title --notNull --sizeMin 3 --sizeMax 500
+field string --fieldName description --sizeMax 1000 
+field enum --fieldName type --type ~.domain.JemsEventType --notNull 
+field enum --fieldName status --type ~.domain.JemsEventStatus --notNull
+field date --fieldName startDateTime --type java.util.Date --dateFormat MEDIUM --timeFormat SHORT --notnull
+field date --fieldName endDateTime --type java.util.Date --dateFormat MEDIUM --timeFormat SHORT --notnull
+field string --fieldName location --sizeMax 5000
+field reference --fieldName country --type ~.domain.JemsCountry
+field reference --fieldName region --type ~.domain.JemsRegion
+field string --fieldName locationLatLong --sizeMax 500
+field number --fieldName numberDrums --type java.lang.Integer --notNull --min 0
+field number --fieldName numberPeople --type java.lang.Integer --min 0
+field number --fieldName numberDrummers --type java.lang.Integer --min 0
+field number --fieldName numberSessions --type java.lang.Integer --min 0
+field string --fieldName sessionTime --sizeMax 500
+field boolean --fieldName chairsRequired --notnull  --value false
+field set --fieldName staffAssigned --type ~.domain.JemsUser --cardinality MANY_TO_MANY
+field number --fieldName useInDocs --type java.lang.Integer
+field string --fieldName hiringAgentCompany --sizeMax 500
+field string --fieldName hiringAgentContactPerson --sizeMax 500
+field string --fieldName hiringAgentPhone --sizeMax 500
+field string --fieldName hiringAgentEmail --sizeMax 500
+field string --fieldName hiringAgentAddress --sizeMax 2000
+field string --fieldName clientCompany --sizeMax 500
+field string --fieldName clientContactPerson --sizeMax 500
+field string --fieldName clientPhone --sizeMax 500
+field string --fieldName clientEmail --sizeMax 500
+field string --fieldName clientAddress --sizeMax 2000
+field string --fieldName notes --sizeMax 10000
+field string --fieldName notes_ --sizeMax 10000
+field number --type java.lang.Double --fieldName amountPayable
+field boolean --fieldName paid --notNull  --value false
+field number --type java.lang.Double --fieldName paidAmount
+field date --fieldName paidDate --type java.util.Date --dateFormat MEDIUM --timeFormat SHORT
+field enum --fieldName paymentMethod --type ~.domain.JemsPaymentMethod
+field string --fieldName paymentNotes --sizeMax 1000
+field string --fieldName receiptVoucherNumber --sizeMax 500
+field string --fieldName attachments --sizeMax 5000
+field date --fieldName modifiedDateTime --type java.util.Date --dateFormat MEDIUM --timeFormat MEDIUM
+field reference --fieldName modifiedUser --type ~.domain.JemsUser
+field reference --fieldName organization --type ~.domain.JemsOrganization
+field reference --fieldName currency --type ~.domain.JemsCurrency
+field boolean --fieldName active --notnull  --value true
+repository jpa --interface ~.repository.JemsEventRepository --entity ~.domain.JemsEvent
+service --interface ~.service.JemsEventService --entity ~.domain.JemsEvent --class ~.service.impl.JemsEventServiceImpl
+entity jpa --class ~.domain.JemsCounters --activeRecord false
+field number --fieldName qCount --type java.lang.Integer --notNull --min 0
+field number --fieldName iCount --type java.lang.Integer --notNull --min 0
+field reference --fieldName organization --type ~.domain.JemsOrganization
+repository jpa --interface ~.repository.JemsCountersRepository --entity ~.domain.JemsCounters
+service --interface ~.service.JemsCountersService --entity ~.domain.JemsCounters --class ~.service.impl.JemsCountersServiceImpl
+entity jpa --class ~.domain.JemsQuotation --activeRecord false
+field number --fieldName qNumber --type java.lang.Integer --notNull --min 0
+field date --fieldName qDate --type java.util.Date --dateFormat MEDIUM --timeFormat SHORT
+field string --fieldName billTo --sizeMax 500
+field string --fieldName eventDetails --sizeMax 1000
+field string --fieldName paymentTerms --sizeMax 500
+field string --fieldName description1 --sizeMax 500
+field number --type java.lang.Double --fieldName amount1
+field string --fieldName description2 --sizeMax 500
+field number --type java.lang.Double --fieldName amount2
+field string --fieldName description3 --sizeMax 500
+field number --type java.lang.Double --fieldName amount3
+field string --fieldName description4 --sizeMax 500
+field number --type java.lang.Double --fieldName amount4
+field string --fieldName description5 --sizeMax 500
+field number --type java.lang.Double --fieldName amount5
+repository jpa --interface ~.repository.JemsQuotationRepository --entity ~.domain.JemsQuotation
+service --interface ~.service.JemsQuotationService --entity ~.domain.JemsQuotation --class ~.service.impl.JemsQuotationServiceImpl
+entity jpa --class ~.domain.JemsInvoice --activeRecord false
+field number --fieldName iNumber --type java.lang.Integer --notNull --min 0
+field date --fieldName iDate --type java.util.Date --dateFormat MEDIUM --timeFormat SHORT
+field string --fieldName billTo --sizeMax 500
+field string --fieldName eventDetails --sizeMax 1000
+field string --fieldName paymentTerms --sizeMax 500
+field string --fieldName clientRef --sizeMax 500
+field string --fieldName description1 --sizeMax 500
+field number --type java.lang.Double --fieldName amount1
+field string --fieldName description2 --sizeMax 500
+field number --type java.lang.Double --fieldName amount2
+field string --fieldName description3 --sizeMax 500
+field number --type java.lang.Double --fieldName amount3
+field string --fieldName description4 --sizeMax 500
+field number --type java.lang.Double --fieldName amount4
+field string --fieldName description5 --sizeMax 500
+field number --type java.lang.Double --fieldName amount5
+repository jpa --interface ~.repository.JemsInvoiceRepository --entity ~.domain.JemsInvoice
+service --interface ~.service.JemsInvoiceService --entity ~.domain.JemsInvoice --class ~.service.impl.JemsInvoiceServiceImpl
+field reference --fieldName jemsQuotation --class ~.domain.JemsEvent --type ~.domain.JemsQuotation  --cardinality ONE_TO_ONE
+field reference --fieldName jemsInvoice --class ~.domain.JemsEvent --type ~.domain.JemsInvoice  --cardinality ONE_TO_ONE
+field set --fieldName taxes --type ~.domain.JemsTax --class ~.domain.JemsQuotation --cardinality ONE_TO_MANY
+field set --fieldName taxes --type ~.domain.JemsTax --class ~.domain.JemsInvoice --cardinality ONE_TO_MANY
+entity jpa --class ~.domain.JemsSms --activeRecord false
+field set --fieldName sendTo --type ~.domain.JemsUser --cardinality MANY_TO_MANY
+field string --fieldName message --sizeMax 114
+field date --fieldName sentTime --type java.util.Date --dateFormat MEDIUM --timeFormat MEDIUM
+field reference --fieldName sentBy --type ~.domain.JemsUser
+repository jpa --interface ~.repository.JemsSmsRepository --entity ~.domain.JemsSms
+service --interface ~.service.JemsSmsService --entity ~.domain.JemsSms --class ~.service.impl.JemsSmsServiceImpl
+web mvc setup
+web mvc all --package ~.web
+json all
+web mvc json all
+security setup
+logging setup --level INFO
+email sender setup --hostServer SENDGRID_SMTP_HOST --username SENDGRID_USERNAME --password SENDGRID_PASSWORD --port 587 
+field email template --class ~.service.impl.JemsEventServiceImpl --async
+perform eclipse
+// script ../jems.roo
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-03-12 08:58:21
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-03-13 20:05:25
+perform eclipse
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-03-13 20:05:41
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-03-13 20:21:42
+perform eclipse
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-03-13 20:22:35
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-06-01 17:09:56
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-06-01 20:13:24
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-10-11 00:23:42
+focus --class ~.domain.JemsEvent
+field set --fieldName jemsQuotations --type ~.domain.JemsQuotation --cardinality ONE_TO_MANY --mappedBy jemsEvent
+field set --fieldName jemsInvoices --type ~.domain.JemsInvoice --cardinality ONE_TO_MANY --mappedBy jemsEvent
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-10-11 00:33:11
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-10-11 09:56:08
+focus --class ~.domain.JemsQuotation
+field number --type int --fieldName revisionNumber --min 0 --notNull 
+focus --class ~.domain.JemsInvoice
+field number --type int --fieldName revisionNumber --min 0 --notNull 
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-10-11 10:02:13
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-10-11 18:36:23
+focus --class ~.domain.JemsEvent
+field date --type java.util.Date --fieldName createdDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field date --type java.util.Date --fieldName modifiedDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field reference --fieldName createdUser --type ~.domain.JemsUser --notNull 
+// [failed] field reference --fieldName modifiedUser --type ~.domain.JemsUser --notNull 
+focus --class ~.domain.JemsQuotation
+field date --type java.util.Date --fieldName createdDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field date --type java.util.Date --fieldName modifiedDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field reference --fieldName createdUser --type ~.domain.JemsUser --notNull 
+field reference --fieldName modifiedUser --type ~.domain.JemsUser --notNull 
+focus --class ~.domain.JemsInvoice
+field date --type java.util.Date --fieldName createdDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field date --type java.util.Date --fieldName modifiedDate --dateFormat MEDIUM --timeFormat SHORT --notNull 
+field reference --fieldName createdUser --type ~.domain.JemsUser --notNull 
+field reference --fieldName modifiedUser --type ~.domain.JemsUser --notNull 
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-10-11 18:44:25
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-10-12 09:48:56
+focus --class ~.domain.JemsQuotation
+field reference --fieldName jemsInvoice --type ~.domain.JemsInvoice
+focus --class ~.domain.JemsInvoice
+field reference --fieldName jemsQuotation --type ~.domain.JemsQuotation
+exit
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-10-12 09:50:06

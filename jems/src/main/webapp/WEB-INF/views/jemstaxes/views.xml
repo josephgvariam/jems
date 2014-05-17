@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="jemstaxes/list">
+        <put-attribute name="body" value="/WEB-INF/views/jemstaxes/list.jspx"/>
+    </definition>
+<definition extends="default" name="jemstaxes/show">
+        <put-attribute name="body" value="/WEB-INF/views/jemstaxes/show.jspx"/>
+    </definition>
+<definition extends="default" name="jemstaxes/create">
+        <put-attribute name="body" value="/WEB-INF/views/jemstaxes/create.jspx"/>
+    </definition>
+<definition extends="default" name="jemstaxes/update">
+        <put-attribute name="body" value="/WEB-INF/views/jemstaxes/update.jspx"/>
+    </definition>
+</tiles-definitions>

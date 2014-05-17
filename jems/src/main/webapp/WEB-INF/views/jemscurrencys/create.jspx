@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_dubaidrums_jems_domain_JemsCurrency" modelAttribute="jemsCurrency" path="/jemscurrencys" render="${empty dependencies}" z="VU1VPG2IKM1uU0jVS1zRnVnhIA0=">
+        <field:input field="isoCode" id="c_com_dubaidrums_jems_domain_JemsCurrency_isoCode" max="10" min="2" required="true" z="Ip05u8Z2O6IgkiJyDa+xXff3gXg="/>
+        <field:textarea field="name" id="c_com_dubaidrums_jems_domain_JemsCurrency_name" required="true" z="LCDjj3CptK+2ouK92uAhCK61rxY="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsCurrency_active" z="UE6F+SgsTvM1cp5ynh521CS9bkA="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_dubaidrums_jems_domain_JemsCurrency" render="${not empty dependencies}" z="lxE4eFRNTCvwEFZoNrV5VfENpng="/>
+</div>

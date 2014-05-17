@@ -1,0 +1,755 @@
+  <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://jems.dubaidrums.com/tags" prefix="jems" %>
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>New Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- build:css styles/app.css -->
+    <link href="styles/bootstrap.min.css" rel="stylesheet">  
+    <link href="styles/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <!-- build:css styles/typeahead.css -->
+    <link href="styles/typeahead.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <style>
+      body { padding-top: 60px;}
+.modal { top:5%; bottom:5%;width:940px;margin-left:-470px;}  
+.modal-body { max-height:550px; }
+    </style>
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body>
+
+
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">JEMS</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+              <li><a href="/dashboard"><i class="icon-bar-chart icon-white icon-large"></i> Dashboard</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/calendar"><i class="icon-calendar icon-white icon-large"></i> Calendar</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+              <li class="active"><a href="/jemsevents?form"><i class="icon-file icon-white icon-large"></i> New Event</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/jemsevents"><i class="icon-list icon-white icon-large"></i> List Events</a></li>
+            <li class="divider-vertical"></li>
+
+            <li><a href="/search"><i class="icon-search icon-white icon-large"></i> Search</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <li><a href="/settings"><i class="icon-cogs icon-white icon-large "></i> Settings</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="https://jems.ctf.cloudforge.com/sf/tracker/do/listTrackers/projects.jemsjemsv3/tracker" target="_blank"><i class="icon-flag icon-white icon-large"></i> Report Bug</a></li>
+            <li class="divider-vertical"></li> 
+          </ul>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user icon-large"></i> <sec:authentication property="principal.username" /> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/resources/j_spring_security_logout"><i class="icon-share icon-large"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container">
+
+<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.jemsEvent'].allErrors}">
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh snap!</strong> Change a few things up and try submitting again.
+  </div>
+</c:if>
+
+  <form:form action="/jemsevents" method="POST" modelAttribute="jemsEvent" cssClass="form-horizontal">  
+    <fieldset>
+
+      <div id="legend" class="">
+        <legend class="">New Event
+          <div class="form-actions pull-right">
+            <button type="submit" class="btn btn-primary">Save Event</button>
+            <button type="button" class="btn" onclick="window.location.href='/';">Cancel</button>
+          </div>   
+        </legend>        
+      </div>          
+
+    <jems:controlgroup path="title">
+      <label class="control-label">Title</label>
+      <div class="controls">
+        <form:input path="title" type="text" class="input-xlarge" pattern=".{3,100}" maxlength="100" title="3 characters minimum"/>
+        <span class='help-inline'><p class="text-error"><strong>*</strong></p></span>
+        <span class='help-inline'><form:errors path="title"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="description">
+      <label class="control-label">Description</label>
+      <div class="controls">
+        <form:input path="description" type="text" class="input-xlarge" maxlength="200"/>
+        <span class='help-inline'><form:errors path="description"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <label class="control-label">Organization</label>
+      <div class="controls">
+        <form:select path="organization" class="input-xlarge">
+          <form:options items="${jemsorganizations}" itemValue="id" itemLabel="name"/>
+        </form:select>          
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Currency</label>
+      <div class="controls">
+        <form:select path="currency" class="input-xlarge">
+          <form:options items="${jemscurrencys}" itemValue="id" itemLabel="name"/>
+        </form:select>  
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Type</label>
+      <div class="controls">
+        <form:select path="type" class="input-xlarge">
+          <form:options items="${jemseventtypes}" />
+        </form:select>    
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Status</label>
+      <div class="controls">
+        <form:select path="status" class="input-xlarge">
+          <form:options items="${jemseventstatuses}" />
+        </form:select> 
+      </div>
+    </div>
+
+    <jems:controlgroup path="startDateTime">
+      <label class="control-label">Start Date &amp; Time</label>
+      <div class="controls">
+        <div id="startdatetimepicker" class="input-append date">
+          <form:input path="startDateTime" type="text" class="input-xlarge"/>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+        <span class='help-inline'><p class="text-error"><strong>*</strong></p></span>
+        <span class='help-inline'><form:errors path="startDateTime"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="endDateTime">
+      <label class="control-label">End Date &amp; Time</label>
+      <div class="controls">
+        <div id="enddatetimepicker" class="input-append date">
+          <form:input path="endDateTime" type="text" class="input-xlarge"/>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+        <span class='help-inline'><p class="text-error"><strong>*</strong></p></span>
+        <span class='help-inline'><form:errors path="endDateTime"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <div class="controls">
+        <label class="checkbox inline">
+          <input id="recurringeventparams" name="recurringeventparams" type="checkbox" value="RecurringEvent">Recurring Event
+        </label>
+        <p id="repeatEventSummaryLabel" class="help-block"></p>
+        <input value="" name="recurringeventsummary" id="recurringeventsummary" type="hidden"/>
+      </div>
+    </div>    
+
+
+    <jems:controlgroup path="location">
+      <label class="control-label">Location</label>
+      <div class="controls">
+        <div class="textarea">
+            <form:textarea path="location" maxlength="1000"/>
+            <span class='help-inline'><form:errors path="location"/></span>
+        </div>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="locationLatLong">
+      <label class="control-label">GPS Coordinates</label>
+      <div class="controls">
+        <div class="input-append">
+          <form:input path="locationLatLong" type="text" class="input-xlarge" readonly="true" maxlength="100"/>
+          <a id="mapButton" href="#mapModal" role="button" class="btn" data-toggle="modal"><i class="icon-map-marker"></i> Map</a>        
+        </div>
+        <span class='help-inline'><form:errors path="locationLatLong"/></span>
+      </div>            
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <label class="control-label">Country</label>
+      <div class="controls">
+        <form:select path="country" class="input-xlarge">
+          <form:options items="${jemscountrys}" itemValue="id" itemLabel="name"/>
+        </form:select> 
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Region</label>
+      <div class="controls">
+        <form:select path="region" class="input-xlarge">
+          <form:options items="${jemsregions}" itemValue="id" itemLabel="name"/>
+        </form:select> 
+      </div>
+    </div>
+
+    <jems:controlgroup path="numberDrums">
+      <label class="control-label">Number of Drums</label>
+      <div class="controls">
+        <form:input path="numberDrums" type="text" class="input-xlarge" pattern="[0-9]*" title="A valid number"/>
+        <span class='help-inline'><p class="text-error"><strong>*</strong></p></span>
+        <span class='help-inline'><form:errors path="numberDrums"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="numberPeople">
+      <label class="control-label">Number of People</label>
+      <div class="controls">
+        <form:input path="numberPeople" type="text" class="input-xlarge" pattern="[0-9]*" title="A valid number"/>
+        <span class='help-inline'><form:errors path="numberPeople"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="numberDrummers">
+      <label class="control-label">Number of Facilitators</label>
+      <div class="controls">
+        <form:input path="numberDrummers" type="text" class="input-xlarge" pattern="[0-9]*" title="A valid number"/>
+        <span class='help-inline'><form:errors path="numberDrummers"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="numberSessions">
+      <label class="control-label">Number of Sessions</label>
+      <div class="controls">
+        <form:input path="numberSessions" type="text" class="input-xlarge" pattern="[0-9]*" title="A valid number"/>
+        <span class='help-inline'><form:errors path="numberSessions"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="sessionTime">
+      <label class="control-label">Session Duration</label>
+      <div class="controls">
+        <form:input path="sessionTime" type="text" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="sessionTime"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <label class="control-label">Chairs Required</label>
+      <div class="controls">
+        <label class="radio inline">
+          <form:radiobutton path="chairsRequired" value="true" label="Yes"/>
+        </label>
+        <label class="radio inline">
+          <form:radiobutton path="chairsRequired" value="false" label="No"/>
+        </label>
+      </div>
+    </div>
+     
+    <div class="control-group">
+      <label class="control-label">Staff Assigned</label>
+      <div class="controls">
+        <form:select path="staffAssigned2" class="input-xlarge">
+          <form:options items="${jemsstaff}" itemValue="id" itemLabel="name"/>
+        </form:select>
+        <a class="btn btn-mini" href="/jemsstaffs?form">New Staff</a>       
+      </div>      
+    </div> 
+    
+    
+        
+
+    <jems:controlgroup path="clientCompany">
+      <label class="control-label">Client Company</label>
+      <div class="controls">
+        <form:input path="clientCompany" type="text" class="input-xlarge"  maxlength="200"/>
+        <span class='help-inline'><form:errors path="clientCompany"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="clientContactPerson">
+      <label class="control-label">Client Contact Person</label>
+      <div class="controls">
+        <form:input path="clientContactPerson" type="text" class="input-xlarge" maxlength="200"/>
+        <span class='help-inline'><form:errors path="clientContactPerson"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="clientPhone">
+      <label class="control-label">Client Phone</label>
+      <div class="controls">
+        <form:input path="clientPhone" type="text" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="clientPhone"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="clientEmail">
+      <label class="control-label">Client Email</label>
+      <div class="controls">
+        <form:input path="clientEmail" type="email" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="clientEmail"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="clientAddress">
+      <label class="control-label">Client Address</label>
+      <div class="controls">
+        <div class="textarea">              
+          <form:textarea path="clientAddress" maxlength="500"/>
+          <span class='help-inline'><form:errors path="clientAddress"/></span>
+        </div>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="hiringAgentCompany">
+      <label class="control-label">Hiring Agent Company</label>
+      <div class="controls">
+        <form:input path="hiringAgentCompany" type="text" class="input-xlarge" maxlength="200"/>
+        <span class='help-inline'><form:errors path="hiringAgentCompany"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="hiringAgentContactPerson">
+      <label class="control-label">Hiring Agent Contact Person</label>
+      <div class="controls">
+        <form:input path="hiringAgentContactPerson" type="text" class="input-xlarge" maxlength="200"/>
+        <span class='help-inline'><form:errors path="hiringAgentContactPerson"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="hiringAgentPhone">
+      <label class="control-label">Hiring Agent Phone</label>
+      <div class="controls">
+        <form:input path="hiringAgentPhone" type="text" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="hiringAgentPhone"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="hiringAgentEmail">
+      <label class="control-label">Hiring Agent Email</label>
+      <div class="controls">
+        <form:input path="hiringAgentEmail" type="email" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="hiringAgentEmail"/></span>
+      </div>
+    </jems:controlgroup>
+
+    <jems:controlgroup path="hiringAgentAddress">
+      <label class="control-label">Hiring Agent Address</label>
+      <div class="controls">
+        <div class="textarea">
+          <form:textarea path="hiringAgentAddress" maxlength="500"/>
+          <span class='help-inline'><form:errors path="hiringAgentAddress"/></span>
+        </div>
+      </div>
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <label class="control-label">Use in Documents</label>
+      <div class="controls">  
+        <label class="radio">
+          <form:radiobutton path="useInDocs" value="0" label="Client"/>
+        </label>
+        <label class="radio">
+          <form:radiobutton path="useInDocs" value="1" label="Hiring Agent"/>
+        </label>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Public Notes (Goes in JobSheet)</label>
+      <div class="controls">
+        <div class="textarea">
+          <form:textarea path="notes" class="span6" rows="15" maxlength="2500"/>    
+        </div>
+        <p class="help-block">Do not put sensitive corporate info here! Its public!</p>        
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">PRIVATE Notes</label>
+      <div class="controls">
+        <div class="textarea">
+          <form:textarea path="notes_" class="span6" rows="10" maxlength="2500"/>    
+        </div>
+      </div>
+    </div>
+
+    <jems:controlgroup path="amountPayable">
+      <label class="control-label">Amount Payable</label>
+      <div class="controls">
+        <form:input path="amountPayable" type="text" class="input-xlarge"/> 
+        <span class='help-inline'><form:errors path="amountPayable"/></span>       
+      </div>  
+    </jems:controlgroup>
+
+    <div class="control-group">
+      <label class="control-label"></label>
+      <div class="controls">
+        <label class="checkbox">
+          <form:checkbox path="paid" label="Paid"/>                    
+        </label>                
+        <a href="#paidModal" role="button" class="btn" data-toggle="modal">Payment Details</a>        
+      </div>
+    </div>
+
+    <jems:controlgroup path="receiptVoucherNumber">
+      <label class="control-label">Receipt Voucher</label>
+      <div class="controls">
+        <form:input path="receiptVoucherNumber" type="text" class="input-xlarge" maxlength="100"/>
+        <span class='help-inline'><form:errors path="receiptVoucherNumber"/></span>
+      </div>
+    </jems:controlgroup>   
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save Event</button>
+      <button type="button" class="btn" onclick="window.location.href='/';">Cancel</button>
+    </div>   
+
+<div id="paidModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Payment Details" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myModalLabel">Payment Details</h3>
+  </div>
+  <div class="modal-body">
+    <div id="paidAmountControlGroup" class="control-group">
+      <label class="control-label" for="input01">Paid Amount</label>
+      <div class="controls">
+        <form:input path="paidAmount" type="text" class="input-xlarge"/>
+        <p id="paidAmountHelpBlock" class="help-block"></p>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="input01">Paid Date</label>
+      <div class="controls">
+        <div id="paiddatepicker" class="input-append date">
+          <form:input path="paidDate" type="text" class="input-xlarge"/>
+          <span class="add-on">
+            <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Payment Method</label>
+      <div class="controls">
+        <form:select path="paymentMethod" class="input-xlarge">
+          <form:options items="${jemspaymentmethods}" />
+        </form:select> 
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Payment Notes</label>
+      <div class="controls">
+        <div class="textarea">
+          <form:textarea path="paymentNotes" maxlength="200"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button id="paidOKButton" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+  </div>
+</div>      
+
+<div id="mapModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Map" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myModalLabel">Map</h3>
+  </div>
+  <div class="modal-body">
+    <div id="panel">
+      <input id="address" type="textbox" value="">
+      <input id="geocodebutton" type="button" value="Search">
+    </div>
+    <div id="map_canvas" style="height: 520px"></div>
+  </div>
+  <div class="modal-footer">
+    <button id="paidOKButton" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+  </div>
+</div>
+
+    </fieldset>
+  </form:form> 
+
+
+<div id="recurringEventModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Recurring Event" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myModalLabel">Recurring Event</h3>
+  </div>
+
+  <div class="modal-body">
+<form class="form-horizontal">
+<fieldset>
+<div class="control-group">
+  <label class="control-label">Repeats</label>
+  <div class="controls">
+    <select id="repeatFrequency" name="repeatFrequency" class="input-xlarge">
+      <option>Daily</option>
+      <option selected>Weekly</option>
+      <option>Monthly</option>
+      <option>Yearly</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label">Repeat Every</label>
+  <div class="controls">
+    <select id="repeatFrequencyValue" name="selectbasic" class="input-xlarge">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+      <option>11</option>
+      <option>12</option>
+      <option>13</option>
+      <option>14</option>
+      <option>15</option>
+      <option>16</option>
+      <option>17</option>
+      <option>18</option>
+      <option>19</option>
+      <option>20</option>
+      <option>21</option>
+      <option>22</option>
+      <option>23</option>
+      <option>24</option>
+      <option>25</option>
+      <option>26</option>
+      <option>27</option>
+      <option>28</option>
+      <option>29</option>
+      <option>30</option>
+    </select>
+    <div id="repeatFrequencyLabel" style="display:inline-block;"> Days</div>
+  </div>
+</div>
+
+<!-- Multiple Checkboxes (inline) -->
+<div id="repeatOnWeekly" class="control-group">
+  <label class="control-label">Repeat On</label>
+  <div class="controls">
+    <label class="checkbox inline">
+      <input id="chkbxMO" type="checkbox" name="repeatOnDay" value="MO">
+      MO
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxTU" type="checkbox" name="repeatOnDay" value="TU">
+      TU
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxWE" type="checkbox" name="repeatOnDay" value="WE">
+      WE
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxTH" type="checkbox" name="repeatOnDay" value="TH">
+      TH
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxFR" type="checkbox" name="repeatOnDay" value="FR">
+      FR
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxSA" type="checkbox" name="repeatOnDay" value="SA">
+      SA
+    </label>
+    <label class="checkbox inline">
+      <input id="chkbxSU" type="checkbox" name="repeatOnDay" value="SU">
+      SU
+    </label>
+  </div>
+</div>
+
+<!-- Multiple Radios (inline) -->
+<div id="repeatByMonthly" class="control-group">
+  <label class="control-label">Repeat By</label>
+  <div class="controls">
+    <label class="radio inline">
+      <input id="repeatByMonthDayOfMonth" type="radio" name="repeatByMonth" value="dayOfMonth" checked="checked">
+      day of the month
+    </label>
+    <label class="radio inline">
+      <input id="repeatByMonthDayOfWeek" type="radio" name="repeatByMonth" value="dayOfWeek">
+      day of the week
+    </label>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label">Starts On</label>
+  <div class="controls">
+    <input id="startsOn" type="text" class="input-xlarge" readonly>
+  </div>
+</div>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label">Ends On</label>
+  <div class="controls">
+    <label class="radio">
+      <input id="endsOnAfterOccurrencesBtn" type="radio" name="ends" value="endsAfterOccurrences" checked="checked">
+      After&nbsp;
+      <input id="endsAfterOccurrences" type="text" class="input-small" value="5">
+      &nbsp;Ocurrences
+    </label>
+    <label class="radio">
+      <input id="endOnDateBtn" type="radio" name="ends" value="endsOnDate">
+      On&nbsp;&nbsp;&nbsp;&nbsp;
+      <div id="endsOnDate" class="input-append date">
+        <input id="endsOnDateText" type="text" class="input-small">
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+        </span>
+      </div>
+    </label>
+  </div>
+</div>
+
+<div id="repeatSummary" style="text-align: center;"></div>
+
+</fieldset>
+</form>
+
+  </div>
+  <div class="modal-footer">
+    <div class="control-group">
+      <label class="control-label"></label>
+      <div class="controls">
+        <button id="recurringOKButton" name="button1id" class="btn btn-success" data-dismiss="modal">OK</button>
+        <button id="recurringCancelButton" name="button2id" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>    
+  </div>
+</div>
+
+
+   
+    </div>
+
+<!-- build:js scripts/app.js -->
+<script src="scripts/vendor/jquery.min.js"></script>
+<script src="scripts/vendor/bootstrap.min.js"></script>
+<script src="scripts/vendor/bootstrap-datetimepicker.min.js"></script>
+<script src="scripts/vendor/bootstrap-multiselect.js"></script>
+<!-- endbuild --> 
+
+<!-- build:js scripts/typeahead.js -->
+<script src="scripts/vendor/typeahead.min.js"></script>
+<!-- endbuild --> 
+
+    
+
+    <script>
+      var jemsOrganizations = ${jemsOrganizationsJSON};
+      var jemsRegions = ${jemsRegionsJSON};
+
+var typeaheadselected = function(query, selectedItem){
+  if(query.target.id==='clientCompany'){
+    $('#clientContactPerson').val(selectedItem.contactPerson);
+    $('#clientPhone').val(selectedItem.phone);
+    $('#clientEmail').val(selectedItem.email);
+    $('#clientAddress').val(selectedItem.address);
+  }else{
+    $('#hiringAgentContactPerson').val(selectedItem.contactPerson);
+    $('#hiringAgentPhone').val(selectedItem.phone);
+    $('#hiringAgentEmail').val(selectedItem.email);
+    $('#hiringAgentAddress').val(selectedItem.address);
+  }
+  
+
+
+
+}
+
+$('#clientCompany').typeahead({                                
+  name: 'clientCompany',                                                          
+  remote: '/jemsclients/listjson?q=%QUERY',
+  limit: 10
+})
+.on('typeahead:selected', typeaheadselected);
+
+$('#hiringAgentCompany').typeahead({                                
+  name: 'hiringAgentCompany',                                                          
+  remote: '/jemsclients/listjson?q=%QUERY',
+  limit: 10
+})
+.on('typeahead:selected', typeaheadselected);  
+
+//for google map search codeAddress()
+var countryISOCode = '${jemsEvent.country.isoCodeSmall}';
+var country = '${jemsEvent.country.name}';
+
+    </script>
+    
+<!-- build:js scripts/event.js -->
+<script src="scripts/event.js"></script>
+<!-- endbuild -->     
+
+  </body>
+</html>

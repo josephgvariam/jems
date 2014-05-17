@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans	xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:mvc="http://www.springframework.org/schema/mvc" 
+		xmlns:p="http://www.springframework.org/schema/p" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:sec="http://www.springframework.org/schema/security" 
+		xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd                 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd                 
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	
+	<sec:global-method-security pre-post-annotations="enabled" />
+	
+	<context:property-placeholder location="/WEB-INF/spring/web-${buildenv}.properties"/>                
+                
+    <!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->
+    <context:component-scan base-package="com.dubaidrums.jems" use-default-filters="false">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
+    
+    
+    <mvc:resources mapping="/favicon.ico" location="/WEB-INF/jems-views/dist/favicon.ico" order="0" cache-period="31556926"/>
+	<mvc:resources mapping="/robots.txt" location="/WEB-INF/jems-views/dist/robots.txt" order="0" cache-period="31556926"/>
+    
+    <!-- Turns on support for mapping requests to Spring MVC @Controller methods
+         Also registers default Formatters and Validators for use across all @Controllers -->
+    <mvc:annotation-driven conversion-service="applicationConversionService"/>
+    
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources -->
+    <mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**" cache-period="31556926"/>
+    <mvc:resources location="/WEB-INF/jems-views/dist/scripts/" mapping="/scripts/**" cache-period="31556926"/>
+    <mvc:resources location="/WEB-INF/jems-views/dist/styles/" mapping="/styles/**" cache-period="31556926"/>
+    <mvc:resources location="/WEB-INF/jems-views/dist/images/" mapping="/images/**" cache-period="31556926"/>
+
+    <!-- Allows for mapping the DispatcherServlet to "/" by forwarding static resource 
+    requests to the container's default Servlet -->
+    <mvc:default-servlet-handler/>
+
+    <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang"/>
+    </mvc:interceptors>
+
+    <!-- Selects a static view for rendering without the need for an explicit controller -->
+    <mvc:view-controller path="/" view-name="index"/>
+    <mvc:view-controller path="/login"/>    
+    <!-->mvc:view-controller path="/calendar"/-->
+    <mvc:view-controller path="/settings"/>
+    <!--  mvc:view-controller path="/dashboard"/>--> 
+    <mvc:view-controller path="/error"/>
+    <mvc:view-controller path="/404"/>
+    <mvc:view-controller path="/403"/>
+    <mvc:view-controller path="/dataAccessFailure"/>
+
+    <!-- Resolves localized messages*.properties and application.properties files in the application to allow for internationalization. 
+    The messages*.properties files translate Roo generated messages which are part of the admin interface, the 
+    application.properties resource bundle localizes all application specific messages such as entity names and menu items. -->
+    <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application" p:fallbackToSystemLocale="false"/>
+
+    <!-- Store preferred language configuration in a cookie -->
+    <bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver" p:cookieName="locale"/>
+
+    <!-- Resolves localized <theme_name>.properties files in the classpath to allow for theme support -->
+    <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource"/>
+
+    <!-- Store preferred theme configuration in a cookie -->
+    <bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
+
+    <!-- This bean resolves specific types of exceptions to corresponding logical - view names for error views. 
+    The default behaviour of DispatcherServlet - is to propagate all exceptions to the servlet 
+    container: this will happen - here with all other types of exceptions. -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="error">
+        <property name="exceptionMappings">
+            <props>
+                <prop key=".DataAccessException">error</prop>
+                <prop key=".NoSuchRequestHandlingMethodException">error</prop>
+                <prop key=".TypeMismatchException">error</prop>
+                <prop key=".MissingServletRequestParameterException">error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Enable this for integration of file upload functionality -->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
+
+<bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jems-views/dist/" />
+    <property name="suffix" value=".jsp" />
+</bean>  
+
+<bean class="com.dubaidrums.jems.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+</beans>

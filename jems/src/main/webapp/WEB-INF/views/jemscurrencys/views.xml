@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="jemscurrencys/list">
+        <put-attribute name="body" value="/WEB-INF/views/jemscurrencys/list.jspx"/>
+    </definition>
+<definition extends="default" name="jemscurrencys/show">
+        <put-attribute name="body" value="/WEB-INF/views/jemscurrencys/show.jspx"/>
+    </definition>
+<definition extends="default" name="jemscurrencys/create">
+        <put-attribute name="body" value="/WEB-INF/views/jemscurrencys/create.jspx"/>
+    </definition>
+<definition extends="default" name="jemscurrencys/update">
+        <put-attribute name="body" value="/WEB-INF/views/jemscurrencys/update.jspx"/>
+    </definition>
+</tiles-definitions>

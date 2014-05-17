@@ -1,0 +1,520 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <title>View Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- build:css styles/app.css -->
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">  
+    <link href="/styles/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- endbuild -->
+    <style>
+      body { padding-top: 60px;}
+      .tab-content {overflow: visible;}
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <script>
+    var handleTableClick = function(e,h){
+      if(e.target.nodeName==='TD'){
+        window.location.href = h;
+      }
+
+    }
+  </script>
+
+  <body>
+
+
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">JEMS</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')">
+              <li><a href="/dashboard"><i class="icon-bar-chart icon-white icon-large"></i> Dashboard</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/calendar"><i class="icon-calendar icon-white icon-large"></i> Calendar</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+              <li><a href="/jemsevents?form"><i class="icon-file icon-white icon-large"></i> New Event</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="/jemsevents"><i class="icon-list icon-white icon-large"></i> List Events</a></li>
+            <li class="divider-vertical"></li>
+
+            <li><a href="/search"><i class="icon-search icon-white icon-large"></i> Search</a></li>
+            <li class="divider-vertical"></li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+              <li><a href="/settings"><i class="icon-cogs icon-white icon-large "></i> Settings</a></li>
+              <li class="divider-vertical"></li>
+            </sec:authorize>
+
+            <li><a href="https://jems.ctf.cloudforge.com/sf/tracker/do/listTrackers/projects.jemsjemsv3/tracker" target="_blank"><i class="icon-flag icon-white icon-large"></i> Report Bug</a></li>
+            <li class="divider-vertical"></li> 
+          </ul>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user icon-large"></i> <sec:authentication property="principal.username" /> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/resources/j_spring_security_logout"><i class="icon-share icon-large"></i> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <div class="container">
+
+<c:if test="${not empty msg}">
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    ${msg}
+  </div>
+</c:if>
+
+
+
+
+<legend><strong>Event #${jemsevent.id}:</strong> ${jemsevent.title}</legend>
+
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#details">Details</a></li>
+  <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+  <li><a href="#quotations">Quotations</a></li>
+  <li><a href="#invoices">Invoices</a></li>
+  </sec:authorize>
+</ul>
+ 
+<div class="tab-content">
+  <!-- Details TAB START -->
+  <div class="tab-pane fade active in" id="details">
+<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+<c:choose>
+<c:when test="${jemsevent.active}">
+<div class="btn-group">
+  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-cog icon-white"></i> Action <span class="caret"></span></button>
+  <ul class="dropdown-menu">     
+    <li><a href="/jemsevents/${jemsevent.id}/costings"><i class="icon-file"></i> Costings</a></li>    
+    <li><a href="/jemsevents/${jemsevent.id}/jobsheet"><i class="icon-file"></i> Job Sheet</a></li>
+    <li class="divider"></li>
+    <li><a href="/jemsevents/${jemsevent.id}?form"><i class="icon-pencil"></i> Edit Event</a></li>
+    <li><a href="/jemsevents/${jemsevent.id}?duplicate"><i class="icon-copy"></i> Duplicate Event</a></li>
+    <li><a href="#" onclick="$('#deleteModal').modal('show');"><i class="icon-trash"></i> Delete Event</a></li>    
+  </ul>
+</div>
+</c:when>
+</c:choose>
+<br/><br/>
+</sec:authorize>
+
+
+
+<table class="table table-striped table-bordered">
+  <tbody>
+    <tr>
+      <td class="span3">Title</td>
+      <td><spring:eval expression="jemsevent.title" /></td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td><spring:eval expression="jemsevent.description" /></td>
+    </tr>
+    <tr>
+      <td>Organization</td>
+      <td><spring:eval expression="jemsevent.organization" /></td>
+    </tr>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+    <tr>
+      <td>Currency</td>
+      <td><spring:eval expression="jemsevent.currency" /></td>
+    </tr>
+    </sec:authorize>
+    <tr>
+      <td>Type</td>
+      <td><spring:eval expression="jemsevent.type" /></td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td><spring:eval expression="jemsevent.status" /></td>
+    </tr>
+    <tr>
+      <td>Start Date &amp; Time</td>
+      <td><spring:eval expression="jemsevent.startDateTime" /></td>
+    </tr>
+    <tr>
+      <td>End Date &amp; Time</td>
+      <td><spring:eval expression="jemsevent.endDateTime" /></td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td><spring:eval expression="jemsevent.location" /></td>
+    </tr>
+    <tr>
+      <td>GPS Coordinates</td>
+      <td><spring:eval expression="jemsevent.locationLatLong" /></td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td><spring:eval expression="jemsevent.country" /></td>
+    </tr>
+    <tr>
+      <td>Region</td>
+      <td><spring:eval expression="jemsevent.region" /></td>
+    </tr>
+    <tr>
+      <td>Number of Drums</td>
+      <td><spring:eval expression="jemsevent.numberDrums" /></td>
+    </tr>
+    <tr>
+      <td>Number of People</td>
+      <td><spring:eval expression="jemsevent.numberPeople" /></td>
+    </tr>
+    <tr>
+      <td>Number of Facilitators</td>
+      <td><spring:eval expression="jemsevent.numberDrummers" /></td>
+    </tr>
+    <tr>
+      <td>Number of Sessions</td>
+      <td><spring:eval expression="jemsevent.numberSessions" /></td>
+    </tr>
+    <tr>
+      <td>Session Duration</td>
+      <td><spring:eval expression="jemsevent.sessionTime" /></td>
+    </tr>
+    <tr>
+      <td>Chairs Required</td>
+      <td><spring:eval expression="jemsevent.chairsRequired" /></td>
+    </tr>
+    <tr>
+      <td>Staff Assigned</td>
+      <td><spring:eval expression="jemsevent.staffAssigned2" /></td>
+    </tr>    
+    <tr>
+      <td>Client Company</td>
+      <td><spring:eval expression="jemsevent.clientCompany" /></td>
+    </tr>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+    <tr>
+      <td>Client Contact Person</td>
+      <td><spring:eval expression="jemsevent.clientContactPerson" /></td>
+    </tr>
+    <tr>
+      <td>Client Phone</td>
+      <td><spring:eval expression="jemsevent.clientPhone" /></td>
+    </tr>
+    <tr>
+      <td>Client Email</td>
+      <td><spring:eval expression="jemsevent.clientEmail" /></td>
+    </tr>
+    <tr>
+      <td>Client Address</td>
+      <td><spring:eval expression="jemsevent.clientAddress" /></td>
+    </tr>
+    </sec:authorize>
+    <tr>
+      <td>Hiring Agent Company</td>
+      <td><spring:eval expression="jemsevent.hiringAgentCompany" /></td>
+    </tr>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+    <tr>
+      <td>Hiring Agent Contact Person</td>
+      <td><spring:eval expression="jemsevent.hiringAgentContactPerson" /></td>
+    </tr>
+    <tr>
+      <td>Hiring Agent Phone</td>
+      <td><spring:eval expression="jemsevent.hiringAgentPhone" /></td>
+    </tr>
+    <tr>
+      <td>Hiring Agent Email</td>
+      <td><spring:eval expression="jemsevent.hiringAgentEmail" /></td>
+    </tr>
+    <tr>
+      <td>Hiring Agent Address</td>
+      <td><spring:eval expression="jemsevent.hiringAgentAddress" /></td>
+    </tr>
+    <tr>
+      <td>Use in Documents</td>
+      <td><spring:eval expression="jemsevent.niceUseInDocs" /></td>
+    </tr>
+    </sec:authorize>
+    <tr>
+      <td>Notes</td>
+      <td><spring:eval expression="jemsevent.notes" /></td>
+    </tr>
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+    <tr>
+      <td>Private Notes</td>
+      <td><spring:eval expression="jemsevent.notes_" /></td>
+    </tr>
+    <tr>
+      <td>Amount Payable</td>
+      <td><spring:eval expression="jemsevent.amountPayable" /></td>
+    </tr>
+    <tr>
+      <td>Paid</td>
+      <td><spring:eval expression="jemsevent.paid" /></td>
+    </tr>
+    <tr>
+      <td>Paid Amount</td>
+      <td><spring:eval expression="jemsevent.paidAmount" /></td>
+    </tr>
+    <tr>
+      <td>Paid Date</td>
+      <td><spring:eval expression="jemsevent.paidDate" /></td>
+    </tr>
+    <tr>
+      <td>Payment Method</td>
+      <td><spring:eval expression="jemsevent.paymentMethod" /></td>
+    </tr>
+    <tr>
+      <td>Payment Notes</td>
+      <td><spring:eval expression="jemsevent.paymentNotes" /></td>
+    </tr>
+    <tr>
+      <td>Receipt Voucher</td>
+      <td><spring:eval expression="jemsevent.receiptVoucherNumber" /></td>
+    </tr>
+    </sec:authorize>
+    <tr>
+      <td>Created Date</td>
+      <td><spring:eval expression="jemsevent.createdDate" /></td>
+    </tr>
+    <tr>
+      <td>Created User</td>
+      <td><spring:eval expression="jemsevent.createdUser" /></td>
+    </tr>    
+    <tr>
+      <td>Modified Date</td>
+      <td><spring:eval expression="jemsevent.modifiedDate" /></td>
+    </tr>    
+    <tr>
+      <td>Modified User</td>
+      <td><spring:eval expression="jemsevent.modifiedUser" /></td>
+    </tr>    
+        
+  </tbody>
+</table>
+
+  </div>
+  <!-- Details TAB END -->
+<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_OPERATOR')">
+  <div class="tab-pane fade" id="quotations">
+    <a class="btn btn-info" href="/jemsquotations?form&jemsEventId=${jemsevent.id}">New Quotation</a>
+    <br/><br/>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Q-Number</th>
+          <th>Revision</th>
+          <th>Quotation Date</th>
+          <th>Amount</th>          
+          <th>Active</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <c:forEach items="${jemsevent.jemsQuotations}" var="jemsquotation">
+        <c:choose>
+          <c:when test="${jemsquotation.active}">
+            <tr class="success" onClick="handleTableClick(event, '/jemsquotations/${jemsquotation.id}');">
+          </c:when>
+          <c:otherwise>
+            <tr class="error" onClick="handleTableClick(event, '/jemsquotations/${jemsquotation.id}');">
+          </c:otherwise>
+        </c:choose>
+        
+          <td><spring:eval expression="jemsquotation.QNumber" /></td>
+          <td><spring:eval expression="jemsquotation.revisionNumber" /></td>
+          <td><spring:eval expression="jemsquotation.QDate" /></td>
+          <td><spring:eval expression="jemsquotation.totalAmount" /></td>          
+          <td><spring:eval expression="jemsquotation.active" /></td>
+          <td>          	
+
+                <c:choose>
+                  <c:when test="${jemsquotation.active}">
+	             <div class="btn-group">              
+	              <button class="btn dropdown-toggle" data-toggle="dropdown">Action
+	                <span class="caret"></span>
+	              </button>
+	              <ul class="dropdown-menu">
+                <!-- dropdown menu links -->
+                    <li><a href="/jemsquotations/${jemsquotation.id}">View</a></li>
+
+                    <c:choose>
+                    <c:when test="${empty jemsquotation.jemsInvoice}">
+                      <li><a href="/jemsinvoices?form&jemsEventId=${jemsquotation.jemsEvent.id}&jemsQuotationId=${jemsquotation.id}">Create Invoice</a></li>
+                    </c:when>
+                    <c:otherwise>
+                      <li><a href="/jemsinvoices/${jemsquotation.jemsInvoice.id}">View Invoice</a></li>                      
+                    </c:otherwise>
+                    </c:choose>
+
+                    <li><a href="/jemsquotations/${jemsquotation.id}/pdf">Generate PDF</a></li>
+                      
+                                  </ul>
+            </div>                
+                  </c:when>
+                </c:choose>
+
+          </td>
+        </tr>    
+      </tbody>
+
+
+      </c:forEach>
+    </table>    
+  </div>
+
+  <div class="tab-pane fade" id="invoices">
+    <a class="btn btn-info" href="/jemsinvoices?form&jemsEventId=${jemsevent.id}">New Invoice</a>
+    <br/><br/>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>I-Number</th>
+          <th>Revision</th>
+          <th>Invoice Date</th>
+          <th>Amount</th>          
+          <th>Active</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <c:forEach items="${jemsevent.jemsInvoices}" var="jemsinvoice">
+        <c:choose>
+          <c:when test="${jemsinvoice.active}">
+            <tr class="success" onClick="handleTableClick(event, '/jemsinvoices/${jemsinvoice.id}');">
+          </c:when>
+          <c:otherwise>
+            <tr class="error" onClick="handleTableClick(event, '/jemsinvoices/${jemsinvoice.id}');">
+          </c:otherwise>
+        </c:choose>
+          <td><spring:eval expression="jemsinvoice.INumber" /></td>
+          <td><spring:eval expression="jemsinvoice.revisionNumber" /></td>
+          <td><spring:eval expression="jemsinvoice.IDate" /></td>
+          <td><spring:eval expression="jemsinvoice.totalAmount" /></td>          
+          <td><spring:eval expression="jemsinvoice.active" /></td>
+          <td>
+
+                <c:choose>                
+                  <c:when test="${jemsinvoice.active}">
+                              <div class="btn-group">
+              <button class="btn dropdown-toggle" data-toggle="dropdown">Action
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <!-- dropdown menu links -->
+                    <li><a href="/jemsinvoices/${jemsinvoice.id}">View</a></li>
+                    <li><a href="/jemsinvoices/${jemsinvoice.id}/pdf">Generate PDF</a></li>
+                                  </ul>
+            </div>
+                    
+                  </c:when>
+                </c:choose>
+              </ul>
+            </div>
+          </td>          
+        </tr>    
+      </tbody>
+
+
+      </c:forEach>
+    </table>  
+  </div>
+</sec:authorize>
+
+</div>
+
+
+
+
+<div id="deleteModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="myModalLabel">Delete Event</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this event?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+    <button id="deleteButton" class="btn btn-danger">Yes</button>
+  </div>
+</div>
+
+   
+    </div>
+
+<form:form id="deleteForm" action="/jemsevents/${jemsevent.id}" method="DELETE">
+</form:form>    
+
+<!-- build:js scripts/app.js -->
+<script src="/scripts/vendor/jquery.min.js"></script>
+<script src="/scripts/vendor/bootstrap.min.js"></script>
+<script src="scripts/vendor/bootstrap-datetimepicker.min.js"></script>
+<script src="scripts/vendor/bootstrap-multiselect.js"></script>
+<!-- endbuild --> 
+
+<script>
+  $('#deleteButton').click(function() {
+    $('#deleteForm').submit();
+  });
+
+$('#myTab a').click(function (e) {
+  console.log(e);
+  e.preventDefault();
+  $(this).tab('show');
+})  
+
+// Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+      $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+    } 
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+      window.location.hash = e.target.hash;
+    })
+</script>    
+
+
+
+  </body>
+</html>

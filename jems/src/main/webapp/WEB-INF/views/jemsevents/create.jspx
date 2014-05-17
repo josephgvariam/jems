@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_dubaidrums_jems_domain_JemsEvent" modelAttribute="jemsEvent" path="/jemsevents" render="${empty dependencies}" z="FsLDYAwPI1D23lfjsrV4tZ6INvQ=">
+        <field:textarea field="title" id="c_com_dubaidrums_jems_domain_JemsEvent_title" required="true" z="2n4P5I8LUzr4hVXz1GdydRhwMuQ="/>
+        <field:textarea field="description" id="c_com_dubaidrums_jems_domain_JemsEvent_description" z="LKzX+0FyCdHfvK85BiZpl/VmNgk="/>
+        <field:select field="type" id="c_com_dubaidrums_jems_domain_JemsEvent_type" items="${jemseventtypes}" path="jemseventtypes" required="true" z="YWnw5+6ldR2Hu0tD7fybZeeQHRA="/>
+        <field:select field="status" id="c_com_dubaidrums_jems_domain_JemsEvent_status" items="${jemseventstatuses}" path="jemseventstatuses" required="true" z="eWyufzZzyfjvDYqQXC8VX9OoGtY="/>
+        <field:datetime dateTimePattern="${jemsEvent_startdatetime_date_format}" field="startDateTime" id="c_com_dubaidrums_jems_domain_JemsEvent_startDateTime" z="idabkC5TIgaM5JJiqnY9+sssS6U="/>
+        <field:datetime dateTimePattern="${jemsEvent_enddatetime_date_format}" field="endDateTime" id="c_com_dubaidrums_jems_domain_JemsEvent_endDateTime" z="EzNNf/XE0NS/AWZF61l/bkwwPFE="/>
+        <field:textarea field="location" id="c_com_dubaidrums_jems_domain_JemsEvent_location" z="BoXGeYUbZwJEHITQEa9FPlAeud8="/>
+        <field:select field="country" id="c_com_dubaidrums_jems_domain_JemsEvent_country" itemValue="id" items="${jemscountrys}" path="/jemscountrys" z="mRZKw1ku33mcU+PLUnIXHmmwPJU="/>
+        <field:select field="region" id="c_com_dubaidrums_jems_domain_JemsEvent_region" itemValue="id" items="${jemsregions}" path="/jemsregions" z="4EXAjDvocK1N6IZAxhJFl5X7mx4="/>
+        <field:textarea field="locationLatLong" id="c_com_dubaidrums_jems_domain_JemsEvent_locationLatLong" z="74CRKRCFosOwWInEMWNNmEDkDgA="/>
+        <field:input field="numberDrums" id="c_com_dubaidrums_jems_domain_JemsEvent_numberDrums" min="0" required="true" validationMessageCode="field_invalid_integer" z="0cmRyjYTZqk3FPGpxvZLwF8Iq6w="/>
+        <field:input field="numberPeople" id="c_com_dubaidrums_jems_domain_JemsEvent_numberPeople" min="0" required="true" validationMessageCode="field_invalid_integer" z="ezmqN2xyhkOB8AiLHMDzN/cQi10="/>
+        <field:input field="numberDrummers" id="c_com_dubaidrums_jems_domain_JemsEvent_numberDrummers" min="0" required="true" validationMessageCode="field_invalid_integer" z="Dq80jP0lp7blltISRETZF3fYNAU="/>
+        <field:input field="numberSessions" id="c_com_dubaidrums_jems_domain_JemsEvent_numberSessions" min="0" required="true" validationMessageCode="field_invalid_integer" z="6TGXZqeCk0nF4EXuDZFdCtwId3Y="/>
+        <field:textarea field="sessionTime" id="c_com_dubaidrums_jems_domain_JemsEvent_sessionTime" z="G1tTZFpzS6pqKsB412F8BizJSbc="/>
+        <field:checkbox field="chairsRequired" id="c_com_dubaidrums_jems_domain_JemsEvent_chairsRequired" z="zSDv9AFBJZrUXr02q9LWfBcSm0I="/>
+        <field:select field="staffAssigned" id="c_com_dubaidrums_jems_domain_JemsEvent_staffAssigned" itemValue="id" items="${jemsusers}" multiple="true" path="/jemsusers" z="YS0oW3vDZtbFRNu+BjL5Ug0Ew4Q="/>
+        <field:input field="useInDocs" id="c_com_dubaidrums_jems_domain_JemsEvent_useInDocs" validationMessageCode="field_invalid_integer" z="gczc6pMaLStU0zKF86CCXkv7mjc="/>
+        <field:textarea field="hiringAgentCompany" id="c_com_dubaidrums_jems_domain_JemsEvent_hiringAgentCompany" z="eRpSYUW1O8oSQywxu23Kwz9Vc3M="/>
+        <field:textarea field="hiringAgentContactPerson" id="c_com_dubaidrums_jems_domain_JemsEvent_hiringAgentContactPerson" z="gGTcKVhm4CifLPSEs+aAm6PjTmM="/>
+        <field:textarea field="hiringAgentPhone" id="c_com_dubaidrums_jems_domain_JemsEvent_hiringAgentPhone" z="d+dKHbIcBI7mDhSyVrQcM8NzhHQ="/>
+        <field:textarea field="hiringAgentEmail" id="c_com_dubaidrums_jems_domain_JemsEvent_hiringAgentEmail" z="iTLxbfxQRPN3TcinrZHVAbchYDI="/>
+        <field:textarea field="hiringAgentAddress" id="c_com_dubaidrums_jems_domain_JemsEvent_hiringAgentAddress" z="BTqGHTp/rY/wA1YPKOC3qHgosOk="/>
+        <field:textarea field="clientCompany" id="c_com_dubaidrums_jems_domain_JemsEvent_clientCompany" z="fFtgxstH4wfoxNl53HBNKWEATRg="/>
+        <field:textarea field="clientContactPerson" id="c_com_dubaidrums_jems_domain_JemsEvent_clientContactPerson" z="6S5SJhwikUQjqRRJv/b1ieCMAi8="/>
+        <field:textarea field="clientPhone" id="c_com_dubaidrums_jems_domain_JemsEvent_clientPhone" z="VLXgFp6/BR8LTQG7GXLNq6sYzKM="/>
+        <field:textarea field="clientEmail" id="c_com_dubaidrums_jems_domain_JemsEvent_clientEmail" z="/fWQTed+sqROT1tDZLkUbvddKoE="/>
+        <field:textarea field="clientAddress" id="c_com_dubaidrums_jems_domain_JemsEvent_clientAddress" z="5a04KVJZw0KCUYitNkUt26tR85M="/>
+        <field:textarea field="notes" id="c_com_dubaidrums_jems_domain_JemsEvent_notes" z="PGGKlOQZ3AUMFVq9+yhtJrYFgVA="/>
+        <field:textarea field="notes_" id="c_com_dubaidrums_jems_domain_JemsEvent_notes_" z="xvMNirWx0rvkO7xOgWehi39KyLE="/>
+        <field:input field="amountPayable" id="c_com_dubaidrums_jems_domain_JemsEvent_amountPayable" validationMessageCode="field_invalid_number" z="tarxxdneBBpGl61md3VldOLrLFo="/>
+        <field:checkbox field="paid" id="c_com_dubaidrums_jems_domain_JemsEvent_paid" z="bx82A2AO8KC0QQvt9T0mEjQSjDc="/>
+        <field:input field="paidAmount" id="c_com_dubaidrums_jems_domain_JemsEvent_paidAmount" validationMessageCode="field_invalid_number" z="Uu/RZ7cTMkgtZdYY/tx5HwLrtsA="/>
+        <field:datetime dateTimePattern="${jemsEvent_paiddate_date_format}" field="paidDate" id="c_com_dubaidrums_jems_domain_JemsEvent_paidDate" z="amEEJ8EhEErcdQQoBjkVid7jfYg="/>
+        <field:select field="paymentMethod" id="c_com_dubaidrums_jems_domain_JemsEvent_paymentMethod" items="${jemspaymentmethods}" path="jemspaymentmethods" z="XxmGLTWkel4zHSU/K640hPeAOb0="/>
+        <field:textarea field="paymentNotes" id="c_com_dubaidrums_jems_domain_JemsEvent_paymentNotes" z="XQlUqSPxsPQskewlG/vpe5LPftc="/>
+        <field:textarea field="receiptVoucherNumber" id="c_com_dubaidrums_jems_domain_JemsEvent_receiptVoucherNumber" z="DkPGAA+NspOHXH61YjzrAm4GZgs="/>
+        <field:textarea field="attachments" id="c_com_dubaidrums_jems_domain_JemsEvent_attachments" z="VRTtD4z/8b8b8ke7znUbOHo93bE="/>
+        <field:datetime dateTimePattern="${jemsEvent_modifieddatetime_date_format}" field="modifiedDateTime" id="c_com_dubaidrums_jems_domain_JemsEvent_modifiedDateTime" z="z+RHl5jLOik7vb8Ym19NC5ze8yk="/>
+        <field:select field="modifiedUser" id="c_com_dubaidrums_jems_domain_JemsEvent_modifiedUser" itemValue="id" items="${jemsusers}" path="/jemsusers" z="PjFlmMudMa0Zpz7OTIrnSIWFZuQ="/>
+        <field:select field="organization" id="c_com_dubaidrums_jems_domain_JemsEvent_organization" itemValue="id" items="${jemsorganizations}" path="/jemsorganizations" z="tdUwZuYHaK49zPVj2yMVSkELvAs="/>
+        <field:select field="currency" id="c_com_dubaidrums_jems_domain_JemsEvent_currency" itemValue="id" items="${jemscurrencys}" path="/jemscurrencys" z="EQLhNpdACDY4ZHNtKgsiW+hAz5o="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsEvent_active" z="NLN35CBQLdpL4u8+1ufX79KRP04="/>
+        <field:select field="jemsQuotation" id="c_com_dubaidrums_jems_domain_JemsEvent_jemsQuotation" itemValue="id" items="${jemsquotations}" path="/jemsquotations" z="IMJ5Ortj9DiLPMtGBxdo0LOBk8I="/>
+        <field:select field="jemsInvoice" id="c_com_dubaidrums_jems_domain_JemsEvent_jemsInvoice" itemValue="id" items="${jemsinvoices}" path="/jemsinvoices" z="DoCgCbHK6sPY3Fg7UTr7LRO0Xf0="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_dubaidrums_jems_domain_JemsEvent" render="${not empty dependencies}" z="bW7gWR62pdRPPhOnFAjDYmaT+Ik="/>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_dubaidrums_jems_domain_JemsCostingSubCategory" items="${jemscostingsubcategorys}" z="09FsbbFa3oIhma7dEIQU1Qdi0Hs=">
+        <table:table data="${jemscostingsubcategorys}" id="l_com_dubaidrums_jems_domain_JemsCostingSubCategory" path="/jemscostingsubcategorys" z="MpQaAiWF497yq8vuOmg3hAMfmSo=">
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingSubCategory_name" property="name" z="IAvwpFoiYKNs9yJ0L3eup7W95+w="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingSubCategory_rate" property="rate" z="L6j9gmG4dT4O5cx72APnGlO8IYg="/>
+            <table:column id="c_com_dubaidrums_jems_domain_JemsCostingSubCategory_category" property="category" z="kReXBit/vojh0eORFv49HmgDRXM="/>
+        </table:table>
+    </page:list>
+</div>

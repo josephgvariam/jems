@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_dubaidrums_jems_domain_JemsCountry" modelAttribute="jemsCountry" path="/jemscountrys" versionField="Version" z="Q/HGzW0bKcqIn5xp8MEy+P1Qmh0=">
+        <field:input field="isoCode" id="c_com_dubaidrums_jems_domain_JemsCountry_isoCode" max="10" min="2" required="true" z="OVD0BTuLASAX0kD/osX0bm+dsmM="/>
+        <field:textarea field="name" id="c_com_dubaidrums_jems_domain_JemsCountry_name" required="true" z="aa8gY5WnUFOhuPyHl23K6+NunHg="/>
+        <field:select field="currency" id="c_com_dubaidrums_jems_domain_JemsCountry_currency" itemValue="id" items="${jemscurrencys}" path="/jemscurrencys" z="84y+MOKJy7zm+LlTt/1hWT6aOoc="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsCountry_active" z="Yre91pqTSIYhUlldDczAsF/4T9U="/>
+    </form:update>
+</div>

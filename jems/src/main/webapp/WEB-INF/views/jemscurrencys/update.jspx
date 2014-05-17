@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_dubaidrums_jems_domain_JemsCurrency" modelAttribute="jemsCurrency" path="/jemscurrencys" versionField="Version" z="gD6z1Gc19RZQVZW8R6GFiv8FpqY=">
+        <field:input field="isoCode" id="c_com_dubaidrums_jems_domain_JemsCurrency_isoCode" max="10" min="2" required="true" z="Ip05u8Z2O6IgkiJyDa+xXff3gXg="/>
+        <field:textarea field="name" id="c_com_dubaidrums_jems_domain_JemsCurrency_name" required="true" z="LCDjj3CptK+2ouK92uAhCK61rxY="/>
+        <field:checkbox field="active" id="c_com_dubaidrums_jems_domain_JemsCurrency_active" z="UE6F+SgsTvM1cp5ynh521CS9bkA="/>
+    </form:update>
+</div>

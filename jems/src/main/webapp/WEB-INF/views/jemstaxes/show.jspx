@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_dubaidrums_jems_domain_JemsTax" object="${jemstax}" path="/jemstaxes" z="oaQS3gEHWNdpuUZHvfkOIiSxqzk=">
+        <field:display field="name" id="s_com_dubaidrums_jems_domain_JemsTax_name" object="${jemstax}" z="Dpqon+G7B6TWHZppT2Jdj37yXCc="/>
+        <field:display field="ratePercent" id="s_com_dubaidrums_jems_domain_JemsTax_ratePercent" object="${jemstax}" z="4xiF6BGG29wHsUfZkJc/fO9jzgc="/>
+        <field:display field="uuid" id="s_com_dubaidrums_jems_domain_JemsTax_uuid" object="${jemstax}" z="Kd8JKajXSVeE2/D+KUFBdiXuiF4="/>
+    </page:show>
+</div>

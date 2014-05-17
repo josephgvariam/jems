@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="jemsevents/list">
+        <put-attribute name="body" value="/WEB-INF/views/jemsevents/list.jspx"/>
+    </definition>
+<definition extends="default" name="jemsevents/show">
+        <put-attribute name="body" value="/WEB-INF/views/jemsevents/show.jspx"/>
+    </definition>
+<definition extends="default" name="jemsevents/create">
+        <put-attribute name="body" value="/WEB-INF/views/jemsevents/create.jspx"/>
+    </definition>
+<definition extends="default" name="jemsevents/update">
+        <put-attribute name="body" value="/WEB-INF/views/jemsevents/update.jspx"/>
+    </definition>
+</tiles-definitions>
