@@ -17,3 +17,5 @@ target/
 
 bin
 /.settings
+cloudbees-web.xml
+web.xml
