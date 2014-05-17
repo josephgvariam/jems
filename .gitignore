@@ -19,3 +19,4 @@ bin
 /.settings
 cloudbees-web.xml
 web.xml
+context.xml
