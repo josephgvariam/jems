@@ -1,5 +1,7 @@
 package com.dubaidrums.jems.service.impl;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +23,7 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
+import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
@@ -48,10 +51,18 @@ public class JemsCsvDumpServiceImpl implements JemsCsvDumpService{
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
-	public String dumpCsv(boolean searchDate, String startDate, String endDate, HttpServletRequest r){
+	public String dumpCsv(boolean searchDate, String startDate, String endDate, final HttpServletRequest r){
 		try {
 			//log.info("Using sql: "+getSql(searchDate, startDate, endDate));
 			FlatFileItemWriter<JemsView> itemWriter = new FlatFileItemWriter<JemsView>();
+			itemWriter.setHeaderCallback(new FlatFileHeaderCallback() {
+				
+				@Override
+				public void writeHeader(Writer writer) throws IOException {
+					writer.write(getHeaderString(r));
+					
+				}
+			});
 			String filename = "/tmp/output-"+new Date().getTime()+".csv";
 			FileSystemResource resource = new FileSystemResource(filename);
 			
@@ -251,5 +262,122 @@ public class JemsCsvDumpServiceImpl implements JemsCsvDumpService{
 		
 		return result.toArray(new String[result.size()]);
 	}		
+	
+	private String getHeaderString(HttpServletRequest r) {
+		StringBuilder s = new StringBuilder();
+		if (checkOption("edate", r)) {
+			s.append("Event Date,");
+		}
+		if (checkOption("enumber", r)) {
+			s.append("Event Number,");
+		}
+		if (checkOption("org", r)) {
+			s.append("Organization,");
+		}
+		if (checkOption("type", r)) {
+			s.append("Event Type,");
+		}
+		if (checkOption("status", r)) {
+			s.append("Event Status,");
+		}
+		if (checkOption("title", r)) {
+			s.append("Event Title,");
+		}
+		if (checkOption("description", r)) {
+			s.append("Event Description,");
+		}
+		if (checkOption("numfacilitators", r)) {
+			s.append("Number of Facilitators,");
+		}
+		if (checkOption("numPeople", r)) {
+			s.append("Number of People,");
+		}
+		if (checkOption("companyname", r)) {
+			s.append("Company Name,");
+		}
+		if (checkOption("contactperson", r)) {
+			s.append("Company Contact Person,");
+		}
+		if (checkOption("contactnumber", r)) {
+			s.append("Company Contact Number,");
+		}
+		if (checkOption("email", r)) {
+			s.append("Company Email,");
+		}
+
+		if (checkOption("currency", r)) {
+			s.append("Currency,");
+		}
+		if (checkOption("location", r)) {
+			s.append("Location,");
+		}
+		if (checkOption("gps", r)) {
+			s.append("GPS Coordinates,");
+		}
+		if (checkOption("country", r)) {
+			s.append("Country,");
+		}
+		if (checkOption("Region", r)) {
+			s.append("Region,");
+		}
+		if (checkOption("numDrums", r)) {
+			s.append("Number of Drums,");
+		}
+		if (checkOption("numSessions", r)) {
+			s.append("Number of Sessions,");
+		}
+		if (checkOption("chairs", r)) {
+			s.append("Chairs Required,");
+		}
+		if (checkOption("staff", r)) {
+			s.append("Staff Assigned,");
+		}
+		if (checkOption("receipt", r)) {
+			s.append("Receipt Voucher,");
+		}
+
+		if (checkOption("qdate", r)) {
+			s.append("Quotation Date,");
+		}
+		if (checkOption("qnum", r)) {
+			s.append("Quotation Number,");
+		}
+		if (checkOption("idate", r)) {
+			s.append("Invoice Date,");
+		}
+		if (checkOption("inum", r)) {
+			s.append("Invoice Number,");
+		}
+		if (checkOption("qamount", r)) {
+			s.append("Quoted Amount,");
+		}
+		if (checkOption("iamount", r)) {
+			s.append("Invoiced Amount,");
+		}
+		if (checkOption("paidstatus", r)) {
+			s.append("Paid Status,");
+		}
+		if (checkOption("paidamount", r)) {
+			s.append("Paid Amount,");
+		}
+		if (checkOption("paiddate", r)) {
+			s.append("Paid Date,");
+		}
+		if (checkOption("elink", r)) {
+			s.append("Event Link,");
+		}
+		if (checkOption("qlink", r)) {
+			s.append("Quotation Link,");
+		}
+		if (checkOption("ilink", r)) {
+			s.append("Invoice Link");
+		}
+
+		s.append("\n");
+
+		return s.toString();
+
+	}
+	
 
 }
