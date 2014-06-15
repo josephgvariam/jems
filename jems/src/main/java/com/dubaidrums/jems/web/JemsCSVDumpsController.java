@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.web;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.Principal;
@@ -20,6 +21,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -57,19 +59,31 @@ public class JemsCSVDumpsController {
     }	
 	
 	@RequestMapping(value = "/quotations", method = RequestMethod.POST, produces = "text/csv")
-	public void dumpCsv(@RequestParam(value = "searchdate", required = true) boolean searchDate, @RequestParam(value = "startDate", required = true) String startDate, @RequestParam(value = "endDate", required = true) String endDate, Principal principal,HttpServletRequest r, HttpServletResponse response) {
+	@ResponseBody
+	public ResponseEntity<String> dumpCsv(@RequestParam(value = "searchdate", required = true) boolean searchDate, @RequestParam(value = "startDate", required = true) String startDate, @RequestParam(value = "endDate", required = true) String endDate, Principal principal,HttpServletRequest r, HttpServletResponse response) {
 		try{
 			String filename = jemsCsvDumpService.dumpCsv(searchDate, startDate, endDate, r);
-	        if(filename.startsWith("ERROR")) throw new RuntimeException("Error occurred while dumping csv: "+filename);
-	        
-			log.info("user: "+principal.getName()+", method: dumpCsv, msg: csv dumped!");	
+	        if(filename.startsWith("ERROR")) throw new Exception("Error occurred while dumping csv: "+filename);
 			
-			InputStream is = new FileInputStream(filename);
-			IOUtils.copy(is, response.getOutputStream());
-			response.flushBuffer();
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type", "text/csv; charset=utf-8");
+			
+			File f = new File(filename);
+			InputStream is = new FileInputStream(f);
+			InputStreamResource inputStreamResource = new InputStreamResource(is);
+			headers.setContentLength(f.length());
+			
+			log.info("user: "+principal.getName()+", method: dumpCsv, msg: csv dumped!");
+			
+			return new ResponseEntity(inputStreamResource, headers, HttpStatus.OK);
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("Error occurred while dumping csv: "+ex.getMessage());
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type", "text/html; charset=utf-8");
+			log.error("Could not dump csv!", ex);
+			return new ResponseEntity<String>(ex.getMessage(), headers, HttpStatus.OK);			
 	    }
 
     }
