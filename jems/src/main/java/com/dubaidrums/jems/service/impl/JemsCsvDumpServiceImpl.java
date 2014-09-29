@@ -63,7 +63,7 @@ public class JemsCsvDumpServiceImpl implements JemsCsvDumpService{
 					
 				}
 			});
-			String filename = "/tmp/output-"+new Date().getTime()+".csv";
+			String filename = System.getProperty("java.io.tmpdir")+"/output-"+new Date().getTime()+".csv";
 			FileSystemResource resource = new FileSystemResource(filename);
 			
 			BeanWrapperFieldExtractor<JemsView> extractor = new BeanWrapperFieldExtractor<JemsView>();
