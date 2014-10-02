@@ -1,18 +1,13 @@
 
 <Context>
 
-  <!--Resource name="jdbc/jemsdb" auth="Container" type="javax.sql.DataSource"
-               maxActive="5" maxIdle="2" maxWait="10000" removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true" validationQuery="SELECT 1" testOnBorrow="true" driverClassName="com.mysql.jdbc.Driver"
-               username="jemsdb" password="Goathead247"                
-               url="jdbc:mysql://localhost/jemsdb"/-->
-                
   <Resource name="jdbc/jemsdb" auth="Container" type="javax.sql.DataSource"
                maxActive="5" maxIdle="2" maxWait="10000" removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true" validationQuery="SELECT 1" testOnBorrow="true" driverClassName="com.mysql.jdbc.Driver"
-               username="root" password="Goathead247"                
-               url="jdbc:mysql://128.199.198.156/jemsdb"/>
+               username="jemsdb" password="passwd"                
+               url="jdbc:mysql://localhost/jemsdb"/>               
                
   <Resource name="jdbc/jemsdb-dev" auth="Container" type="javax.sql.DataSource"
                maxActive="5" maxIdle="2" maxWait="10000" removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true" validationQuery="SELECT 1" testOnBorrow="true" driverClassName="com.mysql.jdbc.Driver"
-               username="jemsdb" password="Goathead247"                
+               username="jemsdb" password="passwd"                
                url="jdbc:mysql://localhost/jemsdb"/> 
 </Context>
