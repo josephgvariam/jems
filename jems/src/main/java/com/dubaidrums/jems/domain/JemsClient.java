@@ -15,44 +15,39 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 @Entity
 public class JemsClient {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
-	
-    @NotNull
-    private Boolean active;
-    
-    @NotNull
-    @Size(max = 200)
-    private String company;
+	@Column(name = "version")
+	private Integer version;
 
-    @Size(max = 200)
-    private String contactPerson;
+	@NotNull
+	private Boolean active;
 
-    @Size(max = 100)
-    private String phone;
+	@NotNull
+	@Size(max = 200)
+	private String company;
 
-    @Size(max = 100)
-    private String email;
+	@Size(max = 200)
+	private String contactPerson;
 
-    @Size(max = 500)
-    private String address;    
-    
-    @ManyToMany
-    private Set<JemsEvent> events = new HashSet<JemsEvent>();
-    
-    
-    
+	@Size(max = 100)
+	private String phone;
+
+	@Size(max = 100)
+	private String email;
+
+	@Size(max = 500)
+	private String address;
+
+	@ManyToMany
+	private Set<JemsEvent> events = new HashSet<JemsEvent>();
+
 	public Set<JemsEvent> getEvents() {
 		return events;
 	}
@@ -62,21 +57,21 @@ public class JemsClient {
 	}
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }	
-	
+		this.version = version;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -126,13 +121,16 @@ public class JemsClient {
 	}
 
 	public String toString() {
-        //return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+		// return ReflectionToStringBuilder.toString(this,
+		// ToStringStyle.SHORT_PREFIX_STYLE);
 		List<Long> eventIds = new ArrayList<Long>();
-		for(JemsEvent e: getEvents()){
+		for (JemsEvent e : getEvents()) {
 			eventIds.add(e.getId());
 		}
-		return "JemsClient[company="+company+", contactPerson="+contactPerson+", email="+email+", address="+address+", events="+eventIds+" ]";
-    }
+		return "JemsClient[company=" + company + ", contactPerson="
+				+ contactPerson + ", email=" + email + ", address=" + address
+				+ ", events=" + eventIds + " ]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -184,10 +182,8 @@ public class JemsClient {
 		return true;
 	}
 
-	public int getEventsSize(){
+	public int getEventsSize() {
 		return events.size();
 	}
 
-	
-	
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import com.dubaidrums.jems.domain.JemsClient;
 import com.dubaidrums.jems.domain.JemsEvent;
 
-
 public interface JemsClientService {
 	public abstract long countAllJemsClients();
 
@@ -15,8 +14,9 @@ public interface JemsClientService {
 
 	public abstract List<JemsClient> findAllJemsClients();
 
-	public abstract List<JemsClient> findJemsClientEntries(int firstResult, int maxResults);
-	
+	public abstract List<JemsClient> findJemsClientEntries(int firstResult,
+			int maxResults);
+
 	public abstract JemsClient findJemsClientByCompany(String company);
 
 	public abstract void saveJemsClient(JemsClient jemsClient);
@@ -28,6 +28,6 @@ public interface JemsClientService {
 	public abstract void eventDeleted(JemsEvent jemsEvent);
 
 	public abstract void eventSavedOrUpdated(JemsEvent jemsEvent);
-	
-	public JemsClient findJemsClientByEvent(JemsEvent e) ;
+
+	public JemsClient findJemsClientByEvent(JemsEvent e);
 }

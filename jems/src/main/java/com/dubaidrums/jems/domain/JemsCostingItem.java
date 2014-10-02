@@ -1,10 +1,9 @@
 package com.dubaidrums.jems.domain;
 
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,125 +13,131 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
 @Entity
-
 public class JemsCostingItem {
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String category;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String category;
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String subCategory;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String subCategory;
 
-    private Double rate;
+	private Double rate;
 
-    private Double quantity;
+	private Double quantity;
 
-    @ManyToOne
-    private JemsOrganization organization;
-    
-    @ManyToOne
-    private JemsEvent jemsEvent;
-    
+	@ManyToOne
+	private JemsOrganization organization;
+
+	@ManyToOne
+	private JemsEvent jemsEvent;
+
 	public JemsEvent getJemsEvent() {
-        return this.jemsEvent;
-    }
+		return this.jemsEvent;
+	}
 
 	public void setJemsEvent(JemsEvent jemsEvent) {
-        this.jemsEvent = jemsEvent;
-    }    
+		this.jemsEvent = jemsEvent;
+	}
 
 	public String toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(this);
+	}
 
 	public static JemsCostingItem fromJsonToJemsCostingItem(String json) {
-        return new JSONDeserializer<JemsCostingItem>().use(null, JemsCostingItem.class).deserialize(json);
-    }
+		return new JSONDeserializer<JemsCostingItem>().use(null,
+				JemsCostingItem.class).deserialize(json);
+	}
 
 	public static String toJsonArray(Collection<JemsCostingItem> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(collection);
+	}
 
-	public static Collection<JemsCostingItem> fromJsonArrayToJemsCostingItems(String json) {
-        return new JSONDeserializer<List<JemsCostingItem>>().use(null, ArrayList.class).use("values", JemsCostingItem.class).deserialize(json);
-    }
+	public static Collection<JemsCostingItem> fromJsonArrayToJemsCostingItems(
+			String json) {
+		return new JSONDeserializer<List<JemsCostingItem>>()
+				.use(null, ArrayList.class)
+				.use("values", JemsCostingItem.class).deserialize(json);
+	}
 
 	public String getCategory() {
-        return this.category;
-    }
+		return this.category;
+	}
 
 	public void setCategory(String category) {
-        this.category = category;
-    }
+		this.category = category;
+	}
 
 	public String getSubCategory() {
-        return this.subCategory;
-    }
+		return this.subCategory;
+	}
 
 	public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
-    }
+		this.subCategory = subCategory;
+	}
 
 	public Double getRate() {
-        return this.rate;
-    }
+		return this.rate;
+	}
 
 	public void setRate(Double rate) {
-        this.rate = rate;
-    }
+		this.rate = rate;
+	}
 
 	public Double getQuantity() {
-        return this.quantity;
-    }
+		return this.quantity;
+	}
 
 	public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
+		this.quantity = quantity;
+	}
 
 	public JemsOrganization getOrganization() {
-        return this.organization;
-    }
+		return this.organization;
+	}
 
 	public void setOrganization(JemsOrganization organization) {
-        this.organization = organization;
-    }
+		this.organization = organization;
+	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	@Override
 	public int hashCode() {
@@ -165,9 +170,9 @@ public class JemsCostingItem {
 			return false;
 		return true;
 	}
-	
-	public Double getAmount(){
-		return getRate()*getQuantity();
+
+	public Double getAmount() {
+		return getRate() * getQuantity();
 	}
-	
+
 }

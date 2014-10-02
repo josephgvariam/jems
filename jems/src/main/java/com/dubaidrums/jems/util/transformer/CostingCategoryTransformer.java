@@ -6,8 +6,8 @@ import flexjson.transformer.AbstractTransformer;
 
 public class CostingCategoryTransformer extends AbstractTransformer {
 
-    public void transform(Object object) {
-        getContext().write(((JemsCostingCategory) object).getId().toString());
-    }
+	public void transform(Object object) {
+		getContext().write(((JemsCostingCategory) object).getId().toString());
+	}
 
 }

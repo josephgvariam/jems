@@ -13,34 +13,31 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 @Entity
 public class JemsStaff {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
-	
-    @NotNull
-    @Size(min = 3, max = 200)
-    private String name;
-    
-    @Size(min = 3, max = 100)
-    private String email;
+	@Column(name = "version")
+	private Integer version;
 
-    @Size(min = 3, max = 100)
-    private String mobile;
-    
-    @ManyToMany
-    private Set<JemsEvent> events = new HashSet<JemsEvent>();
-    
-    public Set<JemsEvent> getEvents() {
+	@NotNull
+	@Size(min = 3, max = 200)
+	private String name;
+
+	@Size(min = 3, max = 100)
+	private String email;
+
+	@Size(min = 3, max = 100)
+	private String mobile;
+
+	@ManyToMany
+	private Set<JemsEvent> events = new HashSet<JemsEvent>();
+
+	public Set<JemsEvent> getEvents() {
 		return events;
 	}
 
@@ -49,25 +46,25 @@ public class JemsStaff {
 	}
 
 	@NotNull
-    private Boolean active;
-    
+	private Boolean active;
+
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
-    public String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -97,12 +94,13 @@ public class JemsStaff {
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}	
-	
+	}
+
 	public String toString() {
-		return "JemsStaff{id: "+id+", name: "+name+"}";
-        //return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return "JemsStaff{id: " + id + ", name: " + name + "}";
+		// return ReflectionToStringBuilder.toString(this,
+		// ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	@Override
 	public int hashCode() {
@@ -134,6 +132,5 @@ public class JemsStaff {
 			return false;
 		return true;
 	}
-	
-	
+
 }

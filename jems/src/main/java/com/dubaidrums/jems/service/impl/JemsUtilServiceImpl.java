@@ -15,33 +15,27 @@ import com.dubaidrums.jems.service.JemsUtilService;
 @Service
 @Transactional
 public class JemsUtilServiceImpl implements JemsUtilService {
-	
+
 	Logger log = LogManager.getLogger(JemsUtilServiceImpl.class);
 
 	public Date getCurrentDate() {
-		DateTime dt = new DateTime();		
-	    DateTime dtUae = dt.withZone(DateTimeZone.forID("Asia/Dubai"));
-	    
-	    Calendar cal = Calendar.getInstance();
-	    cal.set(Calendar.MONTH, dtUae.getMonthOfYear()-1);
-	    cal.set(Calendar.DATE, dtUae.getDayOfMonth());
-	    cal.set(Calendar.YEAR, dtUae.getYear());
-	    cal.set(Calendar.HOUR_OF_DAY, dtUae.getHourOfDay());
-	    cal.set(Calendar.MINUTE, dtUae.getMinuteOfHour());
-	    cal.set(Calendar.SECOND, dtUae.getSecondOfMinute());
-	    cal.set(Calendar.MILLISECOND, dtUae.getMillisOfSecond());
-	    
-	    Date d = cal.getTime();
-	    
-	    //log.info("method: getCurrentDate, t1: "+dt+", t2:"+d+", dtUae: "+dtUae);
+		DateTime dt = new DateTime();
+		DateTime dtUae = dt.withZone(DateTimeZone.forID("Asia/Dubai"));
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MONTH, dtUae.getMonthOfYear() - 1);
+		cal.set(Calendar.DATE, dtUae.getDayOfMonth());
+		cal.set(Calendar.YEAR, dtUae.getYear());
+		cal.set(Calendar.HOUR_OF_DAY, dtUae.getHourOfDay());
+		cal.set(Calendar.MINUTE, dtUae.getMinuteOfHour());
+		cal.set(Calendar.SECOND, dtUae.getSecondOfMinute());
+		cal.set(Calendar.MILLISECOND, dtUae.getMillisOfSecond());
+
+		Date d = cal.getTime();
+
+		// log.info("method: getCurrentDate, t1: "+dt+", t2:"+d+", dtUae: "+dtUae);
 
 		return d;
-	}
-
-	@Override
-	public boolean isDev() {
-		return System.getProperty("buildenv").equals("development");
-		//return true;
 	}
 
 }

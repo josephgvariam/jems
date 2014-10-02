@@ -1,13 +1,11 @@
 package com.dubaidrums.jems.domain;
 
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,156 +15,163 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-@Entity
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
+@Entity
 public class JemsUser {
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String userName;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String userName;
 
-    @Size(min = 3, max = 500)
-    private String password;
+	@Size(min = 3, max = 500)
+	private String password;
 
-    @NotNull
-    private Boolean enabled;
+	@NotNull
+	private Boolean enabled;
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String email;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String email;
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String mobile;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String mobile;
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String fullName;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String fullName;
 
-    @ManyToMany
-    private Set<JemsRole> roles = new HashSet<JemsRole>();
+	@ManyToMany
+	private Set<JemsRole> roles = new HashSet<JemsRole>();
 
-    @ManyToMany
-    private Set<JemsOrganization> organizations = new HashSet<JemsOrganization>();
+	@ManyToMany
+	private Set<JemsOrganization> organizations = new HashSet<JemsOrganization>();
 
 	public String toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(this);
+	}
 
 	public static JemsUser fromJsonToJemsUser(String json) {
-        return new JSONDeserializer<JemsUser>().use(null, JemsUser.class).deserialize(json);
-    }
+		return new JSONDeserializer<JemsUser>().use(null, JemsUser.class)
+				.deserialize(json);
+	}
 
 	public static String toJsonArray(Collection<JemsUser> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(collection);
+	}
 
 	public static Collection<JemsUser> fromJsonArrayToJemsUsers(String json) {
-        return new JSONDeserializer<List<JemsUser>>().use(null, ArrayList.class).use("values", JemsUser.class).deserialize(json);
-    }
+		return new JSONDeserializer<List<JemsUser>>()
+				.use(null, ArrayList.class).use("values", JemsUser.class)
+				.deserialize(json);
+	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
 	public String getUserName() {
-        return this.userName;
-    }
+		return this.userName;
+	}
 
 	public void setUserName(String userName) {
-        this.userName = userName;
-    }
+		this.userName = userName;
+	}
 
 	public String getPassword() {
-        return this.password;
-    }
+		return this.password;
+	}
 
 	public void setPassword(String password) {
-        this.password = password;
-    }
+		this.password = password;
+	}
 
 	public Boolean getEnabled() {
-        return this.enabled;
-    }
+		return this.enabled;
+	}
 
 	public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
+		this.enabled = enabled;
+	}
 
 	public String getEmail() {
-        return this.email;
-    }
+		return this.email;
+	}
 
 	public void setEmail(String email) {
-        this.email = email;
-    }
+		this.email = email;
+	}
 
 	public String getMobile() {
-        return this.mobile;
-    }
+		return this.mobile;
+	}
 
 	public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+		this.mobile = mobile;
+	}
 
 	public String getFullName() {
-        return this.fullName;
-    }
+		return this.fullName;
+	}
 
 	public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+		this.fullName = fullName;
+	}
 
 	public Set<JemsRole> getRoles() {
-        return this.roles;
-    }
+		return this.roles;
+	}
 
 	public void setRoles(Set<JemsRole> roles) {
-        this.roles = roles;
-    }
+		this.roles = roles;
+	}
 
 	public Set<JemsOrganization> getOrganizations() {
 		Set<JemsOrganization> orgs = new HashSet<JemsOrganization>();
 		for (JemsOrganization jo : organizations) {
-			if(jo.getActive()){
+			if (jo.getActive()) {
 				orgs.add(jo);
 			}
 		}
 		return orgs;
-        //return this.organizations;
-    }
+		// return this.organizations;
+	}
 
 	public void setOrganizations(Set<JemsOrganization> organizations) {
-        this.organizations = organizations;
-    }
+		this.organizations = organizations;
+	}
 
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	@Override
 	public int hashCode() {
@@ -199,7 +204,5 @@ public class JemsUser {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

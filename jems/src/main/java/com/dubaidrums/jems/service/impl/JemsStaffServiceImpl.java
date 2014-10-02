@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,40 +17,42 @@ import com.dubaidrums.jems.service.JemsStaffService;
 public class JemsStaffServiceImpl implements JemsStaffService {
 
 	Logger log = LogManager.getLogger(JemsStaffServiceImpl.class);
-	
+
 	@Autowired
-    JemsStaffRepository jemsStaffRepository;
-	
+	JemsStaffRepository jemsStaffRepository;
+
 	public long countAllJemsStaffs() {
-        return jemsStaffRepository.count();
-    }
+		return jemsStaffRepository.count();
+	}
 
 	public void deleteJemsStaff(JemsStaff jemsStaff) {
-        jemsStaffRepository.delete(jemsStaff);
-    }
+		jemsStaffRepository.delete(jemsStaff);
+	}
 
 	public JemsStaff findJemsStaff(Long id) {
-        return jemsStaffRepository.findOne(id);
-    }
+		return jemsStaffRepository.findOne(id);
+	}
 
 	public List<JemsStaff> findAllJemsStaffs() {
-        return jemsStaffRepository.findAll();
-    }
+		return jemsStaffRepository.findAll();
+	}
 
 	public List<JemsStaff> findJemsStaffEntries(int firstResult, int maxResults) {
-        return jemsStaffRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
-    }
+		return jemsStaffRepository.findAll(
+				new org.springframework.data.domain.PageRequest(firstResult
+						/ maxResults, maxResults)).getContent();
+	}
 
 	public void saveJemsStaff(JemsStaff jemsStaff) {
-        jemsStaffRepository.save(jemsStaff);
-    }
+		jemsStaffRepository.save(jemsStaff);
+	}
 
 	public JemsStaff updateJemsStaff(JemsStaff jemsStaff) {
-        return jemsStaffRepository.save(jemsStaff);
-    }
+		return jemsStaffRepository.save(jemsStaff);
+	}
 
 	public List<JemsStaff> findActiveJemsStaffs() {
 		return jemsStaffRepository.findByActiveOrderByNameAsc(true);
 	}
-	
+
 }

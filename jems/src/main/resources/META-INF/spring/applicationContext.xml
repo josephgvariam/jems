@@ -31,7 +31,7 @@ http://www.springframework.org/schema/batch http://www.springframework.org/schem
         ${propertyKey}.
     -->
     <!--  >context:property-placeholder location="classpath*:META-INF/spring/*.properties"/-->
-    <context:property-placeholder location="classpath:META-INF/spring/application-${buildenv}.properties"/>
+    <context:property-placeholder location="classpath:META-INF/spring/application.properties"/>
     <!--
         Turn on AspectJ @Configurable support. As a result, any time you
         instantiate an object, Spring will attempt to perform dependency
@@ -86,10 +86,10 @@ http://www.springframework.org/schema/batch http://www.springframework.org/schem
     </bean>
     
     <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
-        <property name="host" value="${SENDGRID_SMTP_HOST}"/>
+        <property name="host" value="${SMTP_HOST}"/>
         <property name="port" value="587"/>
-        <property name="username" value="${SENDGRID_USERNAME}"/>
-        <property name="password" value="${SENDGRID_PASSWORD}"/>
+        <property name="username" value="${SMTP_USERNAME}"/>
+        <property name="password" value="${SMTP_PASSWORD}"/>
     </bean>
     
     <bean class="com.dubaidrums.jems.util.LoginListener"/>

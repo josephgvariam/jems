@@ -70,10 +70,7 @@
             <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_ACCOUNTS')">
               <li><a href="/jemscsvdumps"><i class="icon-table icon-white icon-large "></i> CSV Dump</a></li>
               <li class="divider-vertical"></li>
-            </sec:authorize>            
-            
-            <li><a href="https://jems.ctf.cloudforge.com/sf/tracker/do/listTrackers/projects.jemsjemsv3/tracker" target="_blank"><i class="icon-flag icon-white icon-large"></i> Report Bug</a></li>
-            <li class="divider-vertical"></li> 
+            </sec:authorize>                                     
 
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li><a href="https://run.cloudbees.com/a/dubaidrums#app-manage/development:dubaidrums/jems" target="_blank"><i class="icon-cloud icon-white icon-large"></i> CloudBees</a></li>

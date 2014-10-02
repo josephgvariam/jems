@@ -19,37 +19,41 @@ import com.dubaidrums.jems.service.JemsClientService;
 @Transactional
 public class JemsClientServiceImpl implements JemsClientService {
 	Logger log = LogManager.getLogger(JemsClientServiceImpl.class);
-	
+
 	@Autowired
-    JemsClientRepository jemsClientRepository;
-	
+	JemsClientRepository jemsClientRepository;
+
 	public long countAllJemsClients() {
-        return jemsClientRepository.count();
-    }
+		return jemsClientRepository.count();
+	}
 
 	public void deleteJemsClient(JemsClient jemsClient) {
-        jemsClientRepository.delete(jemsClient);
-    }
+		jemsClientRepository.delete(jemsClient);
+	}
 
 	public JemsClient findJemsClient(Long id) {
-        return jemsClientRepository.findOne(id);
-    }
+		return jemsClientRepository.findOne(id);
+	}
 
 	public List<JemsClient> findAllJemsClients() {
-        return jemsClientRepository.findAll(new Sort(Sort.Direction.ASC, "company"));
-    }
+		return jemsClientRepository.findAll(new Sort(Sort.Direction.ASC,
+				"company"));
+	}
 
-	public List<JemsClient> findJemsClientEntries(int firstResult, int maxResults) {
-        return jemsClientRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
-    }
+	public List<JemsClient> findJemsClientEntries(int firstResult,
+			int maxResults) {
+		return jemsClientRepository.findAll(
+				new org.springframework.data.domain.PageRequest(firstResult
+						/ maxResults, maxResults)).getContent();
+	}
 
 	public void saveJemsClient(JemsClient jemsClient) {
-        jemsClientRepository.save(jemsClient);
-    }
+		jemsClientRepository.save(jemsClient);
+	}
 
 	public JemsClient updateJemsClient(JemsClient jemsClient) {
-        return jemsClientRepository.save(jemsClient);
-    }
+		return jemsClientRepository.save(jemsClient);
+	}
 
 	public List<JemsClient> findActiveJemsClients() {
 		return jemsClientRepository.findByActive(true);
@@ -57,12 +61,12 @@ public class JemsClientServiceImpl implements JemsClientService {
 
 	@Async
 	public void eventDeleted(JemsEvent e) {
-		
+
 	}
 
 	@Async
 	public void eventSavedOrUpdated(JemsEvent e) {
-		if(e.getClientCompany()!=null && e.getClientCompany().length()!=0){
+		if (e.getClientCompany() != null && e.getClientCompany().length() != 0) {
 			JemsClient c = new JemsClient();
 			c.setActive(true);
 			c.setAddress(e.getClientAddress());
@@ -71,10 +75,11 @@ public class JemsClientServiceImpl implements JemsClientService {
 			c.setEmail(e.getClientEmail());
 			c.setPhone(e.getClientPhone());
 			c.getEvents().add(e);
-			addorUpdateClient(c,e);				
+			addorUpdateClient(c, e);
 		}
-		
-		if(e.getHiringAgentCompany()!=null && e.getHiringAgentCompany().length()!=0){
+
+		if (e.getHiringAgentCompany() != null
+				&& e.getHiringAgentCompany().length() != 0) {
 			JemsClient c = new JemsClient();
 			c.setActive(true);
 			c.setAddress(e.getHiringAgentAddress());
@@ -83,28 +88,26 @@ public class JemsClientServiceImpl implements JemsClientService {
 			c.setEmail(e.getHiringAgentEmail());
 			c.setPhone(e.getHiringAgentPhone());
 			c.getEvents().add(e);
-			addorUpdateClient(c, e);				
+			addorUpdateClient(c, e);
 		}
 	}
 
 	private void addorUpdateClient(JemsClient c, JemsEvent e) {
-		JemsClient oc = findJemsClientByCompany(c.getCompany()); 
-		if(oc==null){
+		JemsClient oc = findJemsClientByCompany(c.getCompany());
+		if (oc == null) {
 			oc = findJemsClientByEvent(e);
-			
-			if(oc==null){
-				//save
+
+			if (oc == null) {
+				// save
 				saveJemsClient(c);
-			}else{
-				updateClient(oc,c);
+			} else {
+				updateClient(oc, c);
 			}
-		}else{
+		} else {
 			updateClient(oc, c);
 
 		}
 	}
-
-
 
 	private void updateClient(JemsClient oc, JemsClient c) {
 		oc.setAddress(c.getAddress());
@@ -112,16 +115,16 @@ public class JemsClientServiceImpl implements JemsClientService {
 		oc.setContactPerson(c.getContactPerson());
 		oc.setEmail(c.getEmail());
 		oc.setPhone(c.getPhone());
-		
+
 		oc.getEvents().addAll(c.getEvents());
-		
+
 		updateJemsClient(oc);
 	}
 
 	public JemsClient findJemsClientByEvent(JemsEvent e) {
 		List<JemsClient> clients = findAllJemsClients();
 		for (JemsClient c : clients) {
-			if(c.getEvents().contains(e)){
+			if (c.getEvents().contains(e)) {
 				return c;
 			}
 		}
@@ -129,7 +132,8 @@ public class JemsClientServiceImpl implements JemsClientService {
 	}
 
 	public JemsClient findJemsClientByCompany(String company) {
-		return jemsClientRepository.findJemsClientByCompanyIgnoreCase(company.trim());
+		return jemsClientRepository.findJemsClientByCompanyIgnoreCase(company
+				.trim());
 	}
 
 }

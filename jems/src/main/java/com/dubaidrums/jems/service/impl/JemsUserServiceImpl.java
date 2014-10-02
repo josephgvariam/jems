@@ -25,27 +25,31 @@ import com.dubaidrums.jems.service.JemsUserService;
 @Service
 @Transactional
 public class JemsUserServiceImpl implements JemsUserService {
-	
+
 	Logger log = LogManager.getLogger(JemsUserServiceImpl.class);
-	
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {		
+
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
 		JemsUser ju = jemsUserRepository.findByUserName(username);
-		log.info("method: loadUserByUsername, username: "+username+" userFound: "+(ju!=null));
-		if(ju!=null){			
-			if(ju.getRoles().size()==0) throw new UsernameNotFoundException("User has no roles");
-			
+		log.info("method: loadUserByUsername, username: " + username
+				+ " userFound: " + (ju != null));
+		if (ju != null) {
+			if (ju.getRoles().size() == 0)
+				throw new UsernameNotFoundException("User has no roles");
+
 			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			for(JemsRole role : ju.getRoles()){
+			for (JemsRole role : ju.getRoles()) {
 				authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 			}
-			
-			User u = new User(username, ju.getPassword(), ju.getEnabled(), true, true, true, authorities);
+
+			User u = new User(username, ju.getPassword(), ju.getEnabled(),
+					true, true, true, authorities);
 			return u;
-		}else{
+		} else {
 			throw new UsernameNotFoundException("User not found");
 		}
 	}
-	
+
 	public String encrypt(String text) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -55,9 +59,10 @@ public class JemsUserServiceImpl implements JemsUserService {
 
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < byteData.length; i++) {
-				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+				sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16)
+						.substring(1));
 			}
-			
+
 			return sb.toString();
 		} catch (NoSuchAlgorithmException e) {
 			log.error("method: encrypt, msg: Cannot encrypt text.", e);
@@ -66,35 +71,37 @@ public class JemsUserServiceImpl implements JemsUserService {
 	}
 
 	@Autowired
-    JemsUserRepository jemsUserRepository;
+	JemsUserRepository jemsUserRepository;
 
 	public long countAllJemsUsers() {
-        return jemsUserRepository.count();
-    }
+		return jemsUserRepository.count();
+	}
 
 	public void deleteJemsUser(JemsUser jemsUser) {
-        jemsUserRepository.delete(jemsUser);
-    }
+		jemsUserRepository.delete(jemsUser);
+	}
 
 	public JemsUser findJemsUser(Long id) {
-        return jemsUserRepository.findOne(id);
-    }
+		return jemsUserRepository.findOne(id);
+	}
 
 	public List<JemsUser> findAllJemsUsers() {
-        return jemsUserRepository.findAll();
-    }
+		return jemsUserRepository.findAll();
+	}
 
 	public List<JemsUser> findJemsUserEntries(int firstResult, int maxResults) {
-        return jemsUserRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
-    }
+		return jemsUserRepository.findAll(
+				new org.springframework.data.domain.PageRequest(firstResult
+						/ maxResults, maxResults)).getContent();
+	}
 
 	public void saveJemsUser(JemsUser jemsUser) {
-        jemsUserRepository.save(jemsUser);
-    }
+		jemsUserRepository.save(jemsUser);
+	}
 
 	public JemsUser updateJemsUser(JemsUser jemsUser) {
-        return jemsUserRepository.save(jemsUser);
-    }
+		return jemsUserRepository.save(jemsUser);
+	}
 
 	public List<JemsUser> findEnabledJemsUsers() {
 		return jemsUserRepository.findByEnabled(true);

@@ -8,21 +8,16 @@ public interface JemsTaxService {
 
 	public abstract long countAllJemsTaxes();
 
-
 	public abstract void deleteJemsTax(JemsTax jemsTax);
-
 
 	public abstract JemsTax findJemsTax(Long id);
 
-
 	public abstract List<JemsTax> findAllJemsTaxes();
 
-
-	public abstract List<JemsTax> findJemsTaxEntries(int firstResult, int maxResults);
-
+	public abstract List<JemsTax> findJemsTaxEntries(int firstResult,
+			int maxResults);
 
 	public abstract void saveJemsTax(JemsTax jemsTax);
-
 
 	public abstract JemsTax updateJemsTax(JemsTax jemsTax);
 

@@ -19,40 +19,41 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @Entity
 public class JemsLog {
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date logDateTime;
-    
-    @Size(max = 500)
-    private String msg;  
-    
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date logDateTime;
+
+	@Size(max = 500)
+	private String msg;
+
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-	
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
 	public Date getLogDateTime() {
 		return logDateTime;
@@ -69,12 +70,10 @@ public class JemsLog {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	
-	public String getNiceLogDateTime(){
+
+	public String getNiceLogDateTime() {
 		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM d yyyy hh:mm:ss a");
 		return sdf.format(logDateTime);
 	}
-	
-	
-	
+
 }

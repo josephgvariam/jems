@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.dubaidrums.jems.domain.JemsClient;
 
 @Repository
-public interface JemsClientRepository  extends JpaSpecificationExecutor<JemsClient>, JpaRepository<JemsClient, Long> {
+public interface JemsClientRepository extends
+		JpaSpecificationExecutor<JemsClient>, JpaRepository<JemsClient, Long> {
 	List<JemsClient> findByActive(boolean active);
 
 	JemsClient findJemsClientByCompanyIgnoreCase(String company);

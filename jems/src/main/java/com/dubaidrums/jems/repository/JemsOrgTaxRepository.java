@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.dubaidrums.jems.domain.JemsOrgTax;
 
 @Repository
-public interface JemsOrgTaxRepository extends JpaSpecificationExecutor<JemsOrgTax>, JpaRepository<JemsOrgTax, Long> {
+public interface JemsOrgTaxRepository extends
+		JpaSpecificationExecutor<JemsOrgTax>, JpaRepository<JemsOrgTax, Long> {
 }

@@ -13,7 +13,8 @@ public interface JemsStaffService {
 
 	public abstract List<JemsStaff> findAllJemsStaffs();
 
-	public abstract List<JemsStaff> findJemsStaffEntries(int firstResult, int maxResults);
+	public abstract List<JemsStaff> findJemsStaffEntries(int firstResult,
+			int maxResults);
 
 	public abstract void saveJemsStaff(JemsStaff jemsStaff);
 

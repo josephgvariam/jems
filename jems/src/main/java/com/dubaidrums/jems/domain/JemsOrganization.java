@@ -1,10 +1,9 @@
 package com.dubaidrums.jems.domain;
 
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,137 +13,145 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Value;
 
-@Entity
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
+@Entity
 public class JemsOrganization {
 
-    @NotNull
-    @Size(min = 3, max = 500)
-    private String name;
+	@NotNull
+	@Size(min = 3, max = 500)
+	private String name;
 
-    @ManyToOne
-    private JemsCountry country;
+	@ManyToOne
+	private JemsCountry country;
 
-    @ManyToOne
-    private JemsRegion region;
+	@ManyToOne
+	private JemsRegion region;
 
-    @ManyToOne
-    private JemsCurrency currency;
+	@ManyToOne
+	private JemsCurrency currency;
 
-    @NotNull
-    @Size(max = 500)
-    private String adminEmail;
+	@NotNull
+	@Size(max = 500)
+	private String adminEmail;
 
-    @Value("true")
-    private Boolean active;
+	@Value("true")
+	private Boolean active;
 
-    @Size(max = 500)
-    private String defaultGps;
+	@Size(max = 500)
+	private String defaultGps;
 
 	public String toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(this);
+	}
 
 	public static JemsOrganization fromJsonToJemsOrganization(String json) {
-        return new JSONDeserializer<JemsOrganization>().use(null, JemsOrganization.class).deserialize(json);
-    }
+		return new JSONDeserializer<JemsOrganization>().use(null,
+				JemsOrganization.class).deserialize(json);
+	}
 
 	public static String toJsonArray(Collection<JemsOrganization> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
+		return new JSONSerializer().exclude("*.class").serialize(collection);
+	}
 
-	public static Collection<JemsOrganization> fromJsonArrayToJemsOrganizations(String json) {
-        return new JSONDeserializer<List<JemsOrganization>>().use(null, ArrayList.class).use("values", JemsOrganization.class).deserialize(json);
-    }
+	public static Collection<JemsOrganization> fromJsonArrayToJemsOrganizations(
+			String json) {
+		return new JSONDeserializer<List<JemsOrganization>>()
+				.use(null, ArrayList.class)
+				.use("values", JemsOrganization.class).deserialize(json);
+	}
 
 	public String getName() {
-        return this.name;
-    }
+		return this.name;
+	}
 
 	public void setName(String name) {
-        this.name = name;
-    }
+		this.name = name;
+	}
 
 	public JemsCountry getCountry() {
-        return this.country;
-    }
+		return this.country;
+	}
 
 	public void setCountry(JemsCountry country) {
-        this.country = country;
-    }
+		this.country = country;
+	}
 
 	public JemsRegion getRegion() {
-        return this.region;
-    }
+		return this.region;
+	}
 
 	public void setRegion(JemsRegion region) {
-        this.region = region;
-    }
+		this.region = region;
+	}
 
 	public JemsCurrency getCurrency() {
-        return this.currency;
-    }
+		return this.currency;
+	}
 
 	public void setCurrency(JemsCurrency currency) {
-        this.currency = currency;
-    }
+		this.currency = currency;
+	}
 
 	public String getAdminEmail() {
-        return this.adminEmail;
-    }
+		return this.adminEmail;
+	}
 
 	public void setAdminEmail(String adminEmail) {
-        this.adminEmail = adminEmail;
-    }
+		this.adminEmail = adminEmail;
+	}
 
 	public Boolean getActive() {
-        return this.active;
-    }
+		return this.active;
+	}
 
 	public void setActive(Boolean active) {
-        this.active = active;
-    }
+		this.active = active;
+	}
 
 	public String getDefaultGps() {
-        return this.defaultGps;
-    }
+		return this.defaultGps;
+	}
 
 	public void setDefaultGps(String defaultGps) {
-        this.defaultGps = defaultGps;
-    }
+		this.defaultGps = defaultGps;
+	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	@Override
 	public int hashCode() {
@@ -176,6 +183,5 @@ public class JemsOrganization {
 			return false;
 		return true;
 	}
-	
-	
+
 }

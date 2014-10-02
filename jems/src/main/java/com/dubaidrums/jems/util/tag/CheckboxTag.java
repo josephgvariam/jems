@@ -1,8 +1,5 @@
 package com.dubaidrums.jems.util.tag;
 
-
-import java.util.Collection;
-
 import javax.servlet.jsp.JspException;
 
 import org.springframework.web.bind.WebDataBinder;
@@ -22,7 +19,8 @@ public class CheckboxTag extends AbstractSingleCheckedElementTag {
 			tagWriter.writeAttribute("type", "hidden");
 			String name = WebDataBinder.DEFAULT_FIELD_MARKER_PREFIX + getName();
 			tagWriter.writeAttribute("name", name);
-			tagWriter.writeAttribute("value", processFieldValue(name, "on", getInputType()));
+			tagWriter.writeAttribute("value",
+					processFieldValue(name, "on", getInputType()));
 			tagWriter.endTag();
 		}
 
@@ -39,21 +37,25 @@ public class CheckboxTag extends AbstractSingleCheckedElementTag {
 		if (Boolean.class.equals(valueType) || boolean.class.equals(valueType)) {
 			// the concrete type may not be a Boolean - can be String
 			if (boundValue instanceof String) {
-				if(((String) boundValue).equalsIgnoreCase("yes") || ((String) boundValue).equalsIgnoreCase("on") ){
+				if (((String) boundValue).equalsIgnoreCase("yes")
+						|| ((String) boundValue).equalsIgnoreCase("on")) {
 					boundValue = "true";
 				}
 				boundValue = Boolean.valueOf((String) boundValue);
 			}
-			Boolean booleanValue = (boundValue != null ? (Boolean) boundValue : Boolean.FALSE);
+			Boolean booleanValue = (boundValue != null ? (Boolean) boundValue
+					: Boolean.FALSE);
 			renderFromBoolean(booleanValue, tagWriter);
 		}
 
 		else {
 			Object value = getValue();
 			if (value == null) {
-				throw new IllegalArgumentException("Attribute 'value' is required when binding to non-boolean values");
+				throw new IllegalArgumentException(
+						"Attribute 'value' is required when binding to non-boolean values");
 			}
-			Object resolvedValue = (value instanceof String ? evaluate("value", value) : value);
+			Object resolvedValue = (value instanceof String ? evaluate("value",
+					value) : value);
 			renderFromValue(resolvedValue, tagWriter);
 		}
 	}

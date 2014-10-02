@@ -6,8 +6,8 @@ import flexjson.transformer.AbstractTransformer;
 
 public class OrgnaizationTransformer extends AbstractTransformer {
 
-    public void transform(Object object) {
-        getContext().write(((JemsOrganization) object).getId().toString());
-    }
+	public void transform(Object object) {
+		getContext().write(((JemsOrganization) object).getId().toString());
+	}
 
 }

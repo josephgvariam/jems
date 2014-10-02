@@ -1,7 +1,6 @@
 package com.dubaidrums.jems.domain;
 
-
 public enum JemsEventStatus {
 
-    Tentative, Confirmed, Cancelled, Declined;
+	Tentative, Confirmed, Cancelled, Declined;
 }

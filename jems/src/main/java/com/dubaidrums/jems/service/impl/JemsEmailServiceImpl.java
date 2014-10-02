@@ -2,15 +2,12 @@ package com.dubaidrums.jems.service.impl;
 
 import java.io.File;
 
-import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -25,20 +22,16 @@ import com.dubaidrums.jems.service.JemsUtilService;
 public class JemsEmailServiceImpl implements JemsEmailService {
 
 	Logger log = LogManager.getLogger(JemsEmailServiceImpl.class);
-	
-    @Autowired
-    private transient JavaMailSender mailTemplate;
-    
-	@Autowired
-    JemsUtilService jemsUtilService;	
 
-    @Async
-    public void sendEmail(String subject, String body, String attachment) {    
-    	if(jemsUtilService.isDev()){
-    		return;
-    	}
-    	
-		try {
+	@Autowired
+	private transient JavaMailSender mailTemplate;
+
+	@Autowired
+	JemsUtilService jemsUtilService;
+
+	@Async
+	public void sendEmail(String subject, String body, String attachment) {	
+		try {			
 			String mailFrom = "jems3@dubaidrums.com";
 			String mailTo = "jems3@dubaidrums.com";
 			
@@ -63,6 +56,7 @@ public class JemsEmailServiceImpl implements JemsEmailService {
 		} catch (Exception e) {
 			log.error("Error while sending email: "+e.getMessage());
 		}
-    }
-	
+		 
+	}
+
 }
