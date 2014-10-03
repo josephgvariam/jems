@@ -42,7 +42,7 @@ public class JemsEmailServiceImpl implements JemsEmailService {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom(mailFrom);
 			helper.setTo(mailTo);		
-			helper.setSubject(subject);
+			helper.setSubject("TEST "+subject);
 			//helper.setText("<html>\n<body>\n<p>\nDear "+name+"<br/>\nThank you for purchasing your tickets to our Desert Drumming event at the Gulf Ventures camp in Al Awir.<br/>\nPlease find attached your payment voucher and display it at the event gates.<br/>\nYour voucher number is : <strong>"+txnId+"</strong></br>\nDetails of the location with map and coordinates are available for your GPS receiver.<br/>\n<br/>\nFor details please go to our website at:<br/>\n<a href='http://www.dubaidrums.com/full-moon-desert-drumming-event'>http://www.dubaidrums.com/full-moon-desert-drumming-event</a><br/>\n<br/>\nNearer the time we will send you further information on drivers and contact liaisons accordingly<br/>\n<br/>\nThank You and Regards<br/>\n<br/>\nCapt. Guy Odell<br/>\nCOO Jupiter Eclipse Group<br/>\nDubai Drums<br/>\n+971 50 6139180<br/>\n<body>\n</html>", true);
 			helper.setText("<html><body><p>"+body+"</p></body></html>", true);
 				
