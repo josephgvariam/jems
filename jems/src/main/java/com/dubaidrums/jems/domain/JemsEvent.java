@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -137,13 +138,13 @@ public class JemsEvent {
 	@Size(max = 2500)
 	private String notes_;
 
-	private Double amountPayable;
+	private BigDecimal amountPayable;
 
 	@NotNull
 	@Value("false")
 	private Boolean paid;
 
-	private Double paidAmount;
+	private BigDecimal paidAmount;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MMM-yyyy")
@@ -486,11 +487,11 @@ public class JemsEvent {
 		this.notes_ = notes_;
 	}
 
-	public Double getAmountPayable() {
+	public BigDecimal getAmountPayable() {
 		return this.amountPayable;
 	}
 
-	public void setAmountPayable(Double amountPayable) {
+	public void setAmountPayable(BigDecimal amountPayable) {
 		this.amountPayable = amountPayable;
 	}
 
@@ -502,11 +503,11 @@ public class JemsEvent {
 		this.paid = paid;
 	}
 
-	public Double getPaidAmount() {
+	public BigDecimal getPaidAmount() {
 		return this.paidAmount;
 	}
 
-	public void setPaidAmount(Double paidAmount) {
+	public void setPaidAmount(BigDecimal paidAmount) {
 		this.paidAmount = paidAmount;
 	}
 

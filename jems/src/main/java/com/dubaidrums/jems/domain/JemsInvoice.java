@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -56,27 +57,27 @@ public class JemsInvoice {
 	@Size(max = 500)
 	private String description1;
 
-	private Double amount1;
+	private BigDecimal amount1;
 
 	@Size(max = 500)
 	private String description2;
 
-	private Double amount2;
+	private BigDecimal amount2;
 
 	@Size(max = 500)
 	private String description3;
 
-	private Double amount3;
+	private BigDecimal amount3;
 
 	@Size(max = 500)
 	private String description4;
 
-	private Double amount4;
+	private BigDecimal amount4;
 
 	@Size(max = 500)
 	private String description5;
 
-	private Double amount5;
+	private BigDecimal amount5;
 
 	@NotNull
 	@OneToOne
@@ -244,11 +245,11 @@ public class JemsInvoice {
 		this.description1 = description1;
 	}
 
-	public Double getAmount1() {
+	public BigDecimal getAmount1() {
 		return this.amount1;
 	}
 
-	public void setAmount1(Double amount1) {
+	public void setAmount1(BigDecimal amount1) {
 		this.amount1 = amount1;
 	}
 
@@ -260,11 +261,11 @@ public class JemsInvoice {
 		this.description2 = description2;
 	}
 
-	public Double getAmount2() {
+	public BigDecimal getAmount2() {
 		return this.amount2;
 	}
 
-	public void setAmount2(Double amount2) {
+	public void setAmount2(BigDecimal amount2) {
 		this.amount2 = amount2;
 	}
 
@@ -276,11 +277,11 @@ public class JemsInvoice {
 		this.description3 = description3;
 	}
 
-	public Double getAmount3() {
+	public BigDecimal getAmount3() {
 		return this.amount3;
 	}
 
-	public void setAmount3(Double amount3) {
+	public void setAmount3(BigDecimal amount3) {
 		this.amount3 = amount3;
 	}
 
@@ -292,11 +293,11 @@ public class JemsInvoice {
 		this.description4 = description4;
 	}
 
-	public Double getAmount4() {
+	public BigDecimal getAmount4() {
 		return this.amount4;
 	}
 
-	public void setAmount4(Double amount4) {
+	public void setAmount4(BigDecimal amount4) {
 		this.amount4 = amount4;
 	}
 
@@ -308,11 +309,11 @@ public class JemsInvoice {
 		this.description5 = description5;
 	}
 
-	public Double getAmount5() {
+	public BigDecimal getAmount5() {
 		return this.amount5;
 	}
 
-	public void setAmount5(Double amount5) {
+	public void setAmount5(BigDecimal amount5) {
 		this.amount5 = amount5;
 	}
 
@@ -324,25 +325,45 @@ public class JemsInvoice {
 		this.taxes = taxes;
 	}
 
-	public Double getTotalAmount() {
-		Double subtotal = getSubTotalAmount();
+	public BigDecimal getTotalAmount() {
+		BigDecimal hundred = new BigDecimal(100);
+		BigDecimal subtotal = getSubTotalAmount();
 		if (getTaxes().size() == 0)
 			return subtotal;
 		else {
-			Double total = subtotal;
+			BigDecimal total = subtotal;
 			for (JemsTax jt : getTaxes()) {
-				total += (jt.getRatePercent() * subtotal) / 100;
+				BigDecimal tax = jt.getRatePercent().multiply(subtotal).divide(hundred,2,BigDecimal.ROUND_HALF_UP);
+				total = total.add(tax);								
 			}
 			return total;
 		}
 	}
 
-	public Double getSubTotalAmount() {
-		Double total = (amount1 == null ? 0.0 : amount1)
-				+ (amount2 == null ? 0.0 : amount2)
-				+ (amount3 == null ? 0.0 : amount3)
-				+ (amount4 == null ? 0.0 : amount4)
-				+ (amount5 == null ? 0.0 : amount5);
+	public BigDecimal getSubTotalAmount() {
+		BigDecimal total = BigDecimal.ZERO;
+		
+		if(amount1 != null)
+		{
+			total = total.add(amount1);
+		}
+		if(amount2 != null)
+		{
+			total = total.add(amount2);
+		}
+		if(amount3 != null)
+		{
+			total = total.add(amount3);
+		}
+		if(amount4 != null)
+		{
+			total = total.add(amount4);
+		}
+		if(amount5 != null)
+		{
+			total = total.add(amount5);
+		}
+		
 		return total;
 	}
 

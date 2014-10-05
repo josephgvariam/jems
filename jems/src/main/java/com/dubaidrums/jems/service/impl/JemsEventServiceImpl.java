@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.service.impl;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -432,11 +433,11 @@ public class JemsEventServiceImpl implements JemsEventService {
 			for (JemsOrganization jo : user.getOrganizations()) {
 				OrgData od = new OrgData();
 				od.setOrgName(jo.getName());
-				od.setInvoiceAmount(0.0);
+				od.setInvoiceAmount(BigDecimal.ZERO);
 				od.setNumInvoices(0);
 				od.setNumQuotations(0);
-				od.setPaidAmount(0.0);
-				od.setQuotationAmount(0.0);
+				od.setPaidAmount(BigDecimal.ZERO);
+				od.setQuotationAmount(BigDecimal.ZERO);
 
 				orgs.put(od.getOrgName(), od);
 			}
@@ -446,11 +447,11 @@ public class JemsEventServiceImpl implements JemsEventService {
 			OrgData od = new OrgData();
 			od.setOrgName(jemsOrganizationService.findJemsOrganization(org)
 					.getName());
-			od.setInvoiceAmount(0.0);
+			od.setInvoiceAmount(BigDecimal.ZERO);
 			od.setNumInvoices(0);
 			od.setNumQuotations(0);
-			od.setPaidAmount(0.0);
-			od.setQuotationAmount(0.0);
+			od.setPaidAmount(BigDecimal.ZERO);
+			od.setQuotationAmount(BigDecimal.ZERO);
 
 			orgs.put(od.getOrgName(), od);
 		}
@@ -500,8 +501,8 @@ public class JemsEventServiceImpl implements JemsEventService {
 		while (current.compareTo(lend) < 0) {
 			ticks.add(current.toString());
 
-			QIData qd = new QIData(current, 0.0);
-			QIData id = new QIData(current, 0.0);
+			QIData qd = new QIData(current, BigDecimal.ZERO);
+			QIData id = new QIData(current, BigDecimal.ZERO);
 
 			quotationDataList.add(qd);
 			invoiceDataList.add(id);
@@ -528,15 +529,12 @@ public class JemsEventServiceImpl implements JemsEventService {
 						break;
 					}
 				} else if (type.equals("Week")) {
-					if (qd.getDate().getWeekOfWeekyear() == qDate
-							.getWeekOfWeekyear()
-							&& qd.getDate().getYear() == qDate.getYear()) {
+					if (qd.getDate().getWeekOfWeekyear() == qDate.getWeekOfWeekyear() && qd.getDate().getYear() == qDate.getYear()) {
 						qd.add(q.getTotalAmount());
 						break;
 					}
 				} else if (type.equals("Month")) {
-					if (qd.getDate().getMonthOfYear() == qDate.getMonthOfYear()
-							&& qd.getDate().getYear() == qDate.getYear()) {
+					if (qd.getDate().getMonthOfYear() == qDate.getMonthOfYear() && qd.getDate().getYear() == qDate.getYear()) {
 						// log.info("Quotation: "+q.getQNumber()+" qDate: "+qDate+" amt: "+q.getTotalAmount()+" bucket: "+qd.getDate()+" total: "+qd.getTotal());
 						qd.add(q.getTotalAmount());
 						break;
@@ -552,12 +550,9 @@ public class JemsEventServiceImpl implements JemsEventService {
 			OrgData od = orgs.get(q.getJemsEvent().getOrganization().getName());
 			if (od != null) {
 				od.setNumQuotations(od.getNumQuotations() + 1);
-				od.setQuotationAmount(od.getQuotationAmount()
-						+ q.getTotalAmount());
-				if (q.getJemsEvent() != null
-						&& q.getJemsEvent().getPaidAmount() != null) {
-					od.setPaidAmount(od.getPaidAmount()
-							+ q.getJemsEvent().getPaidAmount());
+				od.setQuotationAmount(od.getQuotationAmount().add(q.getTotalAmount()));
+				if (q.getJemsEvent() != null && q.getJemsEvent().getPaidAmount() != null) {
+					od.setPaidAmount(od.getPaidAmount().add(q.getJemsEvent().getPaidAmount()));
 				}
 			}
 		}
@@ -594,13 +589,13 @@ public class JemsEventServiceImpl implements JemsEventService {
 			OrgData od = orgs.get(q.getJemsEvent().getOrganization().getName());
 			if (od != null) {
 				od.setNumInvoices(od.getNumInvoices() + 1);
-				od.setInvoiceAmount(od.getInvoiceAmount() + q.getTotalAmount());
+				od.setInvoiceAmount(od.getInvoiceAmount().add(q.getTotalAmount()));
 			}
 		}
 
 		Map<String, List> data = new HashMap<String, List>();
-		List<Double> quotationData = new ArrayList<Double>();
-		List<Double> invoiceData = new ArrayList<Double>();
+		List<BigDecimal> quotationData = new ArrayList<BigDecimal>();
+		List<BigDecimal> invoiceData = new ArrayList<BigDecimal>();
 
 		for (QIData qd : quotationDataList) {
 			quotationData.add(qd.getTotal());

@@ -1,18 +1,20 @@
 package com.dubaidrums.jems.util.dashboard;
 
+import java.math.BigDecimal;
+
 import org.joda.time.LocalDate;
 
 public class QIData {
 	private LocalDate date;
-	private Double total;
+	private BigDecimal total;
 
-	public QIData(LocalDate current, Double d) {
+	public QIData(LocalDate current, BigDecimal d) {
 		this.date = current;
 		this.total = d;
 	}
 
-	public void add(Double d) {
-		total += d;
+	public void add(BigDecimal d) {
+		total = total.add(d);
 	}
 
 	public LocalDate getDate() {
@@ -23,11 +25,11 @@ public class QIData {
 		this.date = date;
 	}
 
-	public Double getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(Double total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 

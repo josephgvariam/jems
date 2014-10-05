@@ -1,12 +1,14 @@
 package com.dubaidrums.jems.util.dashboard;
 
+import java.math.BigDecimal;
+
 public class OrgData {
 	private String orgName;
 	private int numQuotations;
 	private int numInvoices;
-	private double quotationAmount;
-	private double invoiceAmount;
-	private double paidAmount;
+	private BigDecimal quotationAmount;
+	private BigDecimal invoiceAmount;
+	private BigDecimal paidAmount;
 
 	// public double getOutstandingAmount(){
 	// return getInvoiceAmount()-getPaidAmount();
@@ -38,27 +40,27 @@ public class OrgData {
 		this.numInvoices = numInvoices;
 	}
 
-	public double getQuotationAmount() {
+	public BigDecimal getQuotationAmount() {
 		return quotationAmount;
 	}
 
-	public void setQuotationAmount(double quotationAmount) {
+	public void setQuotationAmount(BigDecimal quotationAmount) {
 		this.quotationAmount = quotationAmount;
 	}
 
-	public double getInvoiceAmount() {
+	public BigDecimal getInvoiceAmount() {
 		return invoiceAmount;
 	}
 
-	public void setInvoiceAmount(double invoiceAmount) {
+	public void setInvoiceAmount(BigDecimal invoiceAmount) {
 		this.invoiceAmount = invoiceAmount;
 	}
 
-	public double getPaidAmount() {
+	public BigDecimal getPaidAmount() {
 		return paidAmount;
 	}
 
-	public void setPaidAmount(double paidAmount) {
+	public void setPaidAmount(BigDecimal paidAmount) {
 		this.paidAmount = paidAmount;
 	}
 

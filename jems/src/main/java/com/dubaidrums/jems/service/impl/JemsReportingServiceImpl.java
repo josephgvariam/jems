@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.service.impl;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -53,6 +54,8 @@ public class JemsReportingServiceImpl implements JemsReportingService {
 	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
 			"dd/MM/yyyy HH:mm");
 	private static NumberFormat numFormat = new DecimalFormat("#,###,###.##");
+	
+	private static final BigDecimal hundred = new BigDecimal(100);
 
 	public String generateQuotationPdf(JemsQuotation jq) throws Exception {
 		JemsOrganization org = jq.getJemsEvent().getOrganization();
@@ -77,7 +80,7 @@ public class JemsReportingServiceImpl implements JemsReportingService {
 
 		if (jq.getTaxes() != null && jq.getTaxes().size() != 0) {
 			JemsTax[] taxes_ = jq.getTaxes().toArray(new JemsTax[0]);
-			Double subtotal = jq.getSubTotalAmount();
+			BigDecimal subtotal = jq.getSubTotalAmount();
 			parameters.put("subtotalAmount", formatNumber(subtotal));
 			parameters.put("tax1", getTax(taxes_, 0));
 			parameters.put("tax1Amount", getTaxAmount(taxes_, 0, subtotal));
@@ -142,7 +145,7 @@ public class JemsReportingServiceImpl implements JemsReportingService {
 
 		if (jq.getTaxes() != null && jq.getTaxes().size() != 0) {
 			JemsTax[] taxes_ = jq.getTaxes().toArray(new JemsTax[0]);
-			Double subtotal = jq.getSubTotalAmount();
+			BigDecimal subtotal = jq.getSubTotalAmount();
 			parameters.put("subtotalAmount", formatNumber(subtotal));
 			parameters.put("tax1", getTax(taxes_, 0));
 			parameters.put("tax1Amount", getTaxAmount(taxes_, 0, subtotal));
@@ -176,9 +179,9 @@ public class JemsReportingServiceImpl implements JemsReportingService {
 		return fileName;
 	}
 
-	private static String getTaxAmount(JemsTax[] taxes_, int i, Double subtotal) {
-		if (i < taxes_.length) {
-			return formatNumber((taxes_[i].getRatePercent() * subtotal) / 100);
+	private static String getTaxAmount(JemsTax[] taxes_, int i, BigDecimal subtotal) {
+		if (i < taxes_.length) {			
+			return formatNumber((taxes_[i].getRatePercent().multiply(subtotal).divide(hundred,2,BigDecimal.ROUND_HALF_UP)));
 		} else
 			return null;
 	}
@@ -197,6 +200,12 @@ public class JemsReportingServiceImpl implements JemsReportingService {
 		return numFormat.format(amt);
 	}
 
+	private static String formatNumber(BigDecimal amt) {
+		if (amt == null)
+			return "";
+		return numFormat.format(amt.doubleValue());
+	}
+	
 	private static String formatDate(Date d) {
 		if (d == null)
 			d = new Date();

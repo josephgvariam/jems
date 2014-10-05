@@ -1,5 +1,6 @@
 package com.dubaidrums.jems.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,7 +28,7 @@ public class JemsTax {
 	@Size(min = 3, max = 500)
 	private String name;
 
-	private Double ratePercent;
+	private BigDecimal ratePercent;
 
 	@Size(min = 3, max = 500)
 	private String uuid;
@@ -48,11 +49,11 @@ public class JemsTax {
 		this.name = name;
 	}
 
-	public Double getRatePercent() {
+	public BigDecimal getRatePercent() {
 		return this.ratePercent;
 	}
 
-	public void setRatePercent(Double ratePercent) {
+	public void setRatePercent(BigDecimal ratePercent) {
 		this.ratePercent = ratePercent;
 	}
 
