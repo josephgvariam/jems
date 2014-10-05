@@ -113,8 +113,6 @@ $(function () {
       separator: ' to ',
       startDate: Date.today().add({ days: -29 }),
       endDate: Date.today(),
-      minDate: '01/01/2012',
-      maxDate: '31/12/2013',
       locale: {
         applyLabel: 'Submit',
         fromLabel: 'From',

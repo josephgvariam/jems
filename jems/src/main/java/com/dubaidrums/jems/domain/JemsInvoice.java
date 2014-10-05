@@ -22,6 +22,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
@@ -79,8 +85,10 @@ public class JemsInvoice {
 	@NotNull
 	private boolean active;
 
-	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST,
-			javax.persistence.CascadeType.MERGE })
+	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE })
+	@Fetch(FetchMode.SELECT)
+    @BatchSize(size=1000)
+	//@LazyCollection(LazyCollectionOption.EXTRA)
 	private Set<JemsTax> taxes = new HashSet<JemsTax>();
 
 	@Id

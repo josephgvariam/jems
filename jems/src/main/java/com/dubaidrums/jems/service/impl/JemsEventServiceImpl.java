@@ -415,7 +415,7 @@ public class JemsEventServiceImpl implements JemsEventService {
 	// public Map<String, List> getReportData(String startDate, String endDate,
 	// String type, Set<JemsOrganization> orgs) {
 	public Map<String, List> getReportData(String startDate, String endDate,
-			String type, Long org, JemsUser user) {
+			String type, Long org, JemsUser user) {		
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy")
 				.withZone(DateTimeZone.forID("Asia/Dubai"));
 		DateTime start = formatter.parseDateTime(startDate).toDateMidnight()

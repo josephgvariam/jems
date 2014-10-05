@@ -63,11 +63,12 @@
         </exec>
     </target>
 
-    <target name="yeoman">        
-        <exec executable="yeoman" dir="${viewdir}">
-            <arg value="build:minify"/>
-            <arg value="--force"/>
-        </exec>
+    <target name="yeoman">    	
+    	<!-- Node 0.8+ required -->
+    	<exec executable="yeoman" dir="${viewdir}">
+    	            <arg value="build:minify"/>
+    	            <arg value="--force"/>
+    	        </exec>
         <antcall target="post-yeoman"/>
     </target>
 

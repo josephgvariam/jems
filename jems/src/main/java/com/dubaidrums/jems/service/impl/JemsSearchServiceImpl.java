@@ -157,6 +157,15 @@ public class JemsSearchServiceImpl implements JemsSearchService {
 		doc.addField("locationLatLong", je.getLocationLatLong());
 
 		doc.addField("country", je.getCountry().getName());
+		
+		if(je.getRegion() != null)
+		{
+			doc.addField("region", je.getRegion().getName());
+		}
+		else
+		{
+			doc.addField("region", je.getCountry().getName());
+		}
 		doc.addField("region", je.getRegion().getName());
 		doc.addField("hiringAgentCompany", je.getHiringAgentCompany());
 		doc.addField("hiringAgentContactPerson",

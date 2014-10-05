@@ -717,13 +717,19 @@ public class JemsEventController {
 			Principal principal) {
 		JemsUser user = jemsUserService.findJemsUserByUserName(principal
 				.getName());
+		
+		long startTime = System.currentTimeMillis();
 		Map<String, List> data = jemsEventService.getReportData(startDate,
 				endDate, type, org, user);
 		;
+		long endTime = System.currentTimeMillis();
+		long diff = endTime - startTime;				
 
 		log.info("user: " + principal.getName()
 				+ ", method: getReportData, msg: got report data for type: "
 				+ type + ", org: " + org);
+		
+		log.info("getReportData took "+diff+" milliseconds.");
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=utf-8");

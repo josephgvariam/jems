@@ -20,6 +20,11 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
@@ -35,6 +40,9 @@ public class JemsCostingCategory {
 	private JemsOrganization organization;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+	@Fetch(FetchMode.SELECT)
+    @BatchSize(size=1000)
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	private Set<JemsCostingSubCategory> subcategories = new HashSet<JemsCostingSubCategory>();
 
 	public String getName() {

@@ -27,6 +27,11 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.text.WordUtils;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -183,12 +188,16 @@ public class JemsEvent {
 	@Column(name = "version")
 	private Integer version;
 
-	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST,
-			javax.persistence.CascadeType.MERGE }, mappedBy = "jemsEvent")
+	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE }, mappedBy = "jemsEvent")
+	@Fetch(FetchMode.SELECT)
+    @BatchSize(size=1000)
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	private Set<JemsQuotation> jemsQuotations = new HashSet<JemsQuotation>();
 
-	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST,
-			javax.persistence.CascadeType.MERGE }, mappedBy = "jemsEvent")
+	@OneToMany(cascade = { javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE }, mappedBy = "jemsEvent")
+	@Fetch(FetchMode.SELECT)
+    @BatchSize(size=1000)
+	@LazyCollection(LazyCollectionOption.EXTRA)
 	private Set<JemsInvoice> jemsInvoices = new HashSet<JemsInvoice>();
 
 	@Temporal(TemporalType.TIMESTAMP)
